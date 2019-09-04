@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Balle.h" />
     <ClInclude Include="Particule.h" />
     <ClInclude Include="Veccteur3D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Balle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particule.cpp" />
     <ClCompile Include="Veccteur3D.cpp" />

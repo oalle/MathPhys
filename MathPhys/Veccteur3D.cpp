@@ -1,5 +1,5 @@
 #include "Veccteur3D.h"
-#include <math.h>
+#include <cmath>
 
 
 Veccteur3D::Veccteur3D()

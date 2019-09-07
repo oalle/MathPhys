@@ -88,8 +88,8 @@ void Particule::integrer(float frameTime)
 	this->InverseMasse = 1 / this->Masse;
 
 	// update position
-	this->Position = this->Position + this->Velocity * frameTime;
+	this->Position = this->Position + this->Velocity.mulScalaire(frameTime);
 
 	// update velocity
-	this->Velocity = this->Velocity * pow(this->Damping, frameTime) + this->Acceleration * frameTime;
+	this->Velocity = this->Velocity.mulScalaire(pow(this->Damping, frameTime)) + this->Acceleration.mulScalaire(frameTime);
 }

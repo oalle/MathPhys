@@ -17,7 +17,8 @@ public:
 	double gety();
 	double getz();
 
-	bool operator=(Veccteur3D& vec2);
+	bool operator==(Veccteur3D& vec2);
+	void operator=(Veccteur3D& vec2);
 	Veccteur3D operator+(Veccteur3D& vec2);
 	Veccteur3D operator-(Veccteur3D& vec2);
 private:

@@ -9,7 +9,7 @@ Particule::~Particule()
 {
 }
 
-Particule::Particule(const Particule &particule)
+Particule::Particule(Particule &particule)
 {
 	this->Acceleration = particule.Acceleration;
 	this->Damping = particule.Damping;
@@ -18,7 +18,7 @@ Particule::Particule(const Particule &particule)
 	this->Position = particule.Position;
 	this->Velocity = particule.Velocity;
 }
-void Particule::operator=(const Particule &particule)
+void Particule::operator=(Particule &particule)
 {
 	this->Acceleration = particule.Acceleration;
 	this->Damping = particule.Damping;

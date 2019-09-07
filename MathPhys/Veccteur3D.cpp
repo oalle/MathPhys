@@ -76,9 +76,16 @@ double Veccteur3D::getz()
 	return z;
 }
 
-bool Veccteur3D::operator=(Veccteur3D& vec2)
+bool Veccteur3D::operator==(Veccteur3D& vec2)
 {
 	return (this->getx() == vec2.getx() && this->gety() == vec2.gety() && this->getz() == vec2.getz());
+}
+
+void Veccteur3D::operator=(Veccteur3D& vec2)
+{
+	this->x = vec2.getx();
+	this->y = vec2.gety();
+	this->z = vec2.getz();
 }
 
 Veccteur3D Veccteur3D::operator+(Veccteur3D& vec2)

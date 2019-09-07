@@ -8,8 +8,8 @@ public:
 	Particule();
 	virtual ~Particule();
 
-	Particule(const Particule &particule);
-	void operator=(const Particule &particule);
+	Particule(Particule &particule);
+	void operator=(Particule& particule);
 
 	void integrer(float frameTime);
 

@@ -76,11 +76,17 @@ double Veccteur3D::getz()
 	return z;
 }
 
-Veccteur3D operator+(Veccteur3D &vec1, Veccteur3D &vec2)
+bool Veccteur3D::operator=(Veccteur3D& vec2)
 {
-	return Veccteur3D(vec1.getx() + vec2.getx(), vec1.gety() + vec2.gety(), vec1.getz() + vec2.getz());
+	return (this->getx() == vec2.getx() && this->gety() == vec2.gety() && this->getz() == vec2.getz());
 }
-Veccteur3D operator-(Veccteur3D &vec1, Veccteur3D &vec2)
+
+Veccteur3D Veccteur3D::operator+(Veccteur3D& vec2)
 {
-	return Veccteur3D(vec1.getx() - vec2.getx(), vec1.gety() - vec2.gety(), vec1.getz() - vec2.getz());
+	return Veccteur3D(this->getx() + vec2.getx(), this->gety() + vec2.gety(), this->getz() + vec2.getz());
+}
+
+Veccteur3D Veccteur3D::operator-(Veccteur3D &vec2)
+{
+	return Veccteur3D(this->getx() - vec2.getx(), this->gety() - vec2.gety(), this->getz() - vec2.getz());
 }

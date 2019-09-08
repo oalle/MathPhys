@@ -76,24 +76,24 @@ double Veccteur3D::getz()
 	return z;
 }
 
-bool Veccteur3D::operator==(Veccteur3D& vec2)
+bool Veccteur3D::operator==(const Veccteur3D& vec2)
 {
-	return (this->getx() == vec2.getx() && this->gety() == vec2.gety() && this->getz() == vec2.getz());
+	return (this->getx() == vec2.x && this->gety() == y && this->getz() == z);
 }
 
-void Veccteur3D::operator=(Veccteur3D& vec2)
+void Veccteur3D::operator=(const Veccteur3D& vec2)
 {
-	this->x = vec2.getx();
-	this->y = vec2.gety();
-	this->z = vec2.getz();
+	this->x = vec2.x;
+	this->y = vec2.y;
+	this->z = vec2.z;
 }
 
-Veccteur3D Veccteur3D::operator+(Veccteur3D& vec2)
+Veccteur3D Veccteur3D::operator+(const Veccteur3D& vec2)
 {
-	return Veccteur3D(this->getx() + vec2.getx(), this->gety() + vec2.gety(), this->getz() + vec2.getz());
+	return Veccteur3D(this->getx() + vec2.x, this->gety() + vec2.y, this->getz() + vec2.z);
 }
 
-Veccteur3D Veccteur3D::operator-(Veccteur3D &vec2)
+Veccteur3D Veccteur3D::operator-(const Veccteur3D &vec2)
 {
-	return Veccteur3D(this->getx() - vec2.getx(), this->gety() - vec2.gety(), this->getz() - vec2.getz());
+	return Veccteur3D(this->getx() - vec2.x, this->gety() - vec2.y, this->getz() - vec2.z);
 }

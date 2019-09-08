@@ -88,8 +88,15 @@ void Particule::integrer(float frameTime)
 	this->InverseMasse = 1 / this->Masse;
 
 	// update position
-	this->Position = this->Position + this->Velocity.mulScalaire(frameTime);
+	Veccteur3D Temp = this->Velocity;
+	Temp.mulScalaire(frameTime);
+	this->Position = this->Position + Temp;
 
 	// update velocity
-	this->Velocity = this->Velocity.mulScalaire(pow(this->Damping, frameTime)) + this->Acceleration.mulScalaire(frameTime);
+	Veccteur3D VelocityTemp = this->Velocity;
+	VelocityTemp.mulScalaire(pow(this->Damping, frameTime));
+
+	Veccteur3D AccelerationTemp = this->Acceleration;
+	AccelerationTemp.mulScalaire(frameTime);
+	this->Velocity = VelocityTemp + AccelerationTemp;
 }

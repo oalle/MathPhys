@@ -17,10 +17,10 @@ public:
 	double gety();
 	double getz();
 
-	bool operator==(Veccteur3D& vec2);
-	void operator=(Veccteur3D& vec2);
-	Veccteur3D operator+(Veccteur3D& vec2);
-	Veccteur3D operator-(Veccteur3D& vec2);
+	bool operator==(const Veccteur3D& vec2);
+	void operator=(const Veccteur3D& vec2);
+	Veccteur3D operator+(const Veccteur3D& vec2);
+	Veccteur3D operator-(const Veccteur3D& vec2);
 private:
 	double x, y, z;
 

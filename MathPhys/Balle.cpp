@@ -4,10 +4,8 @@
 
 Balle::Balle()
 {
-	this->Damping = 0,7;
+	this->Damping = 0.7;
 	this->Masse = 500;
-
-
 }
 
 

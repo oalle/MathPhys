@@ -1,6 +1,6 @@
 #pragma once
 #include <cmath>
-#include "Veccteur3D.h"
+#include "Vecteur3D.h"
 
 class Particule
 {
@@ -22,23 +22,23 @@ public:
 	float getDamping();
 	void setDamping(float newDamping);
 
-	Veccteur3D getPosition();
-	void setPosition(Veccteur3D newPosition);
+	Vecteur3D getPosition();
+	void setPosition(Vecteur3D newPosition);
 
-	Veccteur3D getVelocity();
-	void setVelocity(Veccteur3D newVelocity);
+	Vecteur3D getVelocity();
+	void setVelocity(Vecteur3D newVelocity);
 
-	Veccteur3D getAcceleration();
-	void setAcceleration(Veccteur3D newAcceleration);
+	Vecteur3D getAcceleration();
+	void setAcceleration(Vecteur3D newAcceleration);
 
 protected:
 	float Masse;
 	float InverseMasse;
 	float Damping;
 
-	Veccteur3D Position;
-	Veccteur3D Velocity;
-	Veccteur3D Acceleration;
+	Vecteur3D Position;
+	Vecteur3D Velocity;
+	Vecteur3D Acceleration;
 
 };
 

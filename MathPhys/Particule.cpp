@@ -55,29 +55,29 @@ void Particule::setDamping(float newDamping)
 	this->Damping = newDamping;
 }
 
-Veccteur3D Particule::getPosition()
+Vecteur3D Particule::getPosition()
 {
 	return this->Position;
 }
-void Particule::setPosition(Veccteur3D newPosition)
+void Particule::setPosition(Vecteur3D newPosition)
 {
 	this->Position = newPosition;
 }
 
-Veccteur3D Particule::getVelocity()
+Vecteur3D Particule::getVelocity()
 {
 	return this->Velocity;
 }
-void Particule::setVelocity(Veccteur3D newVelocity)
+void Particule::setVelocity(Vecteur3D newVelocity)
 {
 	this->Velocity = newVelocity;
 }
 
-Veccteur3D Particule::getAcceleration()
+Vecteur3D Particule::getAcceleration()
 {
 	return this->Acceleration;
 }
-void Particule::setAcceleration(Veccteur3D newAcceleration)
+void Particule::setAcceleration(Vecteur3D newAcceleration)
 {
 	this->Acceleration = newAcceleration;
 }
@@ -88,15 +88,15 @@ void Particule::integrer(float frameTime)
 	this->InverseMasse = 1 / this->Masse;
 
 	// update position
-	Veccteur3D Temp = this->Velocity;
+	Vecteur3D Temp = this->Velocity;
 	Temp.mulScalaire(frameTime);
 	this->Position = this->Position + Temp;
 
 	// update velocity
-	Veccteur3D VelocityTemp = this->Velocity;
+	Vecteur3D VelocityTemp = this->Velocity;
 	VelocityTemp.mulScalaire(pow(this->Damping, frameTime));
 
-	Veccteur3D AccelerationTemp = this->Acceleration;
+	Vecteur3D AccelerationTemp = this->Acceleration;
 	AccelerationTemp.mulScalaire(frameTime);
 	this->Velocity = VelocityTemp + AccelerationTemp;
 }

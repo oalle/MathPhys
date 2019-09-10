@@ -19,13 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Balle.h" />
     <ClInclude Include="Particule.h" />
-    <ClInclude Include="Veccteur3D.h" />
+    <ClInclude Include="Vecteur3D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Balle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particule.cpp" />
-    <ClCompile Include="Veccteur3D.cpp" />
+    <ClCompile Include="Vecteur3D.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

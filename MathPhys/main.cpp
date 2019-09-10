@@ -1,6 +1,6 @@
-#include <Windows.h>
-#include <GL\glew.h>
-#include <GL\freeglut.h>
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include <iostream>
 
 using namespace std;
@@ -24,8 +24,8 @@ GLfloat Lnoire[4] = { 0.0,0.0,0.0,1.0 };
 
 void defboule(int x)
 {
-	glColor3f(1.0, 1.0, 1.0);
-	glutSolidSphere(x, 10, 10);
+	glColor3f(1.0, 0.0, 0.0);
+	glutSolidSphere(x, 50, 50);
 	
 }
 
@@ -85,7 +85,6 @@ int main(int argc, char* argv[]) {
 	/* Callback for display */
 	glutDisplayFunc(display);
 	glutReshapeFunc(redim);
-	glutKeyboardFunc(vClavier);
 	/* Main loop */
 	glutMainLoop();
 	return 0;

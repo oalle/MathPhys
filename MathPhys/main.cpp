@@ -2,13 +2,20 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
+#include "Particule.h"
+#include "Vecteur3D.h"
+#include "Balle.h"
+#include "BouleDeFeu.h"
+#include "Laser.h"
+#include "Boulet.h"
 
 using namespace std;
 
-float x = 0;
-float y = 0;
-float z = 0;
+float x2 = 0;
+float y2 = 0;
+float z2 = 0;
 
+Particule projectile;
 
 float MatSpec[4] = { 0.1f, 0.1f, 0.5f, 1.0f };
 float MatDif[4] = { 0.057f, 0.447f, 0.361f, 1.0f };
@@ -23,20 +30,21 @@ GLfloat shine[1] = { 50.0 };
 GLfloat Lnoire[4] = { 0.0,0.0,0.0,1.0 };
 
 
-
-void defboule(int x)
+void initSphereObj(float x)
 {
-	
+
 	glutSolidSphere(x, 50, 50);
-	
+
 }
 
-void Translation()
+void translation(Vecteur3D vec1)
 {
-	x = x + 0.001;
-	y = y + 0.001;
-    z = z + 0.001;
-	
+	projectile.integrer(0.0033);
+
+	x2 = x2 + vec1.getx();
+	y2 = y2 + vec1.gety();
+	z2 = z2 + vec1.getz();
+
 }
 
 void display(void)
@@ -55,24 +63,60 @@ void display(void)
 	glClearColor(1, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
+
 	glColor3f(1.0, 0.0, 0.0);
 	glPushMatrix();
-	glTranslatef(x, y, z);
-	
-	defboule(1);
+
+	Vecteur3D vec1 = projectile.getPosition();
+	glTranslatef(x2 - 2, y2, z2);
+	initSphereObj(0.1);
 	glPopMatrix();
 
-	Translation();
-	
+	translation(vec1);
+
+
+
 	glFlush();
 	/* Swap front and back buffers */
 	glutPostRedisplay();
 	glutSwapBuffers();
 }
 void key_pressed(unsigned char key, int x, int y) {
-	/*if (key == 'q') {
-		defboule(1);
-	}*/
+
+	Balle tmpBalle;
+	BouleDeFeu tmpBDF;
+	Laser tmpLaser;
+	Boulet tmpBoulet;
+
+	switch (key)
+	{
+	case 'a':
+		x2 = 0;
+		y2 = 0;
+		z2 = 0;
+		projectile = tmpBalle;
+		break;
+	case 'z':
+		x2 = 0;
+		y2 = 0;
+		z2 = 0;
+		projectile = tmpBDF;
+		break;
+	case 'e':
+		x2 = 0;
+		y2 = 0;
+		z2 = 0;
+		projectile = tmpLaser;
+		break;
+	case 'r':
+		x2 = 0;
+		y2 = 0;
+		z2 = 0;
+		projectile = tmpBoulet;
+		break;
+	default:
+		break;
+	}
 }
 void redim(int width, int height)
 {
@@ -93,8 +137,8 @@ void redim(int width, int height)
 int main(int argc, char* argv[]) {
 
 	glutInit(&argc, argv);
-	glutInitWindowSize(500, 500);
-	glutInitWindowPosition(200, 100);
+	glutInitWindowSize(1920, 1080);
+	glutInitWindowPosition(0, 00);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Hello world");
 	/* Callback for display */

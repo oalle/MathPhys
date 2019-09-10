@@ -7,6 +7,10 @@ Particule::Particule()
 	InverseMasse = 0;
 
 	this->Position = Vecteur3D(0, 0, 0);
+	this->Velocity = Vecteur3D(0, 0, 0);
+
+	// gravity
+	this->Acceleration = Vecteur3D(0, -0.0098, 0);
 }
 
 
@@ -102,6 +106,7 @@ void Particule::integrer(float frameTime)
 	VelocityTemp.mulScalaire(pow(this->Damping, frameTime));
 
 	Vecteur3D AccelerationTemp = this->Acceleration;
+	AccelerationTemp.mulScalaire(this->Masse);
 	AccelerationTemp.mulScalaire(frameTime);
 	this->Velocity = VelocityTemp + AccelerationTemp;
 }

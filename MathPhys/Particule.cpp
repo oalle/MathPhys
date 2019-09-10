@@ -2,6 +2,11 @@
 
 Particule::Particule()
 {
+	Damping = 0;
+	Masse = 0;
+	InverseMasse = 0;
+
+	this->Position = Vecteur3D(0, 0, 0);
 }
 
 

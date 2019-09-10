@@ -55,9 +55,9 @@ double Veccteur3D::prodScalaire(Veccteur3D vec1)
 
 Veccteur3D Veccteur3D::prodVectorielle(Veccteur3D vec1)
 {
-	double x2 = y * vec1.getz() - z * gety();
-	double y2 = z * vec1.getx() - x * getz();
-	double z2 = x * vec1.gety() - y * getx();
+	double x2 = y * vec1.getz() - z * vec1.gety();
+	double y2 = z * vec1.getx() - x * vec1.getz();
+	double z2 = x * vec1.gety() - y * vec1.getx();
 	return Veccteur3D(x2,y2,z2);
 }
 

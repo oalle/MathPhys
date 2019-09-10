@@ -5,9 +5,9 @@
 
 using namespace std;
 
-int x = 0;
-int y = 0;
-int z = 0;
+float x = 0;
+float y = 0;
+float z = 0;
 
 
 float MatSpec[4] = { 0.1f, 0.1f, 0.5f, 1.0f };
@@ -22,10 +22,20 @@ GLfloat position1[4] = { -5.0,0.0,3.0,0.0 };
 GLfloat shine[1] = { 50.0 };
 GLfloat Lnoire[4] = { 0.0,0.0,0.0,1.0 };
 
+
+
 void defboule(int x)
 {
 	
 	glutSolidSphere(x, 50, 50);
+	
+}
+
+void Translation()
+{
+	x = x + 0.001;
+	y = y + 0.001;
+    z = z + 0.001;
 	
 }
 
@@ -48,11 +58,11 @@ void display(void)
 	glColor3f(1.0, 0.0, 0.0);
 	glPushMatrix();
 	glTranslatef(x, y, z);
-
+	
 	defboule(1);
 	glPopMatrix();
 
-
+	Translation();
 	
 	glFlush();
 	/* Swap front and back buffers */

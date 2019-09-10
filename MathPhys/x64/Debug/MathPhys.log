@@ -1,5 +1,5 @@
 ﻿  main.cpp
-C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(50,21): warning C4244:  'argument' : conversion de 'int' en 'GLfloat', perte possible de données
-C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(50,18): warning C4244:  'argument' : conversion de 'int' en 'GLfloat', perte possible de données
-C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(50,15): warning C4244:  'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(49,8): warning C4244:  '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(50,8): warning C4244:  '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(51,11): warning C4244:  '=' : conversion de 'double' en 'float', perte possible de données
   MathPhys.vcxproj -> C:\Users\vinceduroc\source\repos\MathPhys\x64\Debug\MathPhys.exe

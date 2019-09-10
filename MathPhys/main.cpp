@@ -14,8 +14,8 @@ float MatSpec[4] = { 0.1f, 0.1f, 0.5f, 1.0f };
 float MatDif[4] = { 0.057f, 0.447f, 0.361f, 1.0f };
 float MatAmb[4] = { 0.3f, 0.3f, 0.3f, 1.0f };
 float Light1Pos[4] = { 0.0f, 0.0f, 20.0f, 1.0f };
-float Light1Dif[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-float Light1Spec[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+float Light1Dif[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+float Light1Spec[4] = { 0.0f, 1.0f, 1.0f, 1.0f };
 float Light1Amb[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 float Spot1Dir[3] = { 0.0f, 0.0f, -1.0f };
 GLfloat position1[4] = { -5.0,0.0,3.0,0.0 };
@@ -24,7 +24,7 @@ GLfloat Lnoire[4] = { 0.0,0.0,0.0,1.0 };
 
 void defboule(int x)
 {
-	glColor3f(1.0, 0.0, 0.0);
+	
 	glutSolidSphere(x, 50, 50);
 	
 }
@@ -42,13 +42,14 @@ void display(void)
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0, 0, 0, 0);
+	glClearColor(1, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-
+	glColor3f(1.0, 0.0, 0.0);
 	glPushMatrix();
 	glTranslatef(x, y, z);
-	defboule(10);
+
+	defboule(1);
 	glPopMatrix();
 
 
@@ -58,7 +59,11 @@ void display(void)
 	glutPostRedisplay();
 	glutSwapBuffers();
 }
-
+void key_pressed(unsigned char key, int x, int y) {
+	/*if (key == 'q') {
+		defboule(1);
+	}*/
+}
 void redim(int width, int height)
 {
 	glViewport(0, 0, width, height);
@@ -85,7 +90,9 @@ int main(int argc, char* argv[]) {
 	/* Callback for display */
 	glutDisplayFunc(display);
 	glutReshapeFunc(redim);
+	glutKeyboardFunc(key_pressed);
 	/* Main loop */
 	glutMainLoop();
 	return 0;
 }
+

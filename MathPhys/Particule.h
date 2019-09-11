@@ -40,21 +40,21 @@ public:
 	void setDamping(float newDamping);
 
 	//Getteur pour l'attribut Position
-	//return la valeur de la position
+	//return le vecteur de la position
 	Vecteur3D getPosition();
 	//Setteur pour l'attribut Position
 	//param : newPosition : la nouvelle valeur de la position
 	void setPosition(Vecteur3D newPosition);
 
 	//Getteur pour l'attribut Velocity
-	//return la valeur de la velocite
+	//return le vecteur de la velocite
 	Vecteur3D getVelocity();
 	//Setteur pour l'attribut Velocity
 	//param : newVelociy : la nouvelle valeur pour la velocite
 	void setVelocity(Vecteur3D newVelocity);
 
 	//Getteur pour l'attribut Acceleration
-	//return la valeur de l'acceleration
+	//return le vecteur de l'acceleration
 	Vecteur3D getAcceleration();
 	//Setteur pour l'attribut Acceleration
 	//param : newAcceleration : nouvelle valeur de l'acceleration

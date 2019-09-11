@@ -4,7 +4,7 @@
 
 Balle::Balle()
 {
-	this->Damping = 0.7f;
+	this->Damping = 0.2f;
 	this->Masse = 5;
 
 	this->Velocity = Vecteur3D(0.03, 0, 0.);

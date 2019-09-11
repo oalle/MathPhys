@@ -106,7 +106,6 @@ void Particule::integrer(float frameTime)
 	VelocityTemp.mulScalaire(pow(this->Damping, frameTime));
 
 	Vecteur3D AccelerationTemp = this->Acceleration;
-	AccelerationTemp.mulScalaire(this->Masse);
 	AccelerationTemp.mulScalaire(frameTime);
 	this->Velocity = VelocityTemp + AccelerationTemp;
 }

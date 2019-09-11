@@ -1,5 +1,4 @@
-﻿  main.cpp
-C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(49,8): warning C4244:  '=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(50,8): warning C4244:  '=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\vinceduroc\source\repos\MathPhys\MathPhys\main.cpp(51,11): warning C4244:  '=' : conversion de 'double' en 'float', perte possible de données
+﻿  Balle.cpp
+  BouleDeFeu.cpp
+  Génération de code en cours...
   MathPhys.vcxproj -> C:\Users\vinceduroc\source\repos\MathPhys\x64\Debug\MathPhys.exe

@@ -11,9 +11,9 @@
 
 using namespace std;
 
-float x2 = 0;
-float y2 = 0;
-float z2 = 0;
+float sphereObjX = 0;
+float sphereObjY = 0;
+float sphereObjZ = 0;
 
 Particule projectile;
 
@@ -29,25 +29,27 @@ GLfloat position1[4] = { -5.0,0.0,3.0,0.0 };
 GLfloat shine[1] = { 50.0 };
 GLfloat Lnoire[4] = { 0.0,0.0,0.0,1.0 };
 
-
+//fonction pour initialiser une sphere dans notre environnement
+//param float x Le rayon de notre sphere
 void initSphereObj(float x)
 {
-
 	glutSolidSphere(x, 50, 50);
-
 }
 
+//fonction pour appliquer une translation à un projectile
+//param Vecteur3D vec1 La position d'un projectile
 void translation(Vecteur3D vec1)
 {
 	projectile.integrer(0.0033);
 
-	x2 = x2 + vec1.getx();
-	y2 = y2 + vec1.gety();
-	z2 = z2 + vec1.getz();
+	sphereObjX = sphereObjX + vec1.getx();
+	sphereObjY = sphereObjY + vec1.gety();
+	sphereObjZ = sphereObjZ + vec1.getz();
 
 }
 
-void display(void)
+//fonction permettant le rafraichissement de la vue
+void displayLoop(void)
 {
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, MatSpec);
@@ -68,7 +70,7 @@ void display(void)
 	glPushMatrix();
 
 	Vecteur3D vec1 = projectile.getPosition();
-	glTranslatef(x2 - 2, y2, z2);
+	glTranslatef(sphereObjX - 2, sphereObjY, sphereObjZ);
 	initSphereObj(0.1);
 	glPopMatrix();
 
@@ -81,6 +83,11 @@ void display(void)
 	glutPostRedisplay();
 	glutSwapBuffers();
 }
+
+//fonction de detection des inputs
+//param char key La touche appuyee
+//param int x Coordonnee X du curseur de la souris
+//param int Y Coordonnee Y du curseur de la souris
 void key_pressed(unsigned char key, int x, int y) {
 
 	Balle tmpBalle;
@@ -91,34 +98,38 @@ void key_pressed(unsigned char key, int x, int y) {
 	switch (key)
 	{
 	case 'a':
-		x2 = 0;
-		y2 = 0;
-		z2 = 0;
+		sphereObjX = 0;
+		sphereObjY = 0;
+		sphereObjZ = 0;
 		projectile = tmpBalle;
 		break;
 	case 'z':
-		x2 = 0;
-		y2 = 0;
-		z2 = 0;
+		sphereObjX = 0;
+		sphereObjY = 0;
+		sphereObjZ = 0;
 		projectile = tmpBDF;
 		break;
 	case 'e':
-		x2 = 0;
-		y2 = 0;
-		z2 = 0;
+		sphereObjX = 0;
+		sphereObjY = 0;
+		sphereObjZ = 0;
 		projectile = tmpLaser;
 		break;
 	case 'r':
-		x2 = 0;
-		y2 = 0;
-		z2 = 0;
+		sphereObjX = 0;
+		sphereObjY = 0;
+		sphereObjZ = 0;
 		projectile = tmpBoulet;
 		break;
 	default:
 		break;
 	}
 }
-void redim(int width, int height)
+
+//fonction pour positionner la vue / la camera
+//param int width La largeur de la fenetre
+//param int height La hauteur de la fenetre
+void reshapeLoop(int width, int height)
 {
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_MODELVIEW);
@@ -132,8 +143,6 @@ void redim(int width, int height)
 	gluPerspective(70.0, 1.0, 1.0, 12.0);
 }
 
-
-
 int main(int argc, char* argv[]) {
 
 	glutInit(&argc, argv);
@@ -142,8 +151,8 @@ int main(int argc, char* argv[]) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Hello world");
 	/* Callback for display */
-	glutDisplayFunc(display);
-	glutReshapeFunc(redim);
+	glutDisplayFunc(displayLoop);
+	glutReshapeFunc(reshapeLoop);
 	glutKeyboardFunc(key_pressed);
 	/* Main loop */
 	glutMainLoop();

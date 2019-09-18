@@ -9,6 +9,11 @@ public:
 	Particule();
 	//Destructeur de la classe particule
 	virtual ~Particule();
+	
+	//Constructeur a deux parametres
+	//param : masse : La masse de la particule
+	//param : position : La position de la particule (par defaut, la particule est placee a l'origine du repere)
+	Particule(float masse, Vecteur3D position = Vecteur3D(0, 0, 0));
 
 	//Constructeur de recopie de la classe particule
 	//param : &particule : l'adresse de la particule qu'il faut recopier
@@ -31,13 +36,6 @@ public:
 	//Setteur pour l'attribut InverseMasse
 	//param : newInverseMasse : la nouvelle valeur de la masse inverse
 	void setInverseMasse(float newInverseMasse);
-
-	//Getteur pour l'attribut Damping
-	//return la valeur du damping
-	float getDamping();
-	//Setteur pour l'attribut Damping
-	//param : newDamping : la nouvelle valeur du damping
-	void setDamping(float newDamping);
 
 	//Getteur pour l'attribut Position
 	//return le vecteur de la position
@@ -62,16 +60,24 @@ public:
 
 	//Fonction pour l'integrateur pour les particules
 	//param : frameTime : le temps d'une frame
-	void integrer(float frameTime);
+	void integrate(float frameTime);
+
+	//Fonction pour calculer la resultante des forces
+	//param : force : la force a ajouter a la resultante courante
+	void addForce(const Vecteur3D& force);
+
+	//Fonction pour nettoyer la resultante courante
+	void clearAccum();
 
 protected:
 	float Masse;
 	float InverseMasse;
-	float Damping;
 
 	Vecteur3D Position;
 	Vecteur3D Velocity;
 	Vecteur3D Acceleration;
+
+	Vecteur3D AccumForces;
 
 };
 

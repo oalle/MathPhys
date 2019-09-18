@@ -1,9 +1,9 @@
 #include "Particule.h"
+#include <cassert>
 
 //Constructeur de la classe particule
 Particule::Particule()
 {
-	Damping = 0;
 	Masse = 0;
 	InverseMasse = 0;
 
@@ -19,12 +19,23 @@ Particule::~Particule()
 {
 }
 
+//Constructeur a deux parametres
+//param : masse : La masse de la particule
+//param : position : La position de la particule (par defaut, la particule est placee a l'origine du repere)
+Particule::Particule(float masse, Vecteur3D position)
+{
+	this->Masse = masse;
+	this->InverseMasse = 1 / masse;
+
+	this->Position = position;
+	this->Velocity = Vecteur3D(0, 0, 0);
+}
+
 //Constructeur de recopie de la classe particule
 //param : &particule : l'adresse de la particule qu'il faut recopier
 Particule::Particule(Particule& particule)
 {
 	this->Acceleration = particule.Acceleration;
-	this->Damping = particule.Damping;
 	this->Masse = particule.Masse;
 	this->InverseMasse = particule.InverseMasse;
 	this->Position = particule.Position;
@@ -36,7 +47,6 @@ Particule::Particule(Particule& particule)
 void Particule::operator=(Particule& particule)
 {
 	this->Acceleration = particule.Acceleration;
-	this->Damping = particule.Damping;
 	this->Masse = particule.Masse;
 	this->InverseMasse = particule.InverseMasse;
 	this->Position = particule.Position;
@@ -55,6 +65,7 @@ float Particule::getMasse()
 void Particule::setMasse(float newMasse)
 {
 	this->Masse = newMasse;
+	this->InverseMasse = 1 / this->Masse;
 }
 
 //Getteur pour l'attribut InverseMasse
@@ -69,20 +80,6 @@ float Particule::getInverseMasse()
 void Particule::setInverseMasse(float newInverseMasse)
 {
 	this->InverseMasse = newInverseMasse;
-}
-
-//Getteur pour l'attribut Damping
-//return la valeur du damping
-float Particule::getDamping()
-{
-	return this->Damping;
-}
-
-//Setteur pour l'attribut Damping
-//param : newDamping : la nouvelle valeur du damping
-void Particule::setDamping(float newDamping)
-{
-	this->Damping = newDamping;
 }
 
 //Getteur pour l'attribut Position
@@ -129,20 +126,41 @@ void Particule::setAcceleration(Vecteur3D newAcceleration)
 
 //Fonction pour l'integrateur pour les particules
 //param : frameTime : le temps d'une frame
-void Particule::integrer(float frameTime)
+void Particule::integrate(float frameTime)
 {
-	this->InverseMasse = 1 / this->Masse;
+	if (this->InverseMasse < 0) return;
+
+	assert(frameTime > 0);
 
 	// update position
 	Vecteur3D Temp = this->Velocity;
 	Temp.mulScalaire(frameTime);
 	this->Position = this->Position + Temp;
 
-	// update velocity
-	Vecteur3D VelocityTemp = this->Velocity;
-	VelocityTemp.mulScalaire(pow(this->Damping, frameTime));
+	// calcul acceleration
+	Vecteur3D AccumForcesTemp = this->AccumForces;
+	AccumForcesTemp.mulScalaire(this->InverseMasse);
+	this->Acceleration = AccumForcesTemp;
+	//TODO faire 2e version des fonctions mulScal, etc (renvoie d'un Vecteur3D ou non)
 
+	// update velocite
 	Vecteur3D AccelerationTemp = this->Acceleration;
 	AccelerationTemp.mulScalaire(frameTime);
-	this->Velocity = VelocityTemp + AccelerationTemp;
+	this->Velocity += AccelerationTemp;
+
+	// clear AccumForces
+	clearAccum();
+}
+
+//Fonction pour calculer la resultante des forces
+//param : force : la force a ajouter a la resultante courante
+void Particule::addForce(const Vecteur3D& force)
+{
+	this->AccumForces += force;
+}
+
+//Fonction pour nettoyer la resultante courante
+void Particule::clearAccum()
+{
+	this->AccumForces = Vecteur3D(0, 0, 0);
 }

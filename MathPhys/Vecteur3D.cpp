@@ -100,15 +100,22 @@ double Vecteur3D::getz()
 //surcharge l'opérateur + pour additionner deux vecteurs composante par composante
 //param Vecteur3D vec Le vecteur avec lequel on souhaite additionner le vecteur
 //return Le vecteur résultant de l'addition des vecteurs
-Vecteur3D Vecteur3D::operator+(Vecteur3D &vec)
+Vecteur3D Vecteur3D::operator+(const Vecteur3D &vec)
 {
-	return Vecteur3D(this->getx() + vec.getx(), this->gety() + vec.gety(), this->getz() + vec.getz());
+	return Vecteur3D(this->getx() + vec.x, this->gety() + vec.y, this->getz() + vec.z);
 }
 
 //surcharge l'opérateur - pour soustraire deux vecteurs composante par composante
 //param Vecteur3D vec Le vecteur avec lequel on souhaite soustraire le vecteur
 //return Le vecteur résultant de la soustraction des vecteurs
-Vecteur3D Vecteur3D::operator-(Vecteur3D &vec)
+Vecteur3D Vecteur3D::operator-(const Vecteur3D &vec)
 {
-	return Vecteur3D(this->getx() - vec.getx(), this->gety() - vec.gety(), this->getz() - vec.getz());
+	return Vecteur3D(this->getx() - vec.x, this->gety() - vec.y, this->getz() - vec.z);
+}
+
+void Vecteur3D::operator+=(const Vecteur3D& vec)
+{
+	x += vec.x;
+	y += vec.y;
+	z += vec.z;
 }

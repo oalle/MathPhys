@@ -4,10 +4,6 @@
 #include <iostream>
 #include "Particule.h"
 #include "Vecteur3D.h"
-#include "Balle.h"
-#include "BouleDeFeu.h"
-#include "Laser.h"
-#include "Boulet.h"
 
 using namespace std;
 
@@ -16,6 +12,8 @@ float sphereObjY = 0;
 float sphereObjZ = 0;
 
 Particule projectile;
+
+float frameTime = 0.0033;
 
 float MatSpec[4] = { 0.1f, 0.1f, 0.5f, 1.0f };
 float MatDif[4] = { 0.057f, 0.447f, 0.361f, 1.0f };
@@ -40,7 +38,7 @@ void initSphereObj(float x)
 //param Vecteur3D vec1 La position d'un projectile
 void translation(Vecteur3D vec1)
 {
-	projectile.integrer(0.0033);
+	projectile.integrate(frameTime);
 
 	sphereObjX = sphereObjX + vec1.getx();
 	sphereObjY = sphereObjY + vec1.gety();
@@ -51,6 +49,10 @@ void translation(Vecteur3D vec1)
 //fonction permettant le rafraichissement de la vue
 void displayLoop(void)
 {
+	// debut calcul frame time
+	float previousTime = glutGet( GLUT_ELAPSED_TIME );
+
+
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, MatSpec);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDif);
@@ -82,6 +84,13 @@ void displayLoop(void)
 	/* Swap front and back buffers */
 	glutPostRedisplay();
 	glutSwapBuffers();
+
+	for (int i = 0; i < 100; i++);
+
+	// fin calcul frame time
+	float currentTime = glutGet(GLUT_ELAPSED_TIME);
+	frameTime = (currentTime - previousTime) / 1000.0f;
+
 }
 
 //fonction de detection des inputs
@@ -90,10 +99,10 @@ void displayLoop(void)
 //param int Y Coordonnee Y du curseur de la souris
 void key_pressed(unsigned char key, int x, int y) {
 
-	Balle tmpBalle;
-	BouleDeFeu tmpBDF;
-	Laser tmpLaser;
-	Boulet tmpBoulet;
+	Particule tmpBalle(100);
+	Particule tmpBDF(50);
+	Particule tmpLaser(0);
+	Particule tmpBoulet(150);
 
 	switch (key)
 	{
@@ -158,4 +167,3 @@ int main(int argc, char* argv[]) {
 	glutMainLoop();
 	return 0;
 }
-

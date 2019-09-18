@@ -41,11 +41,16 @@ public:
 	//surcharge l'opérateur + pour additionner deux vecteurs composante par composante
 	//param Vecteur3D vec Le vecteur avec lequel on souhaite additionner le vecteur
 	//return Le vecteur résultant de l'addition des vecteurs
-	Vecteur3D operator+(Vecteur3D& vec);
+	Vecteur3D operator+(const Vecteur3D& vec);
 	//surcharge l'opérateur - pour soustraire deux vecteurs composante par composante
 	//param Vecteur3D vec Le vecteur avec lequel on souhaite soustraire le vecteur
 	//return Le vecteur résultant de la soustraction des vecteurs
-	Vecteur3D operator-(Vecteur3D& vec);
+	Vecteur3D operator-(const Vecteur3D& vec);
+
+	//surcharge l'opérateur += pour additionner deux vecteurs composante par composante
+	//param Vecteur3D vec Le vecteur avec lequel on souhaite additionner le vecteur
+	//return Le vecteur résultant de l'addition des vecteurs
+	void operator+=(const Vecteur3D& vec);
 
 private:
 	double x, y, z;

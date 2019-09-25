@@ -44,13 +44,25 @@ Particule::Particule(Particule& particule)
 
 //Surcharge de l'operateur d'assignation pour la classe particule
 //param : &particule : l'adresse de la particule a assigner
-void Particule::operator=(Particule& particule)
+void Particule::operator=(const Particule& particule)
 {
 	this->Acceleration = particule.Acceleration;
 	this->Masse = particule.Masse;
 	this->InverseMasse = particule.InverseMasse;
 	this->Position = particule.Position;
 	this->Velocity = particule.Velocity;
+}
+
+//Surcharge de l'operateur de comparaison pour la classe particule
+//param : &particule : l'adresse de la particule a comparer
+bool Particule::operator==(const Particule& particule)
+{
+	return this->Acceleration == particule.Acceleration 
+		&& this->AccumForces == particule.AccumForces 
+		&& this->InverseMasse == particule.InverseMasse 
+		&& this->Masse == particule.Masse 
+		&& this->Position == particule.Position 
+		&& this->Velocity == particule.Velocity;
 }
 
 //Getteur pour l'attribut masse 

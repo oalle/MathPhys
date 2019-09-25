@@ -29,11 +29,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameWorld.cpp" />
-    <ClCompile Include="GravityForce.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particule.cpp" />
     <ClCompile Include="ParticuleForceGenerator.cpp" />
     <ClCompile Include="RegistreForces.cpp" />
+    <ClCompile Include="GravityForce.cpp" />
     <ClCompile Include="Vecteur3D.cpp" />
   </ItemGroup>
   <ItemGroup>

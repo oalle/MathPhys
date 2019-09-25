@@ -19,9 +19,13 @@ public:
 	//param : &particule : l'adresse de la particule qu'il faut recopier
 	Particule(Particule& particule);
 
-	//Surcharge de l'operateur d'assignation pour la classe particule
-	//param : &particule : l'adresse de la particule a assigner
-	void operator=(Particule& particule);
+	//Surcharge de l'operateur de comparaison pour la classe particule
+	//param : &particule : l'adresse de la particule a comparer
+	void operator=(const Particule& particule);
+
+	//Surcharge de l'operateur de comparaison pour la classe particule
+	//param : &particule : l'adresse de la particule a comparer
+	bool operator==(const Particule& particule);
 
 	//Getteur pour l'attribut masse 
 	//return la valeur de la masse

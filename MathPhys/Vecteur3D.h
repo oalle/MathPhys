@@ -52,6 +52,14 @@ public:
 	//return Le vecteur résultant de l'addition des vecteurs
 	void operator+=(const Vecteur3D& vec);
 
+	//Surcharge de l'operateur de comparaison pour la classe Vecteur3D
+	//param : &vec : l'adresse du Vecteur3D a comparer
+	bool operator==(const Vecteur3D& vec);
+
+	//Surcharge de l'operateur d'assignation pour la classe Vecteur3D
+	//param : &vec : l'adresse du Vecteur3D a assigner
+	void operator=(const Vecteur3D& vec);
+
 private:
 	double x, y, z;
 

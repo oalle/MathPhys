@@ -113,9 +113,27 @@ Vecteur3D Vecteur3D::operator-(const Vecteur3D &vec)
 	return Vecteur3D(this->getx() - vec.x, this->gety() - vec.y, this->getz() - vec.z);
 }
 
+//surcharge l'opérateur += pour additionner deux vecteurs composante par composante
+//param Vecteur3D vec Le vecteur avec lequel on souhaite additionner le vecteur
+//return Le vecteur résultant de l'addition des vecteurs
 void Vecteur3D::operator+=(const Vecteur3D& vec)
 {
 	x += vec.x;
 	y += vec.y;
 	z += vec.z;
+}
+
+//Surcharge de l'operateur de comparaison pour la classe vecteur3D
+//param : &vec : l'adresse du vecteur3D a comparer
+bool Vecteur3D::operator==(const Vecteur3D& vec)
+{
+	return this->getx() == vec.x && this->gety() == vec.y && this->getz() == vec.z;
+}
+//Surcharge de l'operateur d'assignation pour la classe Vecteur3D
+//param : &vec : l'adresse du Vecteur3D a assigner
+void Vecteur3D::operator=(const Vecteur3D& vec)
+{
+	this->x = vec.x;
+	this->y = vec.y;
+	this->z = vec.z;
 }

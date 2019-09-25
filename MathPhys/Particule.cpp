@@ -11,7 +11,7 @@ Particule::Particule()
 	this->Velocity = Vecteur3D(0, 0, 0);
 
 	// gravity
-	this->Acceleration = Vecteur3D(0, -0.0098, 0);
+	//this->Acceleration = Vecteur3D(0, -0.0098, 0);
 }
 
 //Destructeur de la classe particule

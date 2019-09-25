@@ -12,5 +12,8 @@ GravityForce::~GravityForce()
 
 void GravityForce::updateForce(Particule* particule, float duration)
 {
-	particule->integrate(duration);
+	if (particule->getMasse() != 0)
+	{
+		particule->addForce(GravityVector);
+	}
 }

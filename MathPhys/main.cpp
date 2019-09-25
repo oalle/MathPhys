@@ -50,7 +50,7 @@ void translation(Vecteur3D vec1)
 void displayLoop(void)
 {
 	// debut calcul frame time
-	float previousTime = glutGet( GLUT_ELAPSED_TIME );
+	//float previousTime = glutGet( GLUT_ELAPSED_TIME );
 
 
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
@@ -85,11 +85,11 @@ void displayLoop(void)
 	glutPostRedisplay();
 	glutSwapBuffers();
 
-	for (int i = 0; i < 100; i++);
+	//for (int i = 0; i < 100; i++);
 
 	// fin calcul frame time
-	float currentTime = glutGet(GLUT_ELAPSED_TIME);
-	frameTime = (currentTime - previousTime) / 1000.0f;
+	//float currentTime = glutGet(GLUT_ELAPSED_TIME);
+	//frameTime = (currentTime - previousTime) / 1000.0f;
 
 }
 

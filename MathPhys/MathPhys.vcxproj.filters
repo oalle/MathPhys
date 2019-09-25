@@ -36,6 +36,9 @@
     <ClInclude Include="GravityForce.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="DragForce.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Particule.cpp">
@@ -57,6 +60,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="GravityForce.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DragForce.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

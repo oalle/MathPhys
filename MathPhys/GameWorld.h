@@ -1,10 +1,12 @@
 #pragma once
 #include "Particule.h"
 #include <vector>
+#include "RegistreForces.h"
 class GameWorld
 {
 private :
 	std::vector<Particule> listParticules;
+	RegistreForces registreForces;
 
 public :
 	GameWorld(std::vector<Particule> p_listParticules) { listParticules = p_listParticules; }

@@ -24,6 +24,7 @@
     <ClInclude Include="GravityForce.h" />
     <ClInclude Include="ParticleAnchoredSpring.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleBungeeElastic.h" />
     <ClInclude Include="ParticleForceGenerator.h" />
     <ClInclude Include="ParticleSpring.h" />
     <ClInclude Include="RegistreForces.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParticleAnchoredSpring.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleBungeeElastic.cpp" />
     <ClCompile Include="ParticleForceGenerator.cpp" />
     <ClCompile Include="ParticleSpring.cpp" />
     <ClCompile Include="RegistreForces.cpp" />

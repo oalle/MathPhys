@@ -52,6 +52,12 @@ void Vector3D::mulScalaire(double k)
 	z = k * z;
 }
 
+Vector3D Vector3D::mulScalaireResult(double k)
+{
+	Vector3D result = Vector3D(k * x, k * y, k * z);
+	return result;
+}
+
 //calcul le produit composante du vecteur avec un autre vecteur
 //param Vecteur3D vec1 Le vecteur avec lequel on souhaite calculer le produit composante
 //return Le vecteur résultant du produit composante

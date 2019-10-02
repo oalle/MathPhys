@@ -3,7 +3,7 @@
 class GravityForce : public ParticleForceGenerator
 {
 private :
-	Vecteur3D GravityVector;
+	Vector3D GravityVector;
 public:
 	GravityForce();
 	~GravityForce();

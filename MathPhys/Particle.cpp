@@ -7,8 +7,8 @@ Particle::Particle()
 	Masse = 0;
 	InverseMasse = 0;
 
-	this->Position = Vecteur3D(0, 0, 0);
-	this->Velocity = Vecteur3D(0, 0, 0);
+	this->Position = Vector3D(0, 0, 0);
+	this->Velocity = Vector3D(0, 0, 0);
 
 	// gravity
 	//this->Acceleration = Vecteur3D(0, -0.0098, 0);
@@ -22,13 +22,13 @@ Particle::~Particle()
 //Constructeur a deux parametres
 //param : masse : La masse de la particule
 //param : position : La position de la particule (par defaut, la particule est placee a l'origine du repere)
-Particle::Particle(float masse, Vecteur3D position)
+Particle::Particle(float masse, Vector3D position)
 {
 	this->Masse = masse;
 	this->InverseMasse = 1 / masse;
 
 	this->Position = position;
-	this->Velocity = Vecteur3D(0, 0, 0);
+	this->Velocity = Vector3D(0, 0, 0);
 }
 
 //Constructeur de recopie de la classe particule
@@ -96,42 +96,42 @@ void Particle::setInverseMasse(float newInverseMasse)
 
 //Getteur pour l'attribut Position
 //return le vecteur de la position
-Vecteur3D Particle::getPosition()
+Vector3D Particle::getPosition()
 {
 	return this->Position;
 }
 
 //Setteur pour l'attribut Position
 //param : newPosition : la nouvelle valeur de la position
-void Particle::setPosition(Vecteur3D newPosition)
+void Particle::setPosition(Vector3D newPosition)
 {
 	this->Position = newPosition;
 }
 
 //Getteur pour l'attribut Velocity
 //return le vecteur de la velocite
-Vecteur3D Particle::getVelocity()
+Vector3D Particle::getVelocity()
 {
 	return this->Velocity;
 }
 
 //Setteur pour l'attribut Velocity
 //param : newVelociy : la nouvelle valeur pour la velocite
-void Particle::setVelocity(Vecteur3D newVelocity)
+void Particle::setVelocity(Vector3D newVelocity)
 {
 	this->Velocity = newVelocity;
 }
 
 //Getteur pour l'attribut Acceleration
 //return le vecteur de l'acceleration
-Vecteur3D Particle::getAcceleration()
+Vector3D Particle::getAcceleration()
 {
 	return this->Acceleration;
 }
 
 //Setteur pour l'attribut Acceleration
 //param : newAcceleration : nouvelle valeur de l'acceleration
-void Particle::setAcceleration(Vecteur3D newAcceleration)
+void Particle::setAcceleration(Vector3D newAcceleration)
 {
 	this->Acceleration = newAcceleration;
 }
@@ -145,18 +145,18 @@ void Particle::integrate(float frameTime)
 	assert(frameTime > 0);
 
 	// update position
-	Vecteur3D Temp = this->Velocity;
+	Vector3D Temp = this->Velocity;
 	Temp.mulScalaire(frameTime);
 	this->Position = this->Position + Temp;
 
 	// calcul acceleration
-	Vecteur3D AccumForcesTemp = this->AccumForces;
+	Vector3D AccumForcesTemp = this->AccumForces;
 	AccumForcesTemp.mulScalaire(this->InverseMasse);
 	this->Acceleration = AccumForcesTemp;
 	//TODO faire 2e version des fonctions mulScal, etc (renvoie d'un Vecteur3D ou non)
 
 	// update velocite
-	Vecteur3D AccelerationTemp = this->Acceleration;
+	Vector3D AccelerationTemp = this->Acceleration;
 	AccelerationTemp.mulScalaire(frameTime);
 	this->Velocity += AccelerationTemp;
 
@@ -166,7 +166,7 @@ void Particle::integrate(float frameTime)
 
 //Fonction pour calculer la resultante des forces
 //param : force : la force a ajouter a la resultante courante
-void Particle::addForce(const Vecteur3D& force)
+void Particle::addForce(const Vector3D& force)
 {
 	this->AccumForces += force;
 }
@@ -174,5 +174,5 @@ void Particle::addForce(const Vecteur3D& force)
 //Fonction pour nettoyer la resultante courante
 void Particle::clearAccum()
 {
-	this->AccumForces = Vecteur3D(0, 0, 0);
+	this->AccumForces = Vector3D(0, 0, 0);
 }

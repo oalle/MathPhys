@@ -3,7 +3,7 @@
 #include <GL/glu.h>
 #include <iostream>
 #include "Particle.h"
-#include "Vecteur3D.h"
+#include "Vector3D.h"
 
 using namespace std;
 
@@ -36,7 +36,7 @@ void initSphereObj(float x)
 
 //fonction pour appliquer une translation à un projectile
 //param Vecteur3D vec1 La position d'un projectile
-void translation(Vecteur3D vec1)
+void translation(Vector3D vec1)
 {
 	projectile.integrate(frameTime);
 
@@ -71,7 +71,7 @@ void displayLoop(void)
 	glColor3f(1.0, 0.0, 0.0);
 	glPushMatrix();
 
-	Vecteur3D vec1 = projectile.getPosition();
+	Vector3D vec1 = projectile.getPosition();
 	glTranslatef(sphereObjX - 2, sphereObjY, sphereObjZ);
 	initSphereObj(0.1f);
 	glPopMatrix();

@@ -5,12 +5,13 @@ class ParticleSpring :
 {
 
 private: 
-	Particle otherParticle;
-	const double k;
-	double restLength;
+	Particle m_OtherParticle;
+	int m_WidthSpring;
+	int m_ConstantSpring;
 
-public:
-	ParticleSpring();
-	void updateForce(Particle* particule, float duration);
+private:
+	ParticleSpring(Particle p_OtherParticle, int p_WidthSpring, int p_ConstantSrping);
+
+	void updateForce(Particle* p_Particle, float p_Duration);
 };
 

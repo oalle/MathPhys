@@ -7,10 +7,10 @@ ParticleAnchoredSpring::ParticleAnchoredSpring(Vecteur3D p_AnchoredPoint, int p_
 	m_ConstantSpring = p_ConstantSpring;
 }
 
-void ParticleAnchoredSpring::updateForce(Particule * p_Particule, float p_Duration) 
+void ParticleAnchoredSpring::updateForce(Particle * p_Particle, float p_Duration) 
 {
 	//Calcul de ||d||
-	Vecteur3D l_Distance = p_Particule->getPosition() - m_AnchoredPoint;
+	Vecteur3D l_Distance = p_Particle->getPosition() - m_AnchoredPoint;
 	double l_NormeDistance = l_Distance.norme();
 
 	//Calcul de ^d
@@ -27,5 +27,5 @@ void ParticleAnchoredSpring::updateForce(Particule * p_Particule, float p_Durati
 	l_DistanceUnitaire.mulScalaire(-m_ConstantSpring);
 
 	//Add force to the particle
-	p_Particule->addForce(l_DistanceUnitaire);
+	p_Particle->addForce(l_DistanceUnitaire);
 }

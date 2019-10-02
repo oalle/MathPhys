@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Vecteur3D.h"
-#include "Particule.h"
-#include "ParticuleForceGenerator.h"
+#include "Particle.h"
+#include "ParticleForceGenerator.h"
 class ParticleAnchoredSpring :
-	public ParticuleForceGenerator
+	public ParticleForceGenerator
 {
 public:
 	Vecteur3D m_AnchoredPoint;
@@ -14,7 +14,7 @@ public:
 private:
 	ParticleAnchoredSpring(Vecteur3D p_AnchoredPoint, int p_WidthSpring, int p_ConstantSrping);
 
-	void updateForce(Particule * p_Particle, float p_Duration);
+	void updateForce(Particle * p_Particle, float p_Duration);
 
 };
 

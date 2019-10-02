@@ -7,8 +7,8 @@ class RegistreForces
 {
 	struct EnregistrementForce
 	{
-		Particule* particule;
-		ParticuleForceGenerator* fg;
+		Particle* particule;
+		ParticleForceGenerator* fg;
 
 	};
 		typedef std::vector<EnregistrementForce> Registre;

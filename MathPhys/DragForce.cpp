@@ -17,7 +17,7 @@ DragForce::~DragForce()
 {
 }
 
-void DragForce::updateForce(Particule* particule, float duration)
+void DragForce::updateForce(Particle* particule, float duration)
 {
 	Vecteur3D Force = Vecteur3D();
 	Vecteur3D velocitypart = particule->getVelocity();

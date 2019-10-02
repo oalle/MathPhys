@@ -11,7 +11,7 @@ float sphereObjX = 0;
 float sphereObjY = 0;
 float sphereObjZ = 0;
 
-Particule projectile;
+Particle projectile;
 
 float frameTime = 0.0033;
 
@@ -99,10 +99,10 @@ void displayLoop(void)
 //param int Y Coordonnee Y du curseur de la souris
 void key_pressed(unsigned char key, int x, int y) {
 
-	Particule tmpBalle(100);
-	Particule tmpBDF(50);
-	Particule tmpLaser(0);
-	Particule tmpBoulet(150);
+	Particle tmpBalle(100);
+	Particle tmpBDF(50);
+	Particle tmpLaser(0);
+	Particle tmpBoulet(150);
 
 	switch (key)
 	{

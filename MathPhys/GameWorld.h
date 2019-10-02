@@ -5,16 +5,16 @@
 class GameWorld
 {
 private :
-	std::vector<Particule> listParticules;
+	std::vector<Particle> listParticules;
 	RegistreForces registreForces;
 
 public :
-	GameWorld(std::vector<Particule> p_listParticules) { listParticules = p_listParticules; }
+	GameWorld(std::vector<Particle> p_listParticules) { listParticules = p_listParticules; }
 	GameWorld();
 	~GameWorld();
 
-	std::vector<Particule> GetListParticules() { return listParticules; }
-	void AddParticule(Particule p_Particule) { listParticules.push_back(p_Particule); }
-	void DeleteParticule(Particule p_Particule);
+	std::vector<Particle> GetListParticules() { return listParticules; }
+	void AddParticule(Particle p_Particule) { listParticules.push_back(p_Particule); }
+	void DeleteParticule(Particle p_Particule);
 };
 

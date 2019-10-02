@@ -15,16 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Particule.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Vecteur3D.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticuleForceGenerator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -42,11 +36,14 @@
     <ClInclude Include="ParticleAnchoredSpring.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceGenerator.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Particule.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -54,9 +51,6 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="GameWorld.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticuleForceGenerator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="RegistreForces.cpp">
@@ -69,6 +63,12 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="ParticleAnchoredSpring.cpp">
+      <Filter>Fichiers sources </Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceGenerator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

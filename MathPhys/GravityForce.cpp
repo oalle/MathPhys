@@ -1,4 +1,4 @@
-#include"GravityForce.h";
+#include "GravityForce.h"
 
 GravityForce::GravityForce()
 {
@@ -10,7 +10,7 @@ GravityForce::~GravityForce()
 
 }
 
-void GravityForce::updateForce(Particule* particule, float duration)
+void GravityForce::updateForce(Particle* particule, float duration)
 {
 	if (particule->getMasse() != 0)
 	{

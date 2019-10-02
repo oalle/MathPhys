@@ -1,7 +1,7 @@
 #pragma once
-#include"ParticuleForceGenerator.h";
+#include "ParticleForceGenerator.h"
 
-class DragForce : public ParticuleForceGenerator
+class DragForce : public ParticleForceGenerator
 {
 private :
 	float coeffDrag1;
@@ -11,7 +11,7 @@ public:
 	DragForce();
 	DragForce(float coeffDrag1, float coeffDrag2);
 	~DragForce();
-	void updateForce(Particule* particule, float duration);
+	void updateForce(Particle* particule, float duration);
 
 };
 

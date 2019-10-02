@@ -2,7 +2,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
-#include "Particule.h"
+#include "Particle.h"
 #include "Vecteur3D.h"
 
 using namespace std;
@@ -11,9 +11,9 @@ float sphereObjX = 0;
 float sphereObjY = 0;
 float sphereObjZ = 0;
 
-Particule projectile;
+Particle projectile;
 
-float frameTime = 0.0033;
+float frameTime = 0.0033f;
 
 float MatSpec[4] = { 0.1f, 0.1f, 0.5f, 1.0f };
 float MatDif[4] = { 0.057f, 0.447f, 0.361f, 1.0f };
@@ -40,9 +40,9 @@ void translation(Vecteur3D vec1)
 {
 	projectile.integrate(frameTime);
 
-	sphereObjX = sphereObjX + vec1.getx();
-	sphereObjY = sphereObjY + vec1.gety();
-	sphereObjZ = sphereObjZ + vec1.getz();
+	sphereObjX = sphereObjX + static_cast<float>(vec1.getx());
+	sphereObjY = sphereObjY + static_cast<float>(vec1.gety());
+	sphereObjZ = sphereObjZ + static_cast<float>(vec1.getz());
 
 }
 
@@ -73,7 +73,7 @@ void displayLoop(void)
 
 	Vecteur3D vec1 = projectile.getPosition();
 	glTranslatef(sphereObjX - 2, sphereObjY, sphereObjZ);
-	initSphereObj(0.1);
+	initSphereObj(0.1f);
 	glPopMatrix();
 
 	translation(vec1);
@@ -99,10 +99,10 @@ void displayLoop(void)
 //param int Y Coordonnee Y du curseur de la souris
 void key_pressed(unsigned char key, int x, int y) {
 
-	Particule tmpBalle(100);
-	Particule tmpBDF(50);
-	Particule tmpLaser(0);
-	Particule tmpBoulet(150);
+	Particle tmpBalle(100);
+	Particle tmpBDF(50);
+	Particle tmpLaser(0);
+	Particle tmpBoulet(150);
 
 	switch (key)
 	{

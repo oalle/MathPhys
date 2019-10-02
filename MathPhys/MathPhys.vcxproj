@@ -23,8 +23,8 @@
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="GravityForce.h" />
     <ClInclude Include="ParticleAnchoredSpring.h" />
-    <ClInclude Include="Particule.h" />
-    <ClInclude Include="ParticuleForceGenerator.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleForceGenerator.h" />
     <ClInclude Include="RegistreForces.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Vecteur3D.h" />
@@ -34,8 +34,8 @@
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParticleAnchoredSpring.cpp" />
-    <ClCompile Include="Particule.cpp" />
-    <ClCompile Include="ParticuleForceGenerator.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleForceGenerator.cpp" />
     <ClCompile Include="RegistreForces.cpp" />
     <ClCompile Include="GravityForce.cpp" />
     <ClCompile Include="Vecteur3D.cpp" />

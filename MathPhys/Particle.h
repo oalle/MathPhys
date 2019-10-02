@@ -17,7 +17,7 @@ public:
 
 	//Constructeur de recopie de la classe particule
 	//param : &particule : l'adresse de la particule qu'il faut recopier
-	Particle(Particle& particule);
+	Particle(const Particle& particule);
 
 	//Surcharge de l'operateur de comparaison pour la classe particule
 	//param : &particule : l'adresse de la particule a comparer

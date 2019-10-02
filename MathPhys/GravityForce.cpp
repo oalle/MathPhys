@@ -1,4 +1,4 @@
-#include"GravityForce.h";
+#include "GravityForce.h"
 
 GravityForce::GravityForce()
 {

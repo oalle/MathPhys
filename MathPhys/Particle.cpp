@@ -33,7 +33,7 @@ Particle::Particle(float masse, Vecteur3D position)
 
 //Constructeur de recopie de la classe particule
 //param : &particule : l'adresse de la particule qu'il faut recopier
-Particle::Particle(Particle& particule)
+Particle::Particle(const Particle& particule)
 {
 	this->Acceleration = particule.Acceleration;
 	this->Masse = particule.Masse;

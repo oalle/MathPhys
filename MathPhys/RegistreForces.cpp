@@ -1,6 +1,6 @@
 #include "RegistreForces.h"
 
-void RegistreForces::DeleteEnregistrementForce(EnregistrementForce p_EnregistrementForce)
+void RegistreForces::DeleteEnregistrementForce(int p_Index)
 {
-	//registreForces.erase(std::find(registreForces.begin(), registreForces.end(), p_EnregistrementForce));
+	registreForces.erase(registreForces.begin() + p_Index);
 }

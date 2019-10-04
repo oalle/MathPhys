@@ -29,6 +29,7 @@
     <ClInclude Include="ParticleContact.h" />
     <ClInclude Include="ParticleForceGenerator.h" />
     <ClInclude Include="ParticleSpring.h" />
+    <ClInclude Include="ParticleStiffSpring.h" />
     <ClInclude Include="RegistreForces.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Vector3D.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="ParticleContact.cpp" />
     <ClCompile Include="ParticleForceGenerator.cpp" />
     <ClCompile Include="ParticleSpring.cpp" />
+    <ClCompile Include="ParticleStiffSpring.cpp" />
     <ClCompile Include="RegistreForces.cpp" />
     <ClCompile Include="GravityForce.cpp" />
     <ClCompile Include="Vector3D.cpp" />

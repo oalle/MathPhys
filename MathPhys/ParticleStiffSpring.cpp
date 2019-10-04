@@ -1,5 +1,12 @@
 #include "ParticleStiffSpring.h"
 
+ParticleStiffSpring::ParticleStiffSpring(Vector3D p_AnchoredPoint, double p_Damping, double p_ConstantSrping)
+{
+	m_AnchoredPoint = p_AnchoredPoint;
+	m_ConstantSpring = p_ConstantSrping;
+	m_Damping = p_Damping;
+}
+
 //application mouvement harmonique avec damping
 void ParticleStiffSpring::updateForce(Particle* p_Particle, float p_Duration)
 {

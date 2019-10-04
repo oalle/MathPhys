@@ -1,6 +1,6 @@
 #include "ParticleBuoyancy.h"
 
-ParticleBuoyancy::ParticleBuoyancy(int p_MaxDepth, int p_ObjectVolume, int p_WaterHeight, int p_Density) 
+ParticleBuoyancy::ParticleBuoyancy(double p_MaxDepth, double p_ObjectVolume, double p_WaterHeight, double p_Density)
 {
 	m_MaxDepth = p_MaxDepth;
 	m_ObjectVolume = p_ObjectVolume;

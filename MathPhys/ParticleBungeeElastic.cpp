@@ -7,7 +7,7 @@ ParticleBungeeElastic::ParticleBungeeElastic()
 	this->restLength = 0;
 }
 
-ParticleBungeeElastic::ParticleBungeeElastic(Vector3D ancragePoint, float k, float restLength)
+ParticleBungeeElastic::ParticleBungeeElastic(Vector3D ancragePoint, double k, double restLength)
 {
 	this->ancragePoint = ancragePoint;
 	this->k = k;

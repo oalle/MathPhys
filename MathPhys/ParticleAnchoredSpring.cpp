@@ -1,6 +1,6 @@
 #include "ParticleAnchoredSpring.h"
 
-ParticleAnchoredSpring::ParticleAnchoredSpring(Vector3D p_AnchoredPoint, int p_WidthSpring, int p_ConstantSpring)
+ParticleAnchoredSpring::ParticleAnchoredSpring(Vector3D p_AnchoredPoint, double p_WidthSpring, double p_ConstantSpring)
 {
 	m_AnchoredPoint = p_AnchoredPoint;
 	m_WidthSpring = p_WidthSpring;

@@ -6,11 +6,11 @@ class ParticleSpring :
 
 private: 
 	Particle m_OtherParticle;
-	int m_WidthSpring;
-	int m_ConstantSpring;
+	double m_WidthSpring;
+	double m_ConstantSpring;
 
 private:
-	ParticleSpring(Particle p_OtherParticle, int p_WidthSpring, int p_ConstantSrping);
+	ParticleSpring(Particle p_OtherParticle, double p_WidthSpring, double p_ConstantSrping);
 
 	void updateForce(Particle* p_Particle, float p_Duration);
 };

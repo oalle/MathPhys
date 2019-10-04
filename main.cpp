@@ -1,43 +1,11 @@
-#include "GameWorld.h"
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <iostream>
+#include "Particle.h"
+#include "Vecteur3D.h"
 
-GameWorld::GameWorld()
-{
-	
-}
-
-void GameWorld::Setup(int argc, char* argv[])
-{
-	glutInit(&argc, argv);
-	glutInitWindowSize(1920, 1080);
-	glutInitWindowPosition(0, 00);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutCreateWindow("Hello world");
-	/* Callback for display */
-	glutDisplayFunc(displayLoopWrapper);
-	glutReshapeFunc(reshapeLoopWrapper);
-	glutKeyboardFunc(key_pressedWrapper);
-	/* Main loop */
-	glutMainLoop();
-}
-
-GameWorld::~GameWorld() 
-{
-
-}
-
-void GameWorld::AddForce(Particle* p_Particule, ParticleForceGenerator *fg)
-{
-	RegistreForces::EnregistrementForce p;
-	p.fg = fg;
-	p.particule = p_Particule;
-	registreForces.AddEnregistrementForce(p);
-}
-
-void GameWorld::DeleteParticule(Particle p_Particule)
-{
-	listParticules.erase(std::find(listParticules.begin(), listParticules.end(), p_Particule));
-}
-
+using namespace std;
 
 float sphereObjX = 0;
 float sphereObjY = 0;
@@ -61,14 +29,14 @@ GLfloat Lnoire[4] = { 0.0,0.0,0.0,1.0 };
 
 //fonction pour initialiser une sphere dans notre environnement
 //param float x Le rayon de notre sphere
-void GameWorld::initSphereObj(float x)
+void initSphereObj(float x)
 {
 	glutSolidSphere(x, 50, 50);
 }
 
 //fonction pour appliquer une translation à un projectile
 //param Vecteur3D vec1 La position d'un projectile
-void GameWorld::translation(Vector3D vec1)
+void translation(Vecteur3D vec1)
 {
 	projectile.integrate(frameTime);
 
@@ -79,7 +47,7 @@ void GameWorld::translation(Vector3D vec1)
 }
 
 //fonction permettant le rafraichissement de la vue
-void GameWorld::displayLoop(void)
+void displayLoop(void)
 {
 	// debut calcul frame time
 	//float previousTime = glutGet( GLUT_ELAPSED_TIME );
@@ -99,23 +67,16 @@ void GameWorld::displayLoop(void)
 	glClearColor(1, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-	glBegin(GL_QUADS);
-
-	glVertex3f(-2, -2, -2);
-	glVertex3f(-2, 2, -2);
-	glVertex3f(2, 2, -2);
-	glVertex3f(2, -2, -2);
-	glEnd();
 
 	glColor3f(1.0, 0.0, 0.0);
 	glPushMatrix();
 
-	Vector3D vec1 = projectile.getPosition();
+	Vecteur3D vec1 = projectile.getPosition();
 	glTranslatef(sphereObjX - 2, sphereObjY, sphereObjZ);
-	initSphereObjWrapper(0.1f);
+	initSphereObj(0.1f);
 	glPopMatrix();
 
-	translationWrapper(vec1);
+	translation(vec1);
 
 
 
@@ -136,8 +97,7 @@ void GameWorld::displayLoop(void)
 //param char key La touche appuyee
 //param int x Coordonnee X du curseur de la souris
 //param int Y Coordonnee Y du curseur de la souris
-void GameWorld::key_pressed(unsigned char key, int x, int y)
-{
+void key_pressed(unsigned char key, int x, int y) {
 
 	Particle tmpBalle(100);
 	Particle tmpBDF(50);
@@ -175,35 +135,10 @@ void GameWorld::key_pressed(unsigned char key, int x, int y)
 	}
 }
 
-void GameWorld::initSphereObjWrapper(float x)
-{
-	instance->initSphereObj(x);
-}
-
-void GameWorld::translationWrapper(Vector3D vec1)
-{
-	instance->translation(vec1);
-}
-
-void GameWorld::displayLoopWrapper(void)
-{
-	instance->displayLoop();
-}
-
-void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
-{
-	instance->key_pressed(key, x, y);
-}
-
-void GameWorld::reshapeLoopWrapper(int width, int height)
-{
-	instance->reshapeLoop(width, height);
-}
-
 //fonction pour positionner la vue / la camera
 //param int width La largeur de la fenetre
 //param int height La hauteur de la fenetre
-void GameWorld::reshapeLoop(int width, int height)
+void reshapeLoop(int width, int height)
 {
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_MODELVIEW);
@@ -215,4 +150,20 @@ void GameWorld::reshapeLoop(int width, int height)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(70.0, 1.0, 1.0, 12.0);
+}
+
+int main(int argc, char* argv[]) {
+
+	glutInit(&argc, argv);
+	glutInitWindowSize(1920, 1080);
+	glutInitWindowPosition(0, 00);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutCreateWindow("Hello world");
+	/* Callback for display */
+	glutDisplayFunc(displayLoop);
+	glutReshapeFunc(reshapeLoop);
+	glutKeyboardFunc(key_pressed);
+	/* Main loop */
+	glutMainLoop();
+	return 0;
 }

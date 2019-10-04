@@ -30,3 +30,8 @@ void ParticleContact::ResolveVelocity(float p_Duration)
 	//TODO Appliquer l'impulsion
 
 }
+
+void ParticleContact::ResolveInterpenetration(float p_Duration)
+{
+
+}

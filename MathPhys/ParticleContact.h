@@ -10,12 +10,13 @@ private:
 	Particle* m_Particles[2];
 	double m_CoefficientRestitution;
 	Vector3D m_ContactNormale;
+	double m_Penetration;
 
 public:
 	ParticleContact(Particle * p_Particles[2], double p_CoefficientRestitution);
 	void Resolve(float p_Duration);
 	double CalculVS() const;
 	void ResolveVelocity(float p_Duration);
-
+	void ResolveInterpenetration(float p_Duration);
 };
 

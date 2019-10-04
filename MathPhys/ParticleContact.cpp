@@ -10,7 +10,7 @@ ParticleContact::ParticleContact(Particle* p_Particles[2], double p_CoefficientR
 	m_ContactNormale = l_Temp.mulScalaireResult(1 / l_Temp.norme());
 }
 
-void ParticleContact::ResolveContact(float p_Duration)
+void ParticleContact::Resolve(float p_Duration)
 {
 	ResolveVelocity(p_Duration);
 }
@@ -27,7 +27,7 @@ void ParticleContact::ResolveVelocity(float p_Duration)
 
 	double l_VSP = -m_CoefficientRestitution * l_VS;
 
-	//Appliquer l'impulsion?
+	//TODO Appliquer l'impulsion
 
 }
 

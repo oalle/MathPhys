@@ -5,12 +5,12 @@ class ParticleBungeeElastic
 {
 private:
 	Vector3D ancragePoint;
-	float k;
-	float restLength;
+	double k;
+	double restLength;
 
 public:
 	ParticleBungeeElastic();
-	ParticleBungeeElastic(Vector3D ancragePoint, float k, float restLength);
+	ParticleBungeeElastic(Vector3D ancragePoint, double k, double restLength);
 	~ParticleBungeeElastic();
 	void updateForce(Particle* particule, float duration);
 

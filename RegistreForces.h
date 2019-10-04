@@ -5,7 +5,6 @@
 
 class RegistreForces
 {
-public:
 	struct EnregistrementForce
 	{
 		Particle* particule;

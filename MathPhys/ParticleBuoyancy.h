@@ -4,13 +4,13 @@ class ParticleBuoyancy :
 	public ParticleForceGenerator
 {
 private:
-	int m_MaxDepth;
-	int m_ObjectVolume;
-	int m_WaterHeight;
-	int m_Density;
+	double m_MaxDepth;
+	double m_ObjectVolume;
+	double m_WaterHeight;
+	double m_Density;
 
 public:
-	ParticleBuoyancy(int p_MaxDepth, int p_ObjectVolume, int p_WaterHeight, int p_Density);
+	ParticleBuoyancy(double p_MaxDepth, double p_ObjectVolume, double p_WaterHeight, double p_Density);
 
 	void updateForce(Particle * p_Particle, float p_Duration);
 };

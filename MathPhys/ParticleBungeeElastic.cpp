@@ -23,7 +23,11 @@ void ParticleBungeeElastic::updateForce(Particle* particule, float duration)
 	Vector3D Force = Vector3D();
 	Vector3D PosPartToAncragePoint = particule->getPosition() - this->ancragePoint;
 	double distPartToAncragePoint = PosPartToAncragePoint.norme();
-	PosPartToAncragePoint.normalisation();
-	Force = PosPartToAncragePoint.mulScalaireResult(-k*(distPartToAncragePoint - this->restLength));
-	particule->addForce(Force);
+	if (distPartToAncragePoint > this->restLength)
+	{
+		PosPartToAncragePoint.normalisation();
+		Force = PosPartToAncragePoint.mulScalaireResult(-k * (distPartToAncragePoint - this->restLength));
+		particule->addForce(Force);
+	}
+	
 }

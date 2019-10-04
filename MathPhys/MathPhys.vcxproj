@@ -26,8 +26,12 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleBuoyancy.h" />
     <ClInclude Include="ParticleBungeeElastic.h" />
+    <ClInclude Include="ParticleCable.h" />
     <ClInclude Include="ParticleContact.h" />
+    <ClInclude Include="ParticleContactGenerator.h" />
     <ClInclude Include="ParticleForceGenerator.h" />
+    <ClInclude Include="ParticleLink.h" />
+    <ClInclude Include="ParticleRod.h" />
     <ClInclude Include="ParticleSpring.h" />
     <ClInclude Include="ParticleStiffSpring.h" />
     <ClInclude Include="RegistreForces.h" />
@@ -42,8 +46,11 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleBuoyancy.cpp" />
     <ClCompile Include="ParticleBungeeElastic.cpp" />
+    <ClCompile Include="ParticleCable.cpp" />
     <ClCompile Include="ParticleContact.cpp" />
     <ClCompile Include="ParticleForceGenerator.cpp" />
+    <ClCompile Include="ParticleLink.cpp" />
+    <ClCompile Include="ParticleRod.cpp" />
     <ClCompile Include="ParticleSpring.cpp" />
     <ClCompile Include="ParticleStiffSpring.cpp" />
     <ClCompile Include="RegistreForces.cpp" />

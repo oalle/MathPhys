@@ -19,8 +19,8 @@ DragForce::~DragForce()
 
 void DragForce::updateForce(Particle* particule, float duration)
 {
-	Vecteur3D velocitypart = particule->getVelocity();
-	Vecteur3D force = Vecteur3D(velocitypart.getx(), velocitypart.gety(), velocitypart.getz());
+	Vector3D velocitypart = particule->getVelocity();
+	Vector3D force = Vector3D(velocitypart.getx(), velocitypart.gety(), velocitypart.getz());
 	force.normalisation();
 	force.mulScalaire((coeffDrag1 * velocitypart.norme() + coeffDrag2 * velocitypart.normecarre()) * -1);
 	particule->addForce(force);

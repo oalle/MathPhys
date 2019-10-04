@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector3D.h"
+#include "Particle.h"
 #include "ParticleForceGenerator.h"
 class ParticleAnchoredSpring :
 	public ParticleForceGenerator

@@ -1,6 +1,6 @@
 #pragma once
 #include <cmath>
-#include "Vecteur3D.h"
+#include "Vector3D.h"
 
 class Particle
 {
@@ -13,7 +13,7 @@ public:
 	//Constructeur a deux parametres
 	//param : masse : La masse de la particule
 	//param : position : La position de la particule (par defaut, la particule est placee a l'origine du repere)
-	Particle(float masse, Vecteur3D position = Vecteur3D(0, 0, 0));
+	Particle(float masse, Vector3D position = Vector3D(0, 0, 0));
 
 	//Constructeur de recopie de la classe particule
 	//param : &particule : l'adresse de la particule qu'il faut recopier
@@ -43,24 +43,24 @@ public:
 
 	//Getteur pour l'attribut Position
 	//return le vecteur de la position
-	Vecteur3D getPosition();
+	Vector3D getPosition();
 	//Setteur pour l'attribut Position
 	//param : newPosition : la nouvelle valeur de la position
-	void setPosition(Vecteur3D newPosition);
+	void setPosition(Vector3D newPosition);
 
 	//Getteur pour l'attribut Velocity
 	//return le vecteur de la velocite
-	Vecteur3D getVelocity();
+	Vector3D getVelocity();
 	//Setteur pour l'attribut Velocity
 	//param : newVelociy : la nouvelle valeur pour la velocite
-	void setVelocity(Vecteur3D newVelocity);
+	void setVelocity(Vector3D newVelocity);
 
 	//Getteur pour l'attribut Acceleration
 	//return le vecteur de l'acceleration
-	Vecteur3D getAcceleration();
+	Vector3D getAcceleration();
 	//Setteur pour l'attribut Acceleration
 	//param : newAcceleration : nouvelle valeur de l'acceleration
-	void setAcceleration(Vecteur3D newAcceleration);
+	void setAcceleration(Vector3D newAcceleration);
 
 	//Fonction pour l'integrateur pour les particules
 	//param : frameTime : le temps d'une frame
@@ -68,7 +68,7 @@ public:
 
 	//Fonction pour calculer la resultante des forces
 	//param : force : la force a ajouter a la resultante courante
-	void addForce(const Vecteur3D& force);
+	void addForce(const Vector3D& force);
 
 	//Fonction pour nettoyer la resultante courante
 	void clearAccum();
@@ -77,11 +77,11 @@ protected:
 	float Masse;
 	float InverseMasse;
 
-	Vecteur3D Position;
-	Vecteur3D Velocity;
-	Vecteur3D Acceleration;
+	Vector3D Position;
+	Vector3D Velocity;
+	Vector3D Acceleration;
 
-	Vecteur3D AccumForces;
+	Vector3D AccumForces;
 
 };
 

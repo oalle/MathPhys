@@ -1,16 +1,9 @@
-#include "ParticleAnchoredSpring.h"
+#include "ParticleSpring.h"
 
-ParticleAnchoredSpring::ParticleAnchoredSpring(Vector3D p_AnchoredPoint, int p_WidthSpring, int p_ConstantSpring)
-{
-	m_AnchoredPoint = p_AnchoredPoint;
-	m_WidthSpring = p_WidthSpring;
-	m_ConstantSpring = p_ConstantSpring;
-}
-
-void ParticleAnchoredSpring::updateForce(Particle * p_Particle, float p_Duration) 
+void ParticleSpring::updateForce(Particle* p_Particle, float p_Duration)
 {
 	//Calcul de ||d||
-	Vector3D l_Distance = p_Particle->getPosition() - m_AnchoredPoint;
+	Vector3D l_Distance = p_Particle->getPosition() - m_OtherParticle.getPosition();
 	double l_NormeDistance = l_Distance.norme();
 
 	//Calcul de ^d

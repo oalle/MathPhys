@@ -15,7 +15,7 @@ void ParticleSpring::updateForce(Particle* p_Particle, float p_Duration)
 
 	//Calcul de ^d
 	Vector3D l_DistanceUnitaire = l_Distance;
-	l_DistanceUnitaire.mulScalaire(1 / l_NormeDistance);
+	l_DistanceUnitaire.normalisation();
 
 	//Calcul de ||d|| - l0
 	double temp = l_NormeDistance - m_WidthSpring;

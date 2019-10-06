@@ -6,8 +6,9 @@ ParticleContact::ParticleContact(Particle* p_Particles[2], double p_CoefficientR
 	m_Particles[1] = p_Particles[1];
 	m_CoefficientRestitution = p_CoefficientRestitution;
 
-	Vector3D l_Temp = p_Particles[0]->getPosition() - p_Particles[1]->getPosition();	
-	m_ContactNormale = l_Temp.mulScalaireResult(1 / l_Temp.norme());
+	Vector3D l_Temp = p_Particles[0]->getPosition() - p_Particles[1]->getPosition();
+	l_Temp.normalisation();
+	m_ContactNormale = l_Temp;
 }
 
 void ParticleContact::Resolve(float p_Duration)
@@ -28,6 +29,7 @@ void ParticleContact::ResolveVelocity(float p_Duration)
 	double l_VSP = -m_CoefficientRestitution * l_VS;
 
 	//TODO Appliquer l'impulsion
+
 
 }
 

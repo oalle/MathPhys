@@ -8,7 +8,7 @@ public:
     typedef std::vector<ParticleContact> RegistreContacts;
 
 private:
-    RegistreContacts registreContacts;
+    static RegistreContacts registreContacts;
     double m_Iteration;
     double m_IterationMax;
 
@@ -20,7 +20,7 @@ public:
 	{ 
 		return registreContacts;
 	}
-    void AddContact(ParticleContact p_ParticleContact)
+    void static AddContact(ParticleContact p_ParticleContact)
     {
         registreContacts.push_back(p_ParticleContact);
     }

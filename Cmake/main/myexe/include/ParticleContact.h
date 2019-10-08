@@ -13,7 +13,7 @@ private:
 	double m_Penetration;
 
 public:
-	ParticleContact(Particle * p_Particles[2], double p_CoefficientRestitution);
+	ParticleContact(Particle * p_Particles[2], double p_CoefficientRestitution, Vector3D p_ContactNormale, double m_Penetration);
 	void Resolve(float p_Duration);
 	double CalculVS() const;
 	void ResolveVelocity(float p_Duration);

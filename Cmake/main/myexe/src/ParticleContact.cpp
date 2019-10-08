@@ -1,14 +1,17 @@
 #include "ParticleContact.h"
 
-ParticleContact::ParticleContact(Particle* p_Particles[2], double p_CoefficientRestitution)
+ParticleContact::ParticleContact(Particle* p_Particles[2], double p_CoefficientRestitution, Vector3D p_ContactNormale, double p_Penetration)
 {
 	m_Particles[0] = p_Particles[0];
 	m_Particles[1] = p_Particles[1];
 	m_CoefficientRestitution = p_CoefficientRestitution;
 
-	Vector3D l_Temp = p_Particles[0]->getPosition() - p_Particles[1]->getPosition();
+	m_ContactNormale = p_ContactNormale;
+
+	m_Penetration = p_Penetration;
+	/*Vector3D l_Temp = p_Particles[0]->getPosition() - p_Particles[1]->getPosition();
 	l_Temp.normalisation();
-	m_ContactNormale = l_Temp;
+	m_ContactNormale = l_Temp;*/
 }
 
 void ParticleContact::Resolve(float p_Duration)

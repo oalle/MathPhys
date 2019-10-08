@@ -23,8 +23,22 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
 
-    Particle p(10);
-    AddParticule(p);
+    Particle l_Particle1G1(10, Vector3D(0,0,1));
+    Particle l_Particle2G1(10, Vector3D(0, 0, 2));
+    Particle l_Particle3G1(10, Vector3D(0, 0, 3));
+    Particle l_Particle4G1(10, Vector3D(0, 0, 4));
+    Particle l_Particle1G2(10, Vector3D(0, 0, 5));
+    Particle l_Particle2G2(10, Vector3D(0, 0, 6));
+    Particle l_Particle3G2(10, Vector3D(0, 0, 7));
+    Particle l_Particle4G2(10, Vector3D(0, 0, 8));
+    AddParticule(l_Particle1G1);
+    AddParticule(l_Particle2G1);
+    AddParticule(l_Particle3G1);
+    AddParticule(l_Particle4G1);
+    AddParticule(l_Particle1G2);
+    AddParticule(l_Particle2G2);
+    AddParticule(l_Particle3G2);
+    AddParticule(l_Particle4G2);
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -40,18 +54,18 @@ void GameWorld::GlutSetup(int argc, char* argv[])
     glutKeyboardFunc(key_pressedWrapper);
 }
 
-void GameWorld::reshapeLoopWrapper(int width, int height) { instance->reshapeLoop(width, height); }
+/*void GameWorld::reshapeLoopWrapper(int width, int height) { reshapeLoopWrapper(width, height); }
 
-void GameWorld::translationWrapper(Vector3D v1) { instance->translation(v1); }
+void GameWorld::translationWrapper(Vector3D v1) { translationWrapper(v1); }
 
-void GameWorld::initSphereObjWrapper(float x) { instance->initSphereObj(x); }
+void GameWorld::initSphereObjWrapper(float x) { initSphereObjWrapper(x); }
 
-void GameWorld::displayLoopWrapper() { instance->displayLoop(); }
+void GameWorld::displayLoopWrapper() { displayLoopWrapper(); }
 
 void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
 {
-    instance->key_pressed(key, x, y);
-}
+    key_pressedWrapper(key, x, y);
+}*/
 
 void GameWorld::Setup(int argc, char* argv[])
 {
@@ -79,10 +93,10 @@ void GameWorld::DeleteParticule(Particle p_Particule)
 
 // fonction pour initialiser une sphere dans notre environnement
 // param float x Le rayon de notre sphere
-void GameWorld::initSphereObj(float x) { glutSolidSphere(x, 50, 50); }
+void GameWorld::initSphereObjWrapper(float x) { glutSolidSphere(x, 50, 50); }
 
 // fonction permettant le rafraichissement de la vue
-void GameWorld::displayLoop(void)
+void GameWorld::displayLoopWrapper(void)
 {
     // debut calcul frame time
     int oldTimeSinceStart = 0;
@@ -112,7 +126,17 @@ void GameWorld::displayLoop(void)
     glColor3f(1.0, 0.0, 0.0);
     glPushMatrix();
 
-        for
+	for (int i = 0; i < listParticules.size(); i++) {
+		// draw call pour chaque particule
+		glTranslatef(listParticules[i].getPosition().getx() - 2, listParticules[i].getPosition().gety(),
+			listParticules[i].getPosition().getz());
+		initSphereObjWrapper(0.1f * listParticules[i].getMasse());
+
+		// fonction pour appliquer une translation à un projectile
+		listParticules[i].integrate(frameTime);
+	}
+
+        /*for
             each(Particle particle in GetListParticules())
             {
                 // draw call pour chaque particule
@@ -122,7 +146,7 @@ void GameWorld::displayLoop(void)
 
                 // fonction pour appliquer une translation à un projectile
                 particle.integrate(frameTime);
-            }
+            }*/
 
         glPopMatrix();
 
@@ -143,15 +167,17 @@ void GameWorld::displayLoop(void)
 // param char key La touche appuyee
 // param int x Coordonnee X du curseur de la souris
 // param int Y Coordonnee Y du curseur de la souris
-void GameWorld::key_pressed(unsigned char key, int x, int y)
+void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
 {
     switch (key)
     {
-    case 'a':
+    case 'q':
         // accelereation vers la gauche sur particule no1
+		listParticules[0].setAcceleration(Vector3D(0, 0, 3));
         break;
     case 'd':
         // accelereation vers la gauche sur particule no1
+		listParticules[0].setAcceleration(Vector3D(0, 0, 0));
         break;
     default:
         break;
@@ -161,7 +187,7 @@ void GameWorld::key_pressed(unsigned char key, int x, int y)
 // fonction pour positionner la vue / la camera
 // param int width La largeur de la fenetre
 // param int height La hauteur de la fenetre
-void GameWorld::reshapeLoop(int width, int height)
+void GameWorld::reshapeLoopWrapper(int width, int height)
 {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_MODELVIEW);

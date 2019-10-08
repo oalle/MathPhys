@@ -79,7 +79,7 @@ void GameWorld::DeleteParticule(Particle p_Particule)
 
 // fonction pour initialiser une sphere dans notre environnement
 // param float x Le rayon de notre sphere
-void GameWorld::initSphereObjWrapper(float x) { glutSolidSphere(x, 50, 50); }
+void GameWorld::initSphereObj(float x) { glutSolidSphere(x, 50, 50); }
 
 // fonction permettant le rafraichissement de la vue
 void GameWorld::displayLoop(void)

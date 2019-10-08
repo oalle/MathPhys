@@ -1,5 +1,10 @@
 #include "ParticleCable.h"
 
+//Constructeur a quatre arguments de la classe ParticleCable
+//Param : particle1 : La premiere particule liee au contact
+//Param : particle2 : La deuxieme particule liee au contact
+//Param : maxLength : La longueur maximale du cable entre les deux particules
+//Param : restitution : Le coefficient de restitution
 ParticleCable::ParticleCable(Particle* particle1, Particle* particle2, float maxLength,
                              float restitution)
     : ParticleLink(particle1, particle2)
@@ -8,6 +13,7 @@ ParticleCable::ParticleCable(Particle* particle1, Particle* particle2, float max
     this->restitution = restitution;
 }
 
+//Fonction qui ajoute le contact dans le registre des contacts pour le resoudre
 void ParticleCable::addContact()
 {
     if (this->currentLength() >= this->maxLength) { 

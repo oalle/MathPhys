@@ -1,5 +1,10 @@
 #include "ParticleContact.h"
 
+//Constructeur a quatre arguments de la classe ParticleContact
+//Param : p_Particles[2] : Le tableau des deux particules liees au contact
+//Param : p_CoefficientRestitution : Le coefficient de restitution du contact
+//Param : p_ContactNormale : Le vecteur de la normale au contact
+//Param : p_Penetration : Le coefficient de penetration entre less deux particules
 ParticleContact::ParticleContact(Particle* p_Particles[2], double p_CoefficientRestitution, Vector3D p_ContactNormale, double p_Penetration)
 {
 	m_Particles[0] = p_Particles[0];
@@ -9,23 +14,23 @@ ParticleContact::ParticleContact(Particle* p_Particles[2], double p_CoefficientR
 	m_ContactNormale = p_ContactNormale;
 
 	m_Penetration = p_Penetration;
-	/*Vector3D l_Temp = p_Particles[0]->getPosition() - p_Particles[1]->getPosition();
-	l_Temp.normalisation();
-	m_ContactNormale = l_Temp;*/
 }
 
+//Fonction pour resoudre un contact entre deux particules
 void ParticleContact::Resolve(float p_Duration)
 {
 	ResolveVelocity(p_Duration);
 	ResolveInterpenetration();
 }
 
+//Fonction qui calcul la velocite d'approche des deux particules
 double ParticleContact::CalculVS() const
 {
 	Vector3D l_Temp = m_ContactNormale;
 	return l_Temp.prodScalaire(m_Particles[0]->getVelocity() - m_Particles[1]->getVelocity());
 }
 
+//Fonction qui resoud la velocite que less deux particule doivent avoir pour resoudre le contact
 void ParticleContact::ResolveVelocity(float p_Duration)
 {
 	double l_VS = CalculVS();
@@ -42,6 +47,7 @@ void ParticleContact::ResolveVelocity(float p_Duration)
 
 }
 
+//Fonction qui resoud les cas d'interpenetration entre deux particules
 void ParticleContact::ResolveInterpenetration()
 {
 	Vector3D l_DistanceParticle0 = m_ContactNormale.mulScalaireResult((m_Particles[1]->getInverseMasse() / (m_Particles[0]->getInverseMasse() - m_Particles[1]->getInverseMasse())) * m_Penetration);

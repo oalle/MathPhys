@@ -19,7 +19,7 @@ public:
 	{ 
 		return registreContacts;
 	}
-    void AddContact(ParticleContact p_ParticleContact)
+    void static AddContact(ParticleContact p_ParticleContact)
     {
         registreContacts.push_back(p_ParticleContact);
     }

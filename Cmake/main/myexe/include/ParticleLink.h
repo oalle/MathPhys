@@ -4,7 +4,7 @@
 #include "Particle.h"
 class ParticleLink : public ParticleContactGenerator
 {
-private :
+protected :
 	Particle* particle[2];
 
 public :

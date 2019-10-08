@@ -8,14 +8,14 @@ public:
     typedef std::vector<ParticleContact> RegistreContacts;
 
 private:
-    RegistreContacts registreContacts;
+    static RegistreContacts registreContacts;
     double m_Iteration;
     double m_IterationMax;
 
 public:
     ParticleContactResolver(double p_IterationMax=5);
 
-    Registre GetListContacts()
+    RegistreContacts GetListContacts()
 	{ 
 		return registreContacts;
 	}

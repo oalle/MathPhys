@@ -5,7 +5,7 @@
 class ParticleLink : public ParticleContactGenerator
 {
 protected :
-	Particle* particle[2];
+	Particle* m_Particle[2];
 
 public :
 	ParticleLink();

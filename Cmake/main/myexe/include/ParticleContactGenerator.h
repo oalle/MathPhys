@@ -1,4 +1,6 @@
 #pragma once
+#include "ParticleContact.h"
+#include "ParticleContactResolver.h"
 class ParticleContactGenerator
 {
 	public:

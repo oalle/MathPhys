@@ -1,12 +1,19 @@
 #include "ParticleAnchoredSpring.h"
 
-ParticleAnchoredSpring::ParticleAnchoredSpring(Vector3D p_AnchoredPoint, double p_WidthSpring, double p_ConstantSpring)
+
+//Constructeur a trois arguments pour la classe PaticleAnchoredSpring
+//Param : p_AnchoredPoint : La position du point d'ancrage du ressort
+//Param : p_LengthSpring : La longueur au repos du ressort
+//Param : p_ConstantSpring : Une constante propre au ressort
+ParticleAnchoredSpring::ParticleAnchoredSpring(Vector3D p_AnchoredPoint, double p_LengthSpring, double p_ConstantSpring)
 {
 	m_AnchoredPoint = p_AnchoredPoint;
-	m_WidthSpring = p_WidthSpring;
+	m_LengthSpring = p_LengthSpring;
 	m_ConstantSpring = p_ConstantSpring;
 }
 
+//Fonction pour mettre a jour la force
+//Param : p_Particle : la particule sur la quelle on veut mettre a jour la force
 void ParticleAnchoredSpring::updateForce(Particle * p_Particle, float p_Duration) 
 {
 	//Calcul de ||d||
@@ -18,7 +25,7 @@ void ParticleAnchoredSpring::updateForce(Particle * p_Particle, float p_Duration
 	l_DistanceUnitaire.normalisation();
 
 	//Calcul de ||d|| - l0
-	double temp = l_NormeDistance - m_WidthSpring;
+	double temp = l_NormeDistance - m_LengthSpring;
 
 	//Calcul de (||d|| - l0) * ^d
 	l_DistanceUnitaire.mulScalaire(temp);

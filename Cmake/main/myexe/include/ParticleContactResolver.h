@@ -24,7 +24,7 @@ public:
     {
         registreContacts.push_back(p_ParticleContact);
     }
-    void DeleteContact(int p_Index)
+    void static DeleteContact(int p_Index)
 	{
 		registreContacts.erase(registreContacts.begin() + p_Index); 
 	}

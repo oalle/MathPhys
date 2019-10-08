@@ -1,5 +1,7 @@
 #include "GameWorld.h"
 
+std::vector<Particle> GameWorld::listParticules;
+
 GameWorld::GameWorld() {}
 
 double frameTime = 0.0033f;

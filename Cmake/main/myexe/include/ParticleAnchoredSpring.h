@@ -8,11 +8,11 @@ class ParticleAnchoredSpring :
 {
 private:
 	Vector3D m_AnchoredPoint;
-	double m_WidthSpring;
+	double m_LengthSpring;
 	double m_ConstantSpring;
 
 public:
-	ParticleAnchoredSpring(Vector3D p_AnchoredPoint, double p_WidthSpring, double p_ConstantSrping);
+	ParticleAnchoredSpring(Vector3D p_AnchoredPoint, double p_LengthSpring, double p_ConstantSrping);
 
 	void updateForce(Particle * p_Particle, float p_Duration);
 

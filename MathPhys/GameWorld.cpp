@@ -177,27 +177,27 @@ void GameWorld::key_pressed(unsigned char key, int x, int y)
 
 void GameWorld::initSphereObjWrapper(float x)
 {
-	instance->initSphereObj(x);
+	/*instance->*/initSphereObj(x);
 }
 
 void GameWorld::translationWrapper(Vector3D vec1)
 {
-	instance->translation(vec1);
+	/*instance->*/translation(vec1);
 }
 
 void GameWorld::displayLoopWrapper(void)
 {
-	instance->displayLoop();
+	/*instance->*/displayLoop();
 }
 
 void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
 {
-	instance->key_pressed(key, x, y);
+	/*instance->*/key_pressed(key, x, y);
 }
 
 void GameWorld::reshapeLoopWrapper(int width, int height)
 {
-	instance->reshapeLoop(width, height);
+	/*instance->*/reshapeLoop(width, height);
 }
 
 //fonction pour positionner la vue / la camera

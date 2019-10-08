@@ -9,5 +9,8 @@ void ParticleRod::addContact()
 {
 	Vector3D l_Temp = m_Particle[0]->getPosition() - m_Particle[1]->getPosition();
 	l_Temp.normalisation();
-	ParticleContact(m_Particle, 0, l_Temp, 0);
+	ParticleContact contact = ParticleContact(this->m_Particle, 0, l_Temp, 0);
+	ParticleContactResolver::AddContact(contact);
+
+	
 }

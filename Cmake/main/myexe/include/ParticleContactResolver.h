@@ -13,9 +13,10 @@ private:
     double m_IterationMax;
 
 public:
-    ParticleContactResolver(double p_IterationMax=5);
+    ParticleContactResolver();
+    ParticleContactResolver(double p_IterationMax);
 
-    Registre GetListContacts()
+    RegistreContacts GetListContacts()
 	{ 
 		return registreContacts;
 	}
@@ -32,5 +33,5 @@ public:
 		m_IterationMax = p_IterationMax; 
 	}
 
-	void resolveContact();
+	void resolveContact(float p_Duration);
 };

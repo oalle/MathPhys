@@ -12,6 +12,6 @@ using namespace std;
 int main(int argc, char* argv[]) 
 {
 	GameWorld gw;
-	gw.Setup(argc,argv);
+	gw.Setup(argc, argv);
 	return 0;
 }

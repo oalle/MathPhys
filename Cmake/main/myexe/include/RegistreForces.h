@@ -3,7 +3,7 @@
 #include "ParticleForceGenerator.h"
 #include <vector>
 
-class RegistreForces
+static class RegistreForces
 {
 public:
 	struct EnregistrementForce

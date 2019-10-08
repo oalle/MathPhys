@@ -9,12 +9,12 @@ public:
 
 private:
     static RegistreContacts registreContacts;
-    double m_Iteration;
-    double m_IterationMax;
+    int m_Iteration;
+    int m_IterationMax;
 
 public:
     ParticleContactResolver();
-    ParticleContactResolver(double p_IterationMax);
+    ParticleContactResolver(int p_IterationMax);
 
     RegistreContacts GetListContacts()
 	{ 
@@ -28,7 +28,7 @@ public:
 	{
 		registreContacts.erase(registreContacts.begin() + p_Index); 
 	}
-    void setIterationMax(double p_IterationMax) 
+    void setIterationMax(int p_IterationMax) 
 	{ 
 		m_IterationMax = p_IterationMax; 
 	}

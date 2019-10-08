@@ -17,7 +17,10 @@ GLfloat shine[1] = {50.0};
 GLfloat Lnoire[4] = {0.0, 0.0, 0.0, 1.0};
 
 void GameWorld::GameSetup() 
-{ 
+{
+    registreForces = RegistreForces();
+    listParticules = std::vector<Particle>();
+
 	Particle p(10);
 	AddParticule(p);
 }

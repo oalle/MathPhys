@@ -6,7 +6,7 @@ ParticleContactResolver::ParticleContactResolver()
     this->m_IterationMax = 5;
 }
 
-ParticleContactResolver::ParticleContactResolver(double p_IterationMax)
+ParticleContactResolver::ParticleContactResolver(int p_IterationMax)
 {
     this->m_Iteration = 0;
     this->m_IterationMax = p_IterationMax;

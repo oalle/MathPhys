@@ -1,5 +1,8 @@
 #include "ParticleContactResolver.h"
 
+typedef std::vector<ParticleContact> RegistreContacts;
+RegistreContacts ParticleContactResolver::registreContacts;
+
 ParticleContactResolver::ParticleContactResolver()
 {
     this->m_Iteration = 0;

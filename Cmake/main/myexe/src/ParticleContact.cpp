@@ -14,6 +14,7 @@ ParticleContact::ParticleContact(Particle* p_Particles[2], double p_CoefficientR
 void ParticleContact::Resolve(float p_Duration)
 {
 	ResolveVelocity(p_Duration);
+	ResolveInterpenetration();
 }
 
 double ParticleContact::CalculVS() const
@@ -28,12 +29,22 @@ void ParticleContact::ResolveVelocity(float p_Duration)
 
 	double l_VSP = -m_CoefficientRestitution * l_VS;
 
-	//TODO Appliquer l'impulsion
+
+	//Voir pour changer en vecteur au besoin
+	Vector3D l_VelocityTemp1 = m_Particles[0]->getVelocity();
+	Vector3D l_VelocityTemp2 = m_Particles[1]->getVelocity();
+
+	m_Particles[0]->setVelocity(l_VelocityTemp1 + m_ContactNormale.mulScalaireResult(m_Particles[0]->getInverseMasse() * l_VSP * p_Duration));
 
 
 }
 
-void ParticleContact::ResolveInterpenetration(float p_Duration)
+void ParticleContact::ResolveInterpenetration()
 {
+	Vector3D l_DistanceParticle0 = m_ContactNormale.mulScalaireResult((m_Particles[1]->getInverseMasse() / (m_Particles[0]->getInverseMasse() - m_Particles[1]->getInverseMasse())) * m_Penetration);
+	Vector3D l_DistanceParticle1 = m_ContactNormale.mulScalaireResult(-(m_Particles[0]->getInverseMasse() / (m_Particles[0]->getInverseMasse() - m_Particles[1]->getInverseMasse())) * m_Penetration);
 
+	m_Particles[0]->setPosition(m_Particles[0]->getPosition() + l_DistanceParticle0);
+	m_Particles[1]->setPosition(m_Particles[1]->getPosition() + l_DistanceParticle1);
+	
 }

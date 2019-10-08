@@ -17,6 +17,6 @@ public:
 	void Resolve(float p_Duration);
 	double CalculVS() const;
 	void ResolveVelocity(float p_Duration);
-	void ResolveInterpenetration(float p_Duration);
+	void ResolveInterpenetration();
 };
 

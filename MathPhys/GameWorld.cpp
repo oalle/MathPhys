@@ -44,7 +44,7 @@ float sphereObjY = 0;
 float sphereObjZ = 0;
 
 Particle projectile;
-
+int time=glutGet(GLUT_ELAPSED_TIME);
 float frameTime = 0.0033f;
 
 float MatSpec[4] = { 0.1f, 0.1f, 0.5f, 1.0f };
@@ -144,29 +144,18 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
 
 	switch (key)
 	{
-	case 'a':
-		sphereObjX = 0;
-		sphereObjY = 0;
-		sphereObjZ = 0;
-		projectile = tmpBalle;
+	case 'q':
+		
 		break;
-	case 'z':
-		sphereObjX = 0;
-		sphereObjY = 0;
-		sphereObjZ = 0;
-		projectile = tmpBDF;
+	case 'd':
+		
 		break;
-	case 'e':
-		sphereObjX = 0;
-		sphereObjY = 0;
-		sphereObjZ = 0;
-		projectile = tmpLaser;
+	case 'j':
+		
 		break;
-	case 'r':
-		sphereObjX = 0;
-		sphereObjY = 0;
-		sphereObjZ = 0;
-		projectile = tmpBoulet;
+
+	case 'l':
+		
 		break;
 	default:
 		break;

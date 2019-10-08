@@ -10,6 +10,9 @@ private :
 	static std::vector<Particle> listParticules;
     RegistreForces registreForces;
 	
+protected:
+    static GameWorld* instance;
+
 public :
 	GameWorld(std::vector<Particle> p_listParticules) { listParticules = p_listParticules; }
 	GameWorld();
@@ -23,6 +26,13 @@ public :
 	void AddForce(Particle* p_Particule, ParticleForceGenerator *fg);
 	void DeleteParticule(Particle p_Particule);
 	
+	virtual void initSphereObj(float x);
+    virtual void translation(Vector3D vec1);
+    virtual void displayLoop(void);
+    virtual void key_pressed(unsigned char key, int x, int y);
+    virtual void reshapeLoop(int width, int height);
+
+
 	static void initSphereObjWrapper(float x);
 	static void translationWrapper(Vector3D vec1);
 	static void displayLoopWrapper(void);

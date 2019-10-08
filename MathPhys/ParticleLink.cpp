@@ -19,7 +19,7 @@ ParticleLink::~ParticleLink()
 float ParticleLink::currentLength() const
 {
 	float length = 0;
-	Vector3D PosPartToOtherPart = particle[1]->getPosition - particle[0]->getPosition;
+	Vector3D PosPartToOtherPart = particle[1]->getPosition() - particle[0]->getPosition();
 
-	return PosPartToOtherPart.norme();
+	return (float)PosPartToOtherPart.norme();
 }

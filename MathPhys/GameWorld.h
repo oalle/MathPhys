@@ -12,9 +12,9 @@ private :
 	std::vector<Particle> listParticules;
 	RegistreForces registreForces;
 
-protected :
-
-	static GameWorld* instance;
+//protected :
+//
+//	static GameWorld* instance;
 
 public :
 	GameWorld(std::vector<Particle> p_listParticules) { listParticules = p_listParticules; }
@@ -30,11 +30,11 @@ public :
 	static void displayLoopWrapper(void);
 	static void key_pressedWrapper(unsigned char key, int x, int y);
 	static void reshapeLoopWrapper(int width, int height);
-
+/*
 	virtual void initSphereObj(float x);
 	virtual void translation(Vector3D vec1);
 	virtual void displayLoop(void);
 	virtual void key_pressed(unsigned char key, int x, int y);
-	virtual void reshapeLoop(int width, int height);
+	virtual void reshapeLoop(int width, int height);*/
 };
 

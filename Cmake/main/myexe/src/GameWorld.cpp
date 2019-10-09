@@ -49,6 +49,8 @@ void GameWorld::GameSetup()
     AddForce(&l_Particle1G1, &l_ParticleSpringP12G1);
     ParticleSpring l_ParticleSpringP21G1(l_Particle2G1, l_SpringWidth, l_SpringConstant);
     AddForce(&l_Particle2G1, &l_ParticleSpringP21G1);
+    GravityForce gravityforce = GravityForce();
+	AddForce(&l_Particle1G1, &gravityforce);
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -126,7 +128,7 @@ void GameWorld::displayLoopWrapper(void)
 
     glColor3f(1.0, 0.0, 0.0);
 
-	// affichage des particules et appel à integrate (qui clear aussi les AccumForces)
+	// affichage des particules et appel ï¿½ integrate (qui clear aussi les AccumForces)
 	for (int i = 0; i < listParticules.size(); i++) {
 	    glPushMatrix();
 	

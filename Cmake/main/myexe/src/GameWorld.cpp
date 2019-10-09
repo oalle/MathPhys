@@ -1,8 +1,8 @@
 #include "GameWorld.h"
-#include <ParticleSpring.h>
-#include <GravityForce.h>
 
 std::vector<Particle> GameWorld::listParticules;
+RegistreForces GameWorld::registreForces;
+
 
 GameWorld::GameWorld() {}
 
@@ -126,6 +126,7 @@ void GameWorld::displayLoopWrapper(void)
 
     glColor3f(1.0, 0.0, 0.0);
 
+	// affichage des particules et appel à integrate (qui clear aussi les AccumForces)
 	for (int i = 0; i < listParticules.size(); i++) {
 	    glPushMatrix();
 	
@@ -141,6 +142,12 @@ void GameWorld::displayLoopWrapper(void)
 		glPopMatrix();
 	}
 
+	// update du registre des forces
+	for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)
+	{ 
+		registreForces.GetListEnregistrementForce()[i].fg->updateForce(
+                registreForces.GetListEnregistrementForce()[i].particule, frameTime);
+	}
 
     glFlush();
     /* Swap front and back buffers */
@@ -163,7 +170,8 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     {
     case 'q':
         // accelereation vers la gauche sur particule no1
-        listParticules[0].setAcceleration(Vector3D(0.01, 0, 0));
+        GravityForce* l_GravityForce;
+        AddForce(&listParticules[0], l_GravityForce);
         break;
     case 'd':
         // accelereation vers la gauche sur particule no1

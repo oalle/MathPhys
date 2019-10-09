@@ -4,11 +4,13 @@
 #include <iostream>
 #include <vector>
 #include "RegistreForces.h"
+#include "ParticleSpring.h"
+#include "GravityForce.h"
 class GameWorld
 {
 private :
 	static std::vector<Particle> listParticules;
-    RegistreForces registreForces;
+    static RegistreForces registreForces;
 
 public :
 	GameWorld(std::vector<Particle> p_listParticules) { listParticules = p_listParticules; }
@@ -19,9 +21,9 @@ public :
 	void Setup(int argc, char* argv[]);
 	
 	static std::vector<Particle> GetListParticules() { return listParticules; }
-	void AddParticule(Particle p_Particule) { listParticules.push_back(p_Particule); }
-	void AddForce(Particle* p_Particule, ParticleForceGenerator *fg);
-	void DeleteParticule(Particle p_Particule);
+	static void AddParticule(Particle p_Particule) { listParticules.push_back(p_Particule); }
+	static void AddForce(Particle* p_Particule, ParticleForceGenerator* fg);
+	static void DeleteParticule(Particle p_Particule);
 
 	static void initSphereObjWrapper(float x);
 	static void translationWrapper(Vector3D vec1);

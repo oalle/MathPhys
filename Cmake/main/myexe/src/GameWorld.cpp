@@ -173,6 +173,11 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     case 'q':
 	{
 		// accelereation vers la gauche sur particule no1
+		
+	ParticleSpring *l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 2, 0.3);
+    AddForce(&listParticules[0], l_ParticleSpringP12G1);
+    ParticleSpring *l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 2, 0.003);
+    AddForce(&listParticules[1], l_ParticleSpringP21G1);
 		GravityForce* l_GravityForce = new GravityForce();
 		AddForce(&listParticules[0], l_GravityForce);
 		break;

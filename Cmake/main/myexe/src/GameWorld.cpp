@@ -49,7 +49,8 @@ void GameWorld::GameSetup()
     AddForce(&l_Particle1G1, l_ParticleSpringP12G1);
     ParticleSpring *l_ParticleSpringP21G1 = new ParticleSpring(l_Particle1G1, l_SpringWidth, l_SpringConstant);
     AddForce(&l_Particle2G1, l_ParticleSpringP21G1);
-    GravityForce gravityforce = GravityForce();
+	GravityForce* l_GravityForce = new GravityForce();
+	AddForce(&l_Particle1G1, l_GravityForce);
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -170,16 +171,22 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     switch (key)
     {
     case 'q':
-        // accelereation vers la gauche sur particule no1
-        GravityForce* l_GravityForce;
-        AddForce(&listParticules[0], l_GravityForce);
-        break;
+	{
+		// accelereation vers la gauche sur particule no1
+		GravityForce* l_GravityForce = new GravityForce();
+		AddForce(&listParticules[0], l_GravityForce);
+		break;
+	}
     case 'd':
-        // accelereation vers la gauche sur particule no1
-        listParticules[0].setAcceleration(Vector3D(-0.01, 0, 0));
-        break;
+	{
+		// accelereation vers la gauche sur particule no1
+		listParticules[0].setAcceleration(Vector3D(-0.01, 0, 0));
+		break;
+	}
     default:
-        break;
+	{
+		break;
+	}
     }
 }
 

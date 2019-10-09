@@ -132,9 +132,10 @@ void GameWorld::displayLoopWrapper(void)
 		// draw call pour chaque particule
 		glTranslatef(listParticules[i].getPosition().getx(), listParticules[i].getPosition().gety(),
 			listParticules[i].getPosition().getz());
-		initSphereObjWrapper(0.05f * listParticules[i].getMasse());
-
-		// fonction pour appliquer une translation à un projectile
+		initSphereObjWrapper(0.01f * listParticules[i].getMasse());
+		glTranslatef(-1*(listParticules[i].getPosition().getx() - 2), -1*(listParticules[i].getPosition().gety()),
+			-1*(listParticules[i].getPosition().getz()));
+		// fonction pour appliquer une translation ï¿½ un projectile
 		listParticules[i].integrate(frameTime);
 
 		glPopMatrix();

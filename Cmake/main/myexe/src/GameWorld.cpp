@@ -45,10 +45,10 @@ void GameWorld::GameSetup()
 	double l_SpringConstant = 1;
     double l_SpringWidth = 1;
 	
-	ParticleSpring l_ParticleSpringP12G1(l_Particle1G1, l_SpringWidth, l_SpringConstant);
-    AddForce(&l_Particle1G1, &l_ParticleSpringP12G1);
-    ParticleSpring l_ParticleSpringP21G1(l_Particle2G1, l_SpringWidth, l_SpringConstant);
-    AddForce(&l_Particle2G1, &l_ParticleSpringP21G1);
+	ParticleSpring *l_ParticleSpringP12G1 = new ParticleSpring(l_Particle2G1, l_SpringWidth, l_SpringConstant);
+    AddForce(&l_Particle1G1, l_ParticleSpringP12G1);
+    ParticleSpring *l_ParticleSpringP21G1 = new ParticleSpring(l_Particle1G1, l_SpringWidth, l_SpringConstant);
+    AddForce(&l_Particle2G1, l_ParticleSpringP21G1);
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -80,7 +80,7 @@ void GameWorld::AddForce(Particle* p_Particule, ParticleForceGenerator* fg)
     RegistreForces::EnregistrementForce p;
     p.fg = fg;
     p.particule = p_Particule;
-    registreForces.AddEnregistrementForce(p);
+    registreForces.AddEnregistrementForce(&p);
 }
 
 void GameWorld::DeleteParticule(Particle p_Particule)
@@ -143,7 +143,7 @@ void GameWorld::displayLoopWrapper(void)
 
 	// update du registre des forces
 	for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)
-	{ 
+	{
 		registreForces.GetListEnregistrementForce()[i].fg->updateForce(
                 registreForces.GetListEnregistrementForce()[i].particule, frameTime);
 	}

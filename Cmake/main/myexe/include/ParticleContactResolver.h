@@ -9,8 +9,8 @@ public:
 
 private:
     static RegistreContacts registreContacts;
-    int m_Iteration;
-    int m_IterationMax;
+    static int m_Iteration;
+    static int m_IterationMax;
 
 public:
     ParticleContactResolver();
@@ -25,13 +25,17 @@ public:
         registreContacts.push_back(p_ParticleContact);
     }
     void static DeleteContact(int p_Index)
-	{
-		registreContacts.erase(registreContacts.begin() + p_Index); 
-	}
-    void setIterationMax(int p_IterationMax) 
+    {
+        registreContacts.erase(registreContacts.begin() + p_Index);
+    }
+    void static DeleteAllContacts()
+    {
+        registreContacts.clear();
+    }
+	static void setIterationMax(int p_IterationMax) 
 	{ 
 		m_IterationMax = p_IterationMax; 
 	}
 
-	void resolveContact(float p_Duration);
+	static void resolveContact(float p_Duration);
 };

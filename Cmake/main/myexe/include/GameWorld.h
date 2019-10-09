@@ -6,10 +6,11 @@
 #include "RegistreForces.h"
 #include "ParticleSpring.h"
 #include "GravityForce.h"
+#include <ParticleContactResolver.h>
 class GameWorld
 {
 private :
-	static std::vector<Particle> listParticules;
+    static std::vector<Particle> listParticules;
     static RegistreForces registreForces;
 
 public :

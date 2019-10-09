@@ -13,6 +13,12 @@ ParticleCable::ParticleCable(Particle* particle1, Particle* particle2, float max
     this->restitution = restitution;
 }
 
+
+ParticleCable::~ParticleCable()
+{
+
+}
+
 //Fonction qui ajoute le contact dans le registre des contacts pour le resoudre
 void ParticleCable::addContact()
 {

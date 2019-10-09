@@ -2,6 +2,8 @@
 
 typedef std::vector<ParticleContact> RegistreContacts;
 RegistreContacts ParticleContactResolver::registreContacts;
+int ParticleContactResolver::m_Iteration;
+int ParticleContactResolver::m_IterationMax;
 
 //Constructeur par defaut de la classe ParticleContactResolver
 ParticleContactResolver::ParticleContactResolver()

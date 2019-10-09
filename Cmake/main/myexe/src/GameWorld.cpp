@@ -1,8 +1,8 @@
 #include "GameWorld.h"
+#include <ParticleCable.h>
 
 std::vector<Particle> GameWorld::listParticules;
 RegistreForces GameWorld::registreForces;
-
 
 GameWorld::GameWorld() {}
 
@@ -149,7 +149,9 @@ void GameWorld::displayLoopWrapper(void)
 	{
 		registreForces.GetListEnregistrementForce()[i].fg->updateForce(
                 registreForces.GetListEnregistrementForce()[i].particule, frameTime);
-	}
+    }
+	// update du registre des contacts
+    ParticleContactResolver::resolveContact(frameTime);
 
     glFlush();
     /* Swap front and back buffers */
@@ -172,14 +174,17 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     {
     case 'q':
 	{
-		// accelereation vers la gauche sur particule no1
-		
-	ParticleSpring *l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 2, 0.3);
-    AddForce(&listParticules[0], l_ParticleSpringP12G1);
-    ParticleSpring *l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 2, 0.003);
-    AddForce(&listParticules[1], l_ParticleSpringP21G1);
-		GravityForce* l_GravityForce = new GravityForce();
-		AddForce(&listParticules[0], l_GravityForce);
+		// accelereation vers la gauche sur particule no1		
+		ParticleSpring *l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 1, 0.003);
+		AddForce(&listParticules[0], l_ParticleSpringP12G1);
+		ParticleSpring *l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 1, 0.003);
+		AddForce(&listParticules[1], l_ParticleSpringP21G1);
+
+		ParticleCable l_ParticleCableP12G1(&listParticules[0], &listParticules[1], 1, 0.1);
+		l_ParticleCableP12G1.addContact();
+
+		//GravityForce* l_GravityForce = new GravityForce();
+		//AddForce(&listParticules[0], l_GravityForce);
 		break;
 	}
     case 'd':

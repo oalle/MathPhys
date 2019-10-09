@@ -12,6 +12,6 @@ private:
 private:
 	ParticleStiffSpring(Vector3D p_AnchoredPoint, double p_Damping, double p_ConstantSrping);
 
-	void updateForce(Particle* p_Particle, float p_Duration);
+	void updateForce(Particle* p_Particle, float p_Duration) override;
 };
 

@@ -20,7 +20,7 @@ ParticleContact::ParticleContact(Particle* p_Particles[2], double p_CoefficientR
 void ParticleContact::Resolve(float p_Duration)
 {
 	ResolveVelocity(p_Duration);
-	ResolveInterpenetration();
+	//ResolveInterpenetration();
 }
 
 //Fonction qui calcul la velocite d'approche des deux particules
@@ -42,8 +42,8 @@ void ParticleContact::ResolveVelocity(float p_Duration)
 	Vector3D l_VelocityTemp1 = m_Particles[0]->getVelocity();
 	Vector3D l_VelocityTemp2 = m_Particles[1]->getVelocity();
 
-	m_Particles[0]->setVelocity(l_VelocityTemp1 + m_ContactNormale.mulScalaireResult(m_Particles[0]->getInverseMasse() * l_VSP * p_Duration));
-
+	m_Particles[0]->setVelocity(m_ContactNormale.mulScalaireResult(m_Particles[0]->getInverseMasse() * l_VSP * p_Duration));
+	m_Particles[0]->setVelocity(m_ContactNormale.mulScalaireResult(m_Particles[0]->getInverseMasse() * l_VSP * p_Duration));
 
 }
 

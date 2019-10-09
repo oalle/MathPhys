@@ -24,6 +24,7 @@ ParticleContactResolver::ParticleContactResolver(int p_IterationMax)
 void ParticleContactResolver::resolveContact(float p_Duration)
 {
     m_Iteration = 0;
+	m_IterationMax = 5;
 
     while (m_Iteration < m_IterationMax && m_Iteration < registreContacts.size()) {
         registreContacts[m_Iteration].Resolve(p_Duration);

@@ -11,6 +11,6 @@ private:
 
 public:
 	ParticleSpring(Particle p_OtherParticle, double p_WidthSpring, double p_ConstantSrping);
-	void updateForce(Particle* p_Particle, float p_Duration);
+	void updateForce(Particle* p_Particule, float duration);
 };
 

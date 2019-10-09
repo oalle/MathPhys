@@ -4,7 +4,7 @@ std::vector<Particle> GameWorld::listParticules;
 
 GameWorld::GameWorld() {}
 
-double frameTime = 0.0033f;
+float frameTime = 0.0033f;
 
 float MatSpec[4] = {0.1f, 0.1f, 0.5f, 1.0f};
 float MatDif[4] = {0.057f, 0.447f, 0.361f, 1.0f};
@@ -99,7 +99,7 @@ void GameWorld::initSphereObjWrapper(float x) { glutSolidSphere(x, 50, 50); }
 void GameWorld::displayLoopWrapper(void)
 {
     // debut calcul frame time
-    int oldTimeSinceStart = 0;
+    float oldTimeSinceStart = 0;
 
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, MatSpec);
@@ -136,31 +136,17 @@ void GameWorld::displayLoopWrapper(void)
 		listParticules[i].integrate(frameTime);
 	}
 
-        /*for
-            each(Particle particle in GetListParticules())
-            {
-                // draw call pour chaque particule
-                glTranslatef(particle.getPosition().getx() - 2, particle.getPosition().gety(),
-                             particle.getPosition().getz());
-                initSphereObjWrapper(0.1f * particle.getMasse());
+    glPopMatrix();
 
-                // fonction pour appliquer une translation à un projectile
-                particle.integrate(frameTime);
-            }*/
+    glFlush();
+    /* Swap front and back buffers */
+    glutPostRedisplay();
+    glutSwapBuffers();
 
-        glPopMatrix();
-
-        glFlush();
-        /* Swap front and back buffers */
-        glutPostRedisplay();
-        glutSwapBuffers();
-        int timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
-        int deltaTime = timeSinceStart - oldTimeSinceStart;
-        oldTimeSinceStart = timeSinceStart;
-        frameTime = deltaTime / 1000;
-        // fin calcul frame time
-        // float currentTime = glutGet(GLUT_ELAPSED_TIME);
-        // frameTime = (currentTime - previousTime) / 1000.0f;
+    // fin calcul frame time
+    float timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
+    float deltaTime = timeSinceStart - oldTimeSinceStart;
+    frameTime = deltaTime / 1000;
 }
 
 // fonction de detection des inputs

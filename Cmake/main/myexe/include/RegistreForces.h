@@ -19,7 +19,7 @@ private:
 
 public:
 	Registre GetListEnregistrementForce() { return registreForces; }
-	void AddEnregistrementForce(EnregistrementForce p_EnregistrementForce) { registreForces.push_back(p_EnregistrementForce); }
+	void AddEnregistrementForce(EnregistrementForce *p_EnregistrementForce) { registreForces.push_back(*p_EnregistrementForce); }
 	void DeleteEnregistrementForce(int p_Index);
 };
 

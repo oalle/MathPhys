@@ -12,6 +12,6 @@ private:
 public:
 	ParticleBuoyancy(double p_MaxDepth, double p_ObjectVolume, double p_WaterHeight, double p_Density);
 
-	void updateForce(Particle * p_Particle, float p_Duration);
+	void updateForce(Particle* p_Particle, float p_Duration) override;
 };
 

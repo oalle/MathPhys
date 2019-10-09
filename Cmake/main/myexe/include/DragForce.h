@@ -11,7 +11,7 @@ public:
 	DragForce();
 	DragForce(float coeffDrag1, float coeffDrag2);
 	~DragForce();
-	void updateForce(Particle* particule, float duration);
+	void updateForce(Particle* particule, float p_Duration) override;
 
 };
 

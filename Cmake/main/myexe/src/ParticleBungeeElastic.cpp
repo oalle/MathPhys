@@ -26,16 +26,16 @@ ParticleBungeeElastic::~ParticleBungeeElastic()
 
 //Fonction pour mettre a jour la force
 //Param : particule : La particule sur la quelle on veut mettre a jour la force
-void ParticleBungeeElastic::updateForce(Particle* particule, float duration)
+void ParticleBungeeElastic::updateForce(Particle* p_Particule, float duration)
 {
 	Vector3D Force = Vector3D();
-	Vector3D PosPartToAncragePoint = particule->getPosition() - this->ancragePoint;
+    Vector3D PosPartToAncragePoint = p_Particule->getPosition() - this->ancragePoint;
 	double distPartToAncragePoint = PosPartToAncragePoint.norme();
 	if (distPartToAncragePoint > this->restLength)
 	{
 		PosPartToAncragePoint.normalisation();
 		Force = PosPartToAncragePoint.mulScalaireResult(-k * (distPartToAncragePoint - this->restLength));
-		particule->addForce(Force);
+		p_Particule->addForce(Force);
 	}
 	
 }

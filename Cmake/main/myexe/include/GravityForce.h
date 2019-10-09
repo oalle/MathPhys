@@ -7,6 +7,6 @@ private :
 public:
 	GravityForce();
 	~GravityForce();
-	void updateForce(Particle * particule, float duration);
+	virtual void updateForce(Particle* particule, float p_Duration) override;
 };
 

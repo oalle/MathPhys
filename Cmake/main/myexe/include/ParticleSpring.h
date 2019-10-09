@@ -9,9 +9,8 @@ private:
 	double m_WidthSpring;
 	double m_ConstantSpring;
 
-private:
+public:
 	ParticleSpring(Particle p_OtherParticle, double p_WidthSpring, double p_ConstantSrping);
-
 	void updateForce(Particle* p_Particle, float p_Duration);
 };
 

@@ -1,4 +1,6 @@
 #include "GameWorld.h"
+#include <ParticleSpring.h>
+#include <GravityForce.h>
 
 std::vector<Particle> GameWorld::listParticules;
 
@@ -23,14 +25,14 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
 
-    Particle l_Particle1G1(10, Vector3D(0.5,0,3));
-    Particle l_Particle2G1(10, Vector3D(0, 0.5, 3));
-    Particle l_Particle3G1(10, Vector3D(1, 0, 3));
-    Particle l_Particle4G1(10, Vector3D(0, 1, 3));
-    Particle l_Particle1G2(10, Vector3D(2, 4, 3));
-    Particle l_Particle2G2(10, Vector3D(2, 5, 3));
-    Particle l_Particle3G2(10, Vector3D(2, 6, 3));
-    Particle l_Particle4G2(10, Vector3D(2, 7, 3));
+    Particle l_Particle1G1(10, Vector3D(2, 0, 8));
+    Particle l_Particle2G1(10, Vector3D(2, 3, 8));
+    Particle l_Particle3G1(10, Vector3D(4, 0, 8));
+    Particle l_Particle4G1(10, Vector3D(4, 3, 8));
+    Particle l_Particle1G2(10, Vector3D(-2, 0, 8));
+    Particle l_Particle2G2(10, Vector3D(-2, 3, 8));
+    Particle l_Particle3G2(10, Vector3D(-4, 0, 8));
+    Particle l_Particle4G2(10, Vector3D(-4, 3, 8));
     AddParticule(l_Particle1G1);
     AddParticule(l_Particle2G1);
     AddParticule(l_Particle3G1);
@@ -39,6 +41,14 @@ void GameWorld::GameSetup()
     AddParticule(l_Particle2G2);
     AddParticule(l_Particle3G2);
     AddParticule(l_Particle4G2);
+
+	double l_SpringConstant = 1;
+    double l_SpringWidth = 1;
+	
+	ParticleSpring l_ParticleSpringP12G1(l_Particle1G1, l_SpringWidth, l_SpringConstant);
+    AddForce(&l_Particle1G1, &l_ParticleSpringP12G1);
+    ParticleSpring l_ParticleSpringP21G1(l_Particle2G1, l_SpringWidth, l_SpringConstant);
+    AddForce(&l_Particle2G1, &l_ParticleSpringP21G1);
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -53,19 +63,6 @@ void GameWorld::GlutSetup(int argc, char* argv[])
     glutReshapeFunc(reshapeLoopWrapper);
     glutKeyboardFunc(key_pressedWrapper);
 }
-
-/*void GameWorld::reshapeLoopWrapper(int width, int height) { reshapeLoopWrapper(width, height); }
-
-void GameWorld::translationWrapper(Vector3D v1) { translationWrapper(v1); }
-
-void GameWorld::initSphereObjWrapper(float x) { initSphereObjWrapper(x); }
-
-void GameWorld::displayLoopWrapper() { displayLoopWrapper(); }
-
-void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
-{
-    key_pressedWrapper(key, x, y);
-}*/
 
 void GameWorld::Setup(int argc, char* argv[])
 {
@@ -101,6 +98,7 @@ void GameWorld::displayLoopWrapper(void)
     // debut calcul frame time
     float oldTimeSinceStart = 0;
 
+	// init vue glut
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, MatSpec);
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDif);
@@ -117,6 +115,9 @@ void GameWorld::displayLoopWrapper(void)
     glMatrixMode(GL_MODELVIEW);
     glBegin(GL_QUADS);
 
+	// creation d'un bloc sol
+    glColor3f(0.0, 1.0, 0.0);
+
     glVertex3f(-2, -2, -2);
     glVertex3f(-2, 2, -2);
     glVertex3f(2, 2, -2);
@@ -124,19 +125,21 @@ void GameWorld::displayLoopWrapper(void)
     glEnd();
 
     glColor3f(1.0, 0.0, 0.0);
-    glPushMatrix();
 
 	for (int i = 0; i < listParticules.size(); i++) {
+	    glPushMatrix();
+	
 		// draw call pour chaque particule
-		glTranslatef(listParticules[i].getPosition().getx() - 2, listParticules[i].getPosition().gety(),
+		glTranslatef(listParticules[i].getPosition().getx(), listParticules[i].getPosition().gety(),
 			listParticules[i].getPosition().getz());
 		initSphereObjWrapper(0.05f * listParticules[i].getMasse());
 
 		// fonction pour appliquer une translation à un projectile
-		//listParticules[i].integrate(frameTime);
+		listParticules[i].integrate(frameTime);
+
+		glPopMatrix();
 	}
 
-    glPopMatrix();
 
     glFlush();
     /* Swap front and back buffers */
@@ -159,11 +162,11 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     {
     case 'q':
         // accelereation vers la gauche sur particule no1
-		listParticules[0].setAcceleration(Vector3D(0, 0, 3));
+        listParticules[0].setAcceleration(Vector3D(0.01, 0, 0));
         break;
     case 'd':
         // accelereation vers la gauche sur particule no1
-		listParticules[0].setAcceleration(Vector3D(0, 0, 0));
+        listParticules[0].setAcceleration(Vector3D(-0.01, 0, 0));
         break;
     default:
         break;

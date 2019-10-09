@@ -10,7 +10,7 @@ float MatSpec[4] = {0.1f, 0.1f, 0.5f, 1.0f};
 float MatDif[4] = {0.057f, 0.447f, 0.361f, 1.0f};
 float MatAmb[4] = {0.3f, 0.3f, 0.3f, 1.0f};
 float Light1Pos[4] = {0.0f, 0.0f, 20.0f, 1.0f};
-float Light1Dif[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+float Light1Dif[4] = {1.0f, 1.0f, 1.0f, 1.0f};
 float Light1Spec[4] = {0.0f, 1.0f, 1.0f, 1.0f};
 float Light1Amb[4] = {0.5f, 0.5f, 0.5f, 1.0f};
 float Spot1Dir[3] = {0.0f, 0.0f, -1.0f};
@@ -23,14 +23,14 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
 
-    Particle l_Particle1G1(10, Vector3D(0,0,1));
-    Particle l_Particle2G1(10, Vector3D(0, 0, 2));
-    Particle l_Particle3G1(10, Vector3D(0, 0, 3));
-    Particle l_Particle4G1(10, Vector3D(0, 0, 4));
-    Particle l_Particle1G2(10, Vector3D(0, 0, 5));
-    Particle l_Particle2G2(10, Vector3D(0, 0, 6));
-    Particle l_Particle3G2(10, Vector3D(0, 0, 7));
-    Particle l_Particle4G2(10, Vector3D(0, 0, 8));
+    Particle l_Particle1G1(10, Vector3D(0.5,0,3));
+    Particle l_Particle2G1(10, Vector3D(0, 0.5, 3));
+    Particle l_Particle3G1(10, Vector3D(1, 0, 3));
+    Particle l_Particle4G1(10, Vector3D(0, 1, 3));
+    Particle l_Particle1G2(10, Vector3D(2, 4, 3));
+    Particle l_Particle2G2(10, Vector3D(2, 5, 3));
+    Particle l_Particle3G2(10, Vector3D(2, 6, 3));
+    Particle l_Particle4G2(10, Vector3D(2, 7, 3));
     AddParticule(l_Particle1G1);
     AddParticule(l_Particle2G1);
     AddParticule(l_Particle3G1);
@@ -130,10 +130,10 @@ void GameWorld::displayLoopWrapper(void)
 		// draw call pour chaque particule
 		glTranslatef(listParticules[i].getPosition().getx() - 2, listParticules[i].getPosition().gety(),
 			listParticules[i].getPosition().getz());
-		initSphereObjWrapper(0.1f * listParticules[i].getMasse());
+		initSphereObjWrapper(0.05f * listParticules[i].getMasse());
 
 		// fonction pour appliquer une translation à un projectile
-		listParticules[i].integrate(frameTime);
+		//listParticules[i].integrate(frameTime);
 	}
 
         /*for

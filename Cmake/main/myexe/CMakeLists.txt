@@ -25,7 +25,7 @@ set(SOURCES ${SOURCE_FOLDER}/main.cpp
 		    ${SOURCE_FOLDER}/ParticleStiffSpring.cpp
 		    ${SOURCE_FOLDER}/RegistreForces.cpp
 		    ${SOURCE_FOLDER}/ParticleContactResolver.cpp
-			${SOURCE_FOLDER}/Matrix3.cpp
+		    ${SOURCE_FOLDER}/Quaternion.cpp
 )
 
 #Headers files (for IntelliSense)
@@ -48,7 +48,7 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 		    ${INCLUDE_FOLDER}/ParticleContactResolver.h
 		    ${INCLUDE_FOLDER}/RegistreForces.h
 		    ${INCLUDE_FOLDER}/ParticleContactGenerator.h
-			${INCLUDE_FOLDER}/Matrix3.h
+		    ${INCLUDE_FOLDER}/Quaternion.h
 )
 
 #Main exec

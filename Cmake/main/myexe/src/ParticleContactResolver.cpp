@@ -1,6 +1,5 @@
 #include "ParticleContactResolver.h"
 
-typedef std::vector<ParticleContact> RegistreContacts;
 RegistreContacts ParticleContactResolver::registreContacts;
 int ParticleContactResolver::m_Iteration;
 int ParticleContactResolver::m_IterationMax;
@@ -26,8 +25,18 @@ void ParticleContactResolver::resolveContact(float p_Duration)
     m_Iteration = 0;
 	m_IterationMax = 5;
 
-    while (m_Iteration < m_IterationMax && m_Iteration < registreContacts.size()) {
-        registreContacts[m_Iteration].Resolve(p_Duration);
+	RegistreContacts::Registre rc = registreContacts.GetListEnregistrementContact();
+
+    while (m_Iteration < m_IterationMax && m_Iteration < rc.size()) {
+        rc[m_Iteration].contact->Resolve(p_Duration);
         m_Iteration++;
 	}
+}
+
+
+void ParticleContactResolver::AddContact(ParticleContact* p_Contact)
+{
+    RegistreContacts::EnregistrementContact p;
+    p.contact = p_Contact;
+    registreContacts.AddEnregistrementContact(&p);
 }

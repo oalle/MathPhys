@@ -1,8 +1,10 @@
 #include "GameWorld.h"
 #include <ParticleCable.h>
+#include <DragForce.h>
 
 std::vector<Particle> GameWorld::listParticules;
 RegistreForces GameWorld::registreForces;
+ParticleContactResolver GameWorld::particleContactResolver;
 
 GameWorld::GameWorld() {}
 
@@ -42,15 +44,35 @@ void GameWorld::GameSetup()
     AddParticule(l_Particle3G2);
     AddParticule(l_Particle4G2);
 
-	double l_SpringConstant = 1;
-    double l_SpringWidth = 1;
-	
-	ParticleSpring *l_ParticleSpringP12G1 = new ParticleSpring(l_Particle2G1, l_SpringWidth, l_SpringConstant);
-    AddForce(&l_Particle1G1, l_ParticleSpringP12G1);
-    ParticleSpring *l_ParticleSpringP21G1 = new ParticleSpring(l_Particle1G1, l_SpringWidth, l_SpringConstant);
-    AddForce(&l_Particle2G1, l_ParticleSpringP21G1);
-	GravityForce* l_GravityForce = new GravityForce();
-	AddForce(&l_Particle1G1, l_GravityForce);
+	// application de la force ressort
+    //ParticleSpring* l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 1, 0.003);
+    //AddForce(&listParticules[0], l_ParticleSpringP12G1);
+    //ParticleSpring* l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 1, 0.003);
+    //AddForce(&listParticules[1], l_ParticleSpringP21G1);
+
+    //ParticleSpring* l_ParticleSpringP31G1 = new ParticleSpring(listParticules[2], 1, 0.003);
+    //AddForce(&listParticules[0], l_ParticleSpringP31G1);
+    //ParticleSpring* l_ParticleSpringP13G1 = new ParticleSpring(listParticules[0], 1, 0.003);
+    //AddForce(&listParticules[2], l_ParticleSpringP13G1);
+
+    //ParticleSpring* l_ParticleSpringP34G1 = new ParticleSpring(listParticules[2], 1, 0.003);
+    //AddForce(&listParticules[3], l_ParticleSpringP34G1);
+    //ParticleSpring* l_ParticleSpringP43G1 = new ParticleSpring(listParticules[3], 1, 0.003);
+    //AddForce(&listParticules[2], l_ParticleSpringP43G1);
+
+    //ParticleSpring* l_ParticleSpringP24G1 = new ParticleSpring(listParticules[1], 1, 0.003);
+    //AddForce(&listParticules[3], l_ParticleSpringP24G1);
+    //ParticleSpring* l_ParticleSpringP42G1 = new ParticleSpring(listParticules[3], 1, 0.003);
+    //AddForce(&listParticules[1], l_ParticleSpringP42G1);
+
+    // application de la force drag
+     //float l_DragCoeff1 = 0.1f;
+     //float l_DragCoeff2 = 10.f;
+     //DragForce* l_DragForce = new DragForce(l_DragCoeff1, l_DragCoeff2);
+     //AddForce(&listParticules[0], l_DragForce);
+     //AddForce(&listParticules[1], l_DragForce);
+     //AddForce(&listParticules[2], l_DragForce);
+     //AddForce(&listParticules[3], l_DragForce);
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -100,7 +122,7 @@ void GameWorld::displayLoopWrapper(void)
     // debut calcul frame time
     float oldTimeSinceStart = 0;
 
-	// init vue glut
+    // init vue glut
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, MatSpec);
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDif);
@@ -117,7 +139,7 @@ void GameWorld::displayLoopWrapper(void)
     glMatrixMode(GL_MODELVIEW);
     glBegin(GL_QUADS);
 
-	// creation d'un bloc sol
+    // creation d'un bloc sol
     glColor3f(0.0, 1.0, 0.0);
 
     glVertex3f(-2, -2, -2);
@@ -128,32 +150,32 @@ void GameWorld::displayLoopWrapper(void)
 
     glColor3f(1.0, 0.0, 0.0);
 
-	// update du registre des forces
-	for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)
-	{
-		registreForces.GetListEnregistrementForce()[i].fg->updateForce(
-                registreForces.GetListEnregistrementForce()[i].particule, frameTime);
+    // update du registre des forces
+    for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)
+    {
+        registreForces.GetListEnregistrementForce()[i].fg->updateForce(
+            registreForces.GetListEnregistrementForce()[i].particule, frameTime);
     }
-	// update du registre des contacts
+    // update du registre des contacts
     ParticleContactResolver::resolveContact(frameTime);
 
-	// affichage des particules et appel � integrate (qui clear aussi les AccumForces)
-	for (int i = 0; i < listParticules.size(); i++) {
-	    glPushMatrix();
-	
-		// draw call pour chaque particule
-		glTranslatef(listParticules[i].getPosition().getx(), listParticules[i].getPosition().gety(),
-			listParticules[i].getPosition().getz());
-		initSphereObjWrapper(0.01f * listParticules[i].getMasse());
-		glTranslatef(-1*(listParticules[i].getPosition().getx() - 2), -1*(listParticules[i].getPosition().gety()),
-			-1*(listParticules[i].getPosition().getz()));
-		// fonction pour appliquer une translation � un projectile
-		listParticules[i].integrate(frameTime);
+    // affichage des particules et appel � integrate (qui clear aussi les AccumForces)
+    for (int i = 0; i < listParticules.size(); i++)
+    {
+        glPushMatrix();
 
-		glPopMatrix();
-	}
+        // draw call pour chaque particule
+        glTranslatef(listParticules[i].getPosition().getx(), listParticules[i].getPosition().gety(),
+                     listParticules[i].getPosition().getz());
+        initSphereObjWrapper(0.01f * listParticules[i].getMasse());
+        glTranslatef(-1 * (listParticules[i].getPosition().getx() - 2),
+                     -1 * (listParticules[i].getPosition().gety()),
+                     -1 * (listParticules[i].getPosition().getz()));
+        // fonction pour appliquer une translation � un projectile
+        listParticules[i].integrate(frameTime);
 
-	
+        glPopMatrix();
+    }
 
     glFlush();
     /* Swap front and back buffers */
@@ -175,31 +197,55 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     switch (key)
     {
     case 'q':
-	{
-		// accelereation vers la gauche sur particule no1		
-		ParticleSpring *l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 1, 0.003);
-		AddForce(&listParticules[0], l_ParticleSpringP12G1);
-		ParticleSpring *l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 1, 0.003);
-		AddForce(&listParticules[1], l_ParticleSpringP21G1);
+    {
+        // application de la force ressort
+        ParticleSpring* l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 1, 0.003);
+        AddForce(&listParticules[0], l_ParticleSpringP12G1);
+        ParticleSpring* l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 1, 0.003);
+        AddForce(&listParticules[1], l_ParticleSpringP21G1);
 
-		//ParticleCable l_ParticleCableP12G1(&listParticules[0], &listParticules[1], 1, 1);
-		//l_ParticleCableP12G1.addContact();
-		//ParticleContactResolver::resolveContact(frameTime);
+        ParticleSpring* l_ParticleSpringP31G1 = new ParticleSpring(listParticules[2], 1, 0.003);
+        AddForce(&listParticules[0], l_ParticleSpringP31G1);
+        ParticleSpring* l_ParticleSpringP13G1 = new ParticleSpring(listParticules[0], 1, 0.003);
+        AddForce(&listParticules[2], l_ParticleSpringP13G1);
 
-		//GravityForce* l_GravityForce = new GravityForce();
-		//AddForce(&listParticules[0], l_GravityForce);
-		break;
-	}
+        ParticleSpring* l_ParticleSpringP34G1 = new ParticleSpring(listParticules[2], 1, 0.003);
+        AddForce(&listParticules[3], l_ParticleSpringP34G1);
+        ParticleSpring* l_ParticleSpringP43G1 = new ParticleSpring(listParticules[3], 1, 0.003);
+        AddForce(&listParticules[2], l_ParticleSpringP43G1);
+
+        ParticleSpring* l_ParticleSpringP24G1 = new ParticleSpring(listParticules[1], 1, 0.003);
+        AddForce(&listParticules[3], l_ParticleSpringP24G1);
+        ParticleSpring* l_ParticleSpringP42G1 = new ParticleSpring(listParticules[3], 1, 0.003);
+        AddForce(&listParticules[1], l_ParticleSpringP42G1);
+
+		// application de la force drag
+        //float l_DragCoeff1 = 0.1f;
+        //float l_DragCoeff2 = 10.f;
+        //DragForce* l_DragForce = new DragForce(l_DragCoeff1, l_DragCoeff2);
+        //AddForce(&listParticules[0], l_DragForce);
+        //AddForce(&listParticules[1], l_DragForce);
+        //AddForce(&listParticules[2], l_DragForce);
+        //AddForce(&listParticules[3], l_DragForce);
+
+        // ParticleCable l_ParticleCableP12G1(&listParticules[0], &listParticules[1], 1, 1);
+        // l_ParticleCableP12G1.addContact();
+        // ParticleContactResolver::resolveContact(frameTime);
+
+        // GravityForce* l_GravityForce = new GravityForce();
+        // AddForce(&listParticules[0], l_GravityForce);
+        break;
+    }
     case 'd':
-	{
-		// accelereation vers la gauche sur particule no1
-		listParticules[0].setAcceleration(Vector3D(-0.01, 0, 0));
-		break;
-	}
+    {
+        // accelereation vers la gauche sur particule no1
+        listParticules[0].setAcceleration(Vector3D(-0.01, 0, 0));
+        break;
+    }
     default:
-	{
-		break;
-	}
+    {
+        break;
+    }
     }
 }
 

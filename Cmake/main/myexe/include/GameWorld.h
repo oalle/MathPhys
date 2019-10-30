@@ -7,11 +7,13 @@
 #include "ParticleSpring.h"
 #include "GravityForce.h"
 #include <ParticleContactResolver.h>
+
 class GameWorld
 {
 private :
     static std::vector<Particle> listParticules;
     static RegistreForces registreForces;
+    static ParticleContactResolver particleContactResolver;
 
 public :
 	GameWorld(std::vector<Particle> p_listParticules) { listParticules = p_listParticules; }

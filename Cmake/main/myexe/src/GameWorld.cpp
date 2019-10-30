@@ -128,6 +128,15 @@ void GameWorld::displayLoopWrapper(void)
 
     glColor3f(1.0, 0.0, 0.0);
 
+	// update du registre des forces
+	for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)
+	{
+		registreForces.GetListEnregistrementForce()[i].fg->updateForce(
+                registreForces.GetListEnregistrementForce()[i].particule, frameTime);
+    }
+	// update du registre des contacts
+    ParticleContactResolver::resolveContact(frameTime);
+
 	// affichage des particules et appel � integrate (qui clear aussi les AccumForces)
 	for (int i = 0; i < listParticules.size(); i++) {
 	    glPushMatrix();
@@ -144,14 +153,7 @@ void GameWorld::displayLoopWrapper(void)
 		glPopMatrix();
 	}
 
-	// update du registre des forces
-	for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)
-	{
-		registreForces.GetListEnregistrementForce()[i].fg->updateForce(
-                registreForces.GetListEnregistrementForce()[i].particule, frameTime);
-    }
-	// update du registre des contacts
-    ParticleContactResolver::resolveContact(frameTime);
+	
 
     glFlush();
     /* Swap front and back buffers */
@@ -180,8 +182,9 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
 		ParticleSpring *l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 1, 0.003);
 		AddForce(&listParticules[1], l_ParticleSpringP21G1);
 
-		ParticleCable l_ParticleCableP12G1(&listParticules[0], &listParticules[1], 1, 0.1);
-		l_ParticleCableP12G1.addContact();
+		//ParticleCable l_ParticleCableP12G1(&listParticules[0], &listParticules[1], 1, 1);
+		//l_ParticleCableP12G1.addContact();
+		//ParticleContactResolver::resolveContact(frameTime);
 
 		//GravityForce* l_GravityForce = new GravityForce();
 		//AddForce(&listParticules[0], l_GravityForce);

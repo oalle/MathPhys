@@ -26,6 +26,8 @@ set(SOURCES ${SOURCE_FOLDER}/main.cpp
 		    ${SOURCE_FOLDER}/RegistreForces.cpp
 		    ${SOURCE_FOLDER}/ParticleContactResolver.cpp
 		    ${SOURCE_FOLDER}/Quaternion.cpp
+			${SOURCE_FOLDER}/Matrix3.cpp
+			${SOURCE_FOLDER}/Matrix4.cpp
 )
 
 #Headers files (for IntelliSense)
@@ -49,6 +51,8 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 		    ${INCLUDE_FOLDER}/RegistreForces.h
 		    ${INCLUDE_FOLDER}/ParticleContactGenerator.h
 		    ${INCLUDE_FOLDER}/Quaternion.h
+			${INCLUDE_FOLDER}/Matrix3.h
+			${INCLUDE_FOLDER}/Matrix4.h
 )
 
 #Main exec

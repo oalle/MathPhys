@@ -14,6 +14,7 @@ Matrix4 Matrix4::MultiplicationScalaire(float a)
     return Matrix4(tabRes);
 }
 
+//en utilisans 1  en dernier élément du vecteur
 Vector3D Matrix4::MultiplicationVectorielle(Vector3D vec)
 {
     float tabRes[3] = {0, 0, 0};
@@ -25,9 +26,10 @@ Vector3D Matrix4::MultiplicationVectorielle(Vector3D vec)
     return Vector3D(tabRes[0], tabRes[1], tabRes[2]);
 }
 
-Matrix4 Matrix4::ProduitMatriciel(float tab[12])
+Matrix4 Matrix4::ProduitMatriciel(Matrix4 matrix)
 {
     float tabRes[12] = {0};
+	float[12] tab = matrix.getTab();
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 4; j++)
@@ -76,6 +78,19 @@ Matrix4 Matrix4::MatriceInverse()
         this->tab[8] * this->tab[1] * this->tab[7] + this->tab[0] * this->tab[9] * this->tab[7] +
         this->tab[4] * this->tab[1] * this->tab[11] - this->tab[0] * this->tab[5] * this->tab[11];
     return Matrix4(tabRes).MultiplicationScalaire(1/det);
+}
+
+//transformation d'un vecteur directeur, on ignore la partie translation
+//en utilisans 0  en dernier élément du vecteur
+Vector3D  Matrix4::transformationVecteurDir(Vector3D vec)
+{
+	float tabRes[3] = {0, 0, 0};
+    for (int i = 0; i < 3; i++)
+    {
+        tabRes[i] = this->tab[i * 4] * vec.getx() + this->tab[i * 4 + 1] * vec.gety() +
+                    this->tab[i * 4 + 2] * vec.getz();
+    }
+    return Vector3D(tabRes[0], tabRes[1], tabRes[2]);
 }
 
 float* Matrix4::getTab() 

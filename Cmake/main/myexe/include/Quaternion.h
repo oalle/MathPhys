@@ -15,4 +15,8 @@ public:
 	void operator*=(Quaternion p_Other);
 	void RotateByVector(Vector3D p_Vector);
 	void UpdateAngularVelocity(Vector3D p_Vector, float p_Time);
+        float getR();
+        float getI();
+        float getJ();
+        float getK();
 };

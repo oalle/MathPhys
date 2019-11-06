@@ -1,4 +1,6 @@
 #pragma once
+#include "Vector3D.h"
+#include"Quaternion.h"
 class Matrix3
 {
 private:
@@ -10,9 +12,10 @@ public:
 	Matrix3(float tab[9]);
 	~Matrix3();
     Matrix3 MultiplicationScalaire(float a);
-	float* MultiplicationVectorielle(float tab[3]);
-    Matrix3 ProduitMatriciel(float tab[9]);
+	float* MultiplicationVectorielle(Vector3D vec);
+    Matrix3 ProduitMatriciel(Matrix3 B);
     Matrix3 MatriceInverse();
     Matrix3 MatriceTransposé();
     float* getTab();
+    void setOrientation(Quaternion q);
 };

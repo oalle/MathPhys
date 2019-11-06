@@ -1,4 +1,4 @@
-#include "..\include\Matrix4.h"
+#include "Matrix4.h"
 
 Matrix4::Matrix4(float tab[12])
 {
@@ -29,18 +29,17 @@ Vector3D Matrix4::MultiplicationVectorielle(Vector3D vec)
 Matrix4 Matrix4::ProduitMatriciel(Matrix4 matrix)
 {
     float tabRes[12] = {0};
-	float[12] tab = matrix.getTab();
+	float* tabmatrix = matrix.getTab();
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            for (int k = 0; k < 3; k++) { tabRes[i + j] += this->tab[i * 3 + k] * tab[k * 3 + j]; }
-            tabRes[i * 4 + j] = this->tab[i * 4] * this->tab[j] +
-                                this->tab[i * 4  + 1] * this->tab[j + 4] +
-                                this->tab[i * 4 + 2] * this->tab[j + 8];
+            tabRes[i * 4 + j] = this->tab[i * 4] * tabmatrix[j] +
+                                this->tab[i * 4  + 1] * tabmatrix[j + 4] +
+                                this->tab[i * 4 + 2] * tabmatrix[j + 8];
             //on ajoute l'élément de la dernière colonne de A seulement 
 			//à la dernière colonne de B car le dernier élément de la dernière colonne de B est 1
-			//sinon ils fallent 0 (dernière ligne = 0 0 0 1)
+			//sinon ils vallent 0 (dernière ligne = 0 0 0 1)
 			if (j == 3) { 
 				tabRes[i * 4 + j] += this->tab[i * 4 + 3];
 			}
@@ -96,4 +95,22 @@ Vector3D  Matrix4::transformationVecteurDir(Vector3D vec)
 float* Matrix4::getTab() 
 { 
 	return this->tab; 
+}
+
+/*En ajoutant x, y, z en fin dans la dernière colonne*/
+void Matrix4::setOrientation(Quaternion q) 
+{
+	tab[0] = 1 - (2 * (q.getJ() * q.getJ) +2*(q.getK()*q.getK())); 
+	tab[1] = 2 * q.getI() * q.getJ() + 2 * q.getK() * q.getR();
+    tab[2] = 2 * q.getI() * q.getK() - 2 * q.getJ() * q.getR();
+    tab[3] = q.getI();
+    tab[4] = 2 * q.getI() * q.getJ() - 2 * q.getK() * q.getR();
+    tab[5] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getK() * q.getK()));
+    tab[6] = 2 * q.getJ() * q.getK() + 2 * q.getI() * q.getR();
+    tab[7] = q.getJ();
+    tab[8] = 2 * q.getI() * q.getK() + 2 * q.getJ() * q.getR();
+    tab[9] = 2 * q.getJ() * q.getK() - 2 * q.getI() * q.getR();
+    tab[10] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getJ() * q.getJ()));
+    tab[11] = q.getK();
+
 }

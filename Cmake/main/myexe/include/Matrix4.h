@@ -1,5 +1,6 @@
 #pragma once
 #include <Vector3D.h>
+#include <Quaternion.h>
 class Matrix4
 {
 private:
@@ -41,4 +42,8 @@ public:
 	/*renvoie le tableau de valeur de la Matrix4
 	return le tableau de valeur*/
     float* getTab();
+
+	/*transforme un quaternion en Matrix4
+	param Quaternion q le quaternion*/
+	void setOrientation(Quaternion q);
 };

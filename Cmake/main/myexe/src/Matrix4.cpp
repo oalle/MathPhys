@@ -100,17 +100,17 @@ float* Matrix4::getTab()
 /*En ajoutant x, y, z en fin dans la dernière colonne*/
 void Matrix4::setOrientation(Quaternion q) 
 {
-	tab[0] = 1 - (2 * (q.getJ() * q.getJ) +2*(q.getK()*q.getK())); 
+	tab[0] = 1 - (2 * (q.getJ() * q.getJ()) +2*(q.getK()*q.getK())); 
 	tab[1] = 2 * q.getI() * q.getJ() + 2 * q.getK() * q.getR();
     tab[2] = 2 * q.getI() * q.getK() - 2 * q.getJ() * q.getR();
     tab[3] = q.getI();
     tab[4] = 2 * q.getI() * q.getJ() - 2 * q.getK() * q.getR();
-    tab[5] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getK() * q.getK()));
+    tab[5] = 1 - (2 * (q.getI() * q.getI()) + 2 * (q.getK() * q.getK()));
     tab[6] = 2 * q.getJ() * q.getK() + 2 * q.getI() * q.getR();
     tab[7] = q.getJ();
     tab[8] = 2 * q.getI() * q.getK() + 2 * q.getJ() * q.getR();
     tab[9] = 2 * q.getJ() * q.getK() - 2 * q.getI() * q.getR();
-    tab[10] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getJ() * q.getJ()));
+    tab[10] = 1 - (2 * (q.getI() * q.getI()) + 2 * (q.getJ() * q.getJ()));
     tab[11] = q.getK();
 
 }

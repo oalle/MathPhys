@@ -18,4 +18,7 @@ public:
     Matrix3 MatriceTransposé();
     float* getTab();
     void setOrientation(Quaternion q);
+    Matrix3 operator+(Matrix3& B);
+	Matrix3 operator-(Matrix3& B);
+
 };

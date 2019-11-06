@@ -17,6 +17,5 @@ protected:
     Matrix4 m;
 
 public:
-
     void calculDonnéesDérivées();
-}
+};

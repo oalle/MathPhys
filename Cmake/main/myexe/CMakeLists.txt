@@ -28,6 +28,7 @@ set(SOURCES ${SOURCE_FOLDER}/main.cpp
 		    ${SOURCE_FOLDER}/Quaternion.cpp
 			${SOURCE_FOLDER}/Matrix3.cpp
 			${SOURCE_FOLDER}/Matrix4.cpp
+			${SOURCE_FOLDER}/RigidBody.cpp
 )
 
 #Headers files (for IntelliSense)
@@ -53,6 +54,7 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 		    ${INCLUDE_FOLDER}/Quaternion.h
 			${INCLUDE_FOLDER}/Matrix3.h
 			${INCLUDE_FOLDER}/Matrix4.h
+			${INCLUDE_FOLDER}/RigidBody.h
 )
 
 #Main exec

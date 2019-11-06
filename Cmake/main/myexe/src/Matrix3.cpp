@@ -1,8 +1,14 @@
 #include "Matrix3.h"
+#define SIZE 9
 
-Matrix3::Matrix3(float tab[9])
+Matrix3::Matrix3(float tab[SIZE])
 {
     for (int i = 0; i < 9; i++) { this->tab[i] = tab[i]; }
+}
+
+Matrix3::~Matrix3()
+{
+    
 }
 
 Matrix3 Matrix3::MultiplicationScalaire(float a)
@@ -74,29 +80,29 @@ Matrix3 Matrix3::MatriceTransposé()
 
 float* Matrix3::getTab() { return this->tab; }
 
-Matrix3 operator+(Matrix3 M, Matrix3 B)
+Matrix3 Matrix3::operator+(Matrix3& B)
 {
     float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    for (int i = 0; i < 9; i++) { tabRes[i] = M.getTab[i] + B.getTab[i]; }
+    for (int i = 0; i < 9; i++) { tabRes[i] = this->getTab()[i] + B.getTab()[i]; }
     return Matrix3(tabRes);
 }
 
-Matrix3 operator-(Matrix3 M, Matrix3 B)
+Matrix3 Matrix3::operator-(Matrix3& B)
 {
     float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    for (int i = 0; i < 9; i++) { tabRes[i] = M.getTab[i] - B.getTab[i]; }
+    for (int i = 0; i < 9; i++) { tabRes[i] = this->getTab()[i] - B.getTab()[i]; }
     return Matrix3(tabRes);
 }
 
 void Matrix3::setOrientation(Quaternion q) 
 { 
-	tab[0] = 1 - (2 * (q.getJ() * q.getJ) +2*(q.getK()*q.getK())); 
+	tab[0] = 1 - (2 * (q.getJ() * q.getJ()) +2*(q.getK()*q.getK())); 
 	tab[1] = 2 * q.getI() * q.getJ() + 2 * q.getK() * q.getR();
     tab[2] = 2 * q.getI() * q.getK() - 2 * q.getJ() * q.getR();
     tab[3] = 2 * q.getI() * q.getJ() - 2 * q.getK() * q.getR();
-    tab[4] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getK() * q.getK()));
+    tab[4] = 1 - (2 * (q.getI() * q.getI()) + 2 * (q.getK() * q.getK()));
     tab[5] = 2 * q.getJ() * q.getK() + 2 * q.getI() * q.getR();
     tab[6] = 2 * q.getI() * q.getK() + 2 * q.getJ() * q.getR();
     tab[7] = 2 * q.getJ() * q.getK() - 2 * q.getI() * q.getR();
-    tab[8] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getJ() * q.getJ()));
+    tab[8] = 1 - (2 * (q.getI() * q.getI()) + 2 * (q.getJ() * q.getJ()));
 }

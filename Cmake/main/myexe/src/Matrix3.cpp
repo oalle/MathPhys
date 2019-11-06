@@ -90,13 +90,13 @@ Matrix3 operator-(Matrix3 M, Matrix3 B)
 
 void Matrix3::setOrientation(Quaternion q) 
 { 
-	tab[1] = 1 - (2 * (q.getJ() * q.getJ) +2*(q.getK()*q.getK())); 
-	tab[2] = 2 * q.getI() * q.getJ() + 2 * q.getK() * q.getR();
-    tab[3] = 2 * q.getI() * q.getK() - 2 * q.getJ() * q.getR();
-    tab[4] = 2 * q.getI() * q.getJ() - 2 * q.getK() * q.getR();
-    tab[5] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getK() * q.getK()));
-    tab[6] = 2 * q.getJ() * q.getK() + 2 * q.getI() * q.getR();
-    tab[7] = 2 * q.getI() * q.getK() + 2 * q.getJ() * q.getR();
-    tab[8] = 2 * q.getJ() * q.getK() - 2 * q.getI() * q.getR();
-    tab[9] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getJ() * q.getJ()));
+	tab[0] = 1 - (2 * (q.getJ() * q.getJ) +2*(q.getK()*q.getK())); 
+	tab[1] = 2 * q.getI() * q.getJ() + 2 * q.getK() * q.getR();
+    tab[2] = 2 * q.getI() * q.getK() - 2 * q.getJ() * q.getR();
+    tab[3] = 2 * q.getI() * q.getJ() - 2 * q.getK() * q.getR();
+    tab[4] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getK() * q.getK()));
+    tab[5] = 2 * q.getJ() * q.getK() + 2 * q.getI() * q.getR();
+    tab[6] = 2 * q.getI() * q.getK() + 2 * q.getJ() * q.getR();
+    tab[7] = 2 * q.getJ() * q.getK() - 2 * q.getI() * q.getR();
+    tab[8] = 1 - (2 * (q.getI() * q.getI) + 2 * (q.getJ() * q.getJ()));
 }

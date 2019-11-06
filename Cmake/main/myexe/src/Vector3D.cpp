@@ -143,3 +143,14 @@ void Vector3D::operator=(const Vector3D& vec)
 	this->y = vec.y;
 	this->z = vec.z;
 }
+
+//Methode pour changer la base d'un vecteur
+Vector3D Vector3D::ChangingBase(Matrix4 p_Matrix)
+{
+	float l_Tab[12] = { 1,0,0,x,0,1,0,y,0,0,1,z};
+	Matrix4 l_TempMatrix = Matrix4(l_Tab);
+	Matrix4 l_FirstMul = p_Matrix.ProduitMatriciel(l_TempMatrix);
+	Matrix4 l_InverseMatrix = p_Matrix.MatriceInverse();
+	Matrix4 l_SecondMul = l_FirstMul.ProduitMatriciel(l_InverseMatrix);
+	//TODO a finir pour retourner un vecteur
+}	

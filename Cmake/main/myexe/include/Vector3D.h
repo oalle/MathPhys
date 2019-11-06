@@ -1,4 +1,7 @@
 #pragma once
+#include "Matrix4.h"
+
+
 class Vector3D
 {
 public:
@@ -78,6 +81,8 @@ public:
 	//Surcharge de l'operateur d'assignation pour la classe Vecteur3D
 	//param : &vec : l'adresse du Vecteur3D a assigner
 	void operator=(const Vector3D& vec);
+
+	Vector3D ChangingBase(Matrix4 p_Matrix);
 
 private:
 	double x, y, z;

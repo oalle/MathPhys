@@ -1,7 +1,11 @@
 #pragma once
+#include "Matrix4.h"
+#include "Quaternion.h"
 constexpr auto TABSIZE = 12;
+
 class Vector3D;
 class Quaternion;
+
 class Matrix4
 {
 private:
@@ -11,7 +15,7 @@ private:
 public:
 	/*constructeur de Matrix4
 	param : float tab[12] le tableau de valeur pour la matrice*/
-	Matrix4(float tab[12]);
+    Matrix4(float tab[TABSIZE]);
 
     /*destructeur de Matrix4*/
     ~Matrix4();

@@ -9,8 +9,8 @@ void RigidBody::DerivedData()
 	float l_Ixz = 1 / m_InverseMass * m_Position.getx() * m_Position.getz();
 	float l_Iyz = 1 / m_InverseMass * m_Position.gety() * m_Position.getz();
 
-	float[9] l_Tab = { l_Ix, l_Ixy, l_Ixz, l_Ixy, l_Iy, l_Iyz, l_Ixz, l_Iyz, l_Iz };
-	m_InverseInertieTensor = new Matrix3(l_Tab)->MatriceInverse();
+	float l_Tab[9] = { l_Ix, l_Ixy, l_Ixz, l_Ixy, l_Iy, l_Iyz, l_Ixz, l_Iyz, l_Iz };
+	m_InverseInertieTensor = Matrix3(l_Tab).MatriceInverse();
 }
 
 void RigidBody::AddForceAtPoint(Vector3D p_Force, Vector3D p_Point)

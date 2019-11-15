@@ -3,12 +3,12 @@
 
 void RigidBody::DerivedData() 
 {
-	float l_Ix = 1 / m_InverseMass * pow(m_Position.getx(), 2);
-	float l_Iy = 1 / m_InverseMass * pow(m_Position.gety(), 2);
-	float l_Iz = 1 / m_InverseMass * pow(m_Position.getz(), 2);
-	float l_Ixy = 1 / m_InverseMass * m_Position.getx() * m_Position.gety();
-	float l_Ixz = 1 / m_InverseMass * m_Position.getx() * m_Position.getz();
-	float l_Iyz = 1 / m_InverseMass * m_Position.gety() * m_Position.getz();
+    float l_Ix = 1 / m_InverseMass * (float) pow(m_Position.getx(), 2);
+    float l_Iy = 1 / m_InverseMass * (float) pow(m_Position.gety(), 2);
+	float l_Iz = 1 / m_InverseMass * (float) pow(m_Position.getz(), 2);
+    float l_Ixy = 1 / m_InverseMass * (float) m_Position.getx() * (float) m_Position.gety();
+	float l_Ixz = 1 / m_InverseMass * (float) m_Position.getx() * (float) m_Position.getz();
+    float l_Iyz = 1 / m_InverseMass * (float) m_Position.gety() * (float) m_Position.getz();
 
 	float l_Tab[9] = { l_Ix, l_Ixy, l_Ixz, l_Ixy, l_Iy, l_Iyz, l_Ixz, l_Iyz, l_Iz };
 	m_InverseInertieTensor = Matrix3(l_Tab).MatriceInverse();

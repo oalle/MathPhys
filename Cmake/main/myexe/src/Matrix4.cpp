@@ -1,6 +1,6 @@
 #include "Matrix4.h"
 
-Matrix4::Matrix4(float tab[12])
+Matrix4::Matrix4(float tab[TABSIZE])
 {
     for (int i = 0; i < 12; i++) { this->tab[i] = tab[i]; }
 }

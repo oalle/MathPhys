@@ -6,7 +6,7 @@
 class RigidBody
 {
 
-protected:
+private:
     float m_InverseMass;
     float m_LinearDamping;
     Vector3D m_Position;
@@ -14,8 +14,11 @@ protected:
     Quaternion m_Orientation;
     Vector3D m_Rotation;
     Matrix3 m_TransformMatrix;
-    Matrix4 m;
+    Matrix3 m_InverseInertieTensor;
+	float m_AngularDamping;
 
 public:
-    void CalculDerivee();
+    void DerivedData();
+	void AddForceAtPoint(Vector3D p_Force, Vector3D p_Point);
+	void AddForceAtBodyPoint(Vector3D p_Force, Vector3D p_Point);
 };

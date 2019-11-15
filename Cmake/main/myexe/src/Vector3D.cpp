@@ -153,4 +153,5 @@ Vector3D Vector3D::ChangingBase(Matrix4 p_Matrix)
 	Matrix4 l_InverseMatrix = p_Matrix.MatriceInverse();
 	Matrix4 l_SecondMul = l_FirstMul.ProduitMatriciel(l_InverseMatrix);
 	//TODO a finir pour retourner un vecteur
+        return Vector3D();
 }	

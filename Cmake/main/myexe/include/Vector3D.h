@@ -1,7 +1,7 @@
 #pragma once
 #include "Matrix4.h"
 
-
+class Matrix4;
 class Vector3D
 {
 public:

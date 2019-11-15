@@ -6,7 +6,7 @@
 #include "RegistreForces.h"
 #include "ParticleSpring.h"
 #include "GravityForce.h"
-#include <ParticleContactResolver.h>
+#include "ParticleContactResolver.h"
 
 class GameWorld
 {

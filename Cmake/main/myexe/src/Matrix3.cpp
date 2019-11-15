@@ -18,7 +18,7 @@ Matrix3 Matrix3::MultiplicationScalaire(float a)
     return Matrix3(tabRes);
 }
 
-float* Matrix3::MultiplicationVectorielle(Vector3D v)
+Vector3D Matrix3::MultiplicationVectorielle(Vector3D v)
 {
     float tabRes[3] = {0, 0, 0};
     for (int i = 0; i < 3; i++)
@@ -29,7 +29,7 @@ float* Matrix3::MultiplicationVectorielle(Vector3D v)
         if (i == 2) { temp = v.getz(); }
         for (int j = 0; j < 3; j++) { tabRes[i] += this->tab[i * 3 + j] * temp; }
     }
-    return tabRes;
+    return Vector3D(tabRes[0], tabRes[1], tabRes[2]);
 }
 
 Matrix3 Matrix3::ProduitMatriciel(Matrix3 B)

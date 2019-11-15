@@ -1,6 +1,6 @@
-#include "..\include\RigidBody.h"
+#include "RigidBody.h"
 
-void RigidBody::calculDonnéesDérivées() 
+void RigidBody::CalculDerivee() 
 {
 
 }

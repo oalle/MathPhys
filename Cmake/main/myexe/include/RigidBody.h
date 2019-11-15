@@ -11,6 +11,8 @@ private:
     float m_LinearDamping;
     Vector3D m_Position;
     Vector3D m_Velocity;
+	Vector3D m_Acceleration;
+    Vector3D m_AccelerationAngulaire;
     Quaternion m_Orientation;
     Vector3D m_Rotation;
     Matrix4 m_TransformMatrix;
@@ -24,4 +26,7 @@ public:
     void DerivedData();
 	void AddForceAtPoint(Vector3D p_Force, Vector3D p_Point);
 	void AddForceAtBodyPoint(Vector3D p_Force, Vector3D p_Point);
+    void integrate(float frametime);
+
+	
 };

@@ -12,7 +12,7 @@ public:
 	Matrix3(float tab[9]);
 	~Matrix3();
     Matrix3 MultiplicationScalaire(float a);
-	float* MultiplicationVectorielle(Vector3D vec);
+	Vector3D MultiplicationVectorielle(Vector3D vec);
     Matrix3 ProduitMatriciel(Matrix3 B);
     Matrix3 MatriceInverse();
     Matrix3 MatriceTransposé();

@@ -3,13 +3,14 @@
 #include "Quaternion.h"
 #include "Matrix3.h"
 #include "Matrix4.h"
+#include <math.h>
 class RigidBody
 {
 
 private:
     float m_InverseMass;
     float m_LinearDamping;
-    Vector3D m_Position;
+    Vector3D m_Position; // position du centre de masse du rigidbody
     Vector3D m_Velocity;
 	Vector3D m_Acceleration;
     Vector3D m_AccelerationAngulaire;

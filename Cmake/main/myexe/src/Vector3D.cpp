@@ -152,6 +152,6 @@ Vector3D Vector3D::ChangingBase(Matrix4 p_Matrix)
 	Matrix4 l_FirstMul = p_Matrix.ProduitMatriciel(l_TempMatrix);
 	Matrix4 l_InverseMatrix = p_Matrix.MatriceInverse();
 	Matrix4 l_SecondMul = l_FirstMul.ProduitMatriciel(l_InverseMatrix);
-	//TODO a finir pour retourner un vecteur
-        return Vector3D();
+    float * l_TabResult = l_SecondMul.getTab();
+    return Vector3D(l_TabResult[3], l_TabResult[7], l_TabResult[11]);
 }	

@@ -15,7 +15,7 @@ Matrix4 Matrix4::MultiplicationScalaire(float a)
 }
 
 //en utilisans 1  en dernier élément du vecteur
-Vector3D Matrix4::MultiplicationVectorielle(Vector3D vec)
+Vector3D Matrix4::transformationVecteurPos(Vector3D vec)
 {
     float tabRes[3] = {0, 0, 0};
     for (int i = 0; i < 3; i++)

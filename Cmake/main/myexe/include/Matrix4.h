@@ -25,7 +25,7 @@ public:
 	/*Multiplie la Matrice4 par un vecteur(non direction)
 	param : Vector3D vec le vecteur
 	return le Vector3D resultant*/
-	Vector3D MultiplicationVectorielle(Vector3D vec);
+	Vector3D transformationVecteurPos(Vector3D vec);
 
 	/*Multiplie la Matrice4 par une autre Matrix4
 	param : Matrix4 matrix la matrice

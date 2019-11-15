@@ -13,9 +13,12 @@ private:
     Vector3D m_Velocity;
     Quaternion m_Orientation;
     Vector3D m_Rotation;
-    Matrix3 m_TransformMatrix;
+    Matrix4 m_TransformMatrix;
     Matrix3 m_InverseInertieTensor;
 	float m_AngularDamping;
+
+	Vector3D forceAccum;
+	Vector3D torqueAccum;
 
 public:
     void DerivedData();

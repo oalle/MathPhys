@@ -9,7 +9,7 @@ class RigidBody
 private:
     float m_InverseMass;
     float m_LinearDamping;
-    Vector3D m_Position;
+    Vector3D m_Position; // position du centre de masse du rigidbody
     Vector3D m_Velocity;
     Quaternion m_Orientation;
     Vector3D m_Rotation;

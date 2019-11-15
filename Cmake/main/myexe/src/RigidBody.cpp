@@ -2,6 +2,10 @@
 
 void RigidBody::DerivedData() 
 {
+	// update transform matrix
+
+	// update inverse inertie tensor
+
 
 }
 

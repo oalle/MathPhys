@@ -1,13 +1,12 @@
 #pragma once
-#include "Vector3D.h"
-#include "Quaternion.h"
+constexpr auto TABSIZE = 12;
 class Vector3D;
 class Quaternion;
 class Matrix4
 {
 private:
 
-    float tab[12];
+    float tab[TABSIZE];
 
 public:
 	/*constructeur de Matrix4

@@ -1,5 +1,5 @@
 #include "Matrix3.h"
-
+#define SIZE 9
 
 Matrix3::Matrix3(float tab[SIZE])
 {
@@ -13,8 +13,8 @@ Matrix3::~Matrix3()
 
 Matrix3 Matrix3::MultiplicationScalaire(float a)
 {
-    float tabRes[SIZE] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    for (int i = 0; i < SIZE; i++) { tabRes[i] = this->tab[i] * a; }
+    float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < 9; i++) { tabRes[i] = this->tab[i] * a; }
     return Matrix3(tabRes);
 }
 
@@ -34,7 +34,7 @@ Vector3D Matrix3::MultiplicationVectorielle(Vector3D v)
 
 Matrix3 Matrix3::ProduitMatriciel(Matrix3 B)
 {
-    float tabRes[SIZE] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -48,7 +48,7 @@ Matrix3 Matrix3::ProduitMatriciel(Matrix3 B)
 
 Matrix3 Matrix3::MatriceInverse()
 {
-    float tabRes[SIZE] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     float detM =
         this->tab[0] * this->tab[4] * this->tab[8] + this->tab[3] * this->tab[7] * this->tab[2] +
         this->tab[6] * this->tab[1] * this->tab[5] - this->tab[0] * this->tab[7] * this->tab[5] -
@@ -70,7 +70,7 @@ Matrix3 Matrix3::MatriceInverse()
 
 Matrix3 Matrix3::MatriceTransposé()
 {
-    float tabRes[SIZE] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++) { tabRes[i * 3 + j] = this->tab[i + j * 3]; }
@@ -82,15 +82,15 @@ float* Matrix3::getTab() { return this->tab; }
 
 Matrix3 Matrix3::operator+(Matrix3& B)
 {
-    float tabRes[SIZE] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    for (int i = 0; i < SIZE; i++) { tabRes[i] = this->getTab()[i] + B.getTab()[i]; }
+    float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < 9; i++) { tabRes[i] = this->getTab()[i] + B.getTab()[i]; }
     return Matrix3(tabRes);
 }
 
 Matrix3 Matrix3::operator-(Matrix3& B)
 {
-    float tabRes[SIZE] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    for (int i = 0; i < SIZE; i++) { tabRes[i] = this->getTab()[i] - B.getTab()[i]; }
+    float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < 9; i++) { tabRes[i] = this->getTab()[i] - B.getTab()[i]; }
     return Matrix3(tabRes);
 }
 

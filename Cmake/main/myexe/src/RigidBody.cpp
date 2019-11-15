@@ -36,6 +36,13 @@ void RigidBody::AddForceAtBodyPoint(Vector3D p_Force, Vector3D p_Point)
     AddForceAtPoint(p_Force, pointRelatif);
 }
 
+//Fonction pour nettoyer la resultante courante
+void RigidBody::clearAccum()
+{
+	this->forceAccum = Vector3D(0, 0, 0);
+	this->torqueAccum = Vector3D(0, 0, 0);
+}
+
 void RigidBody::integrate(float frameTime) 
 {
 	// calcul acceleration lineaire
@@ -46,7 +53,7 @@ void RigidBody::integrate(float frameTime)
 	//calcul acceleration angulaire
 	Vector3D torqueAccumTemp = this->torqueAccum;
     Matrix3 inverseInertieTensorTemp = this->m_InverseInertieTensor;
-    this->m_AccelerationAngulaire = this->m_InverseInertieTensor.MultiplicationVectorielle(this->torqueAccum);
+    this->m_AngularAcceleration = this->m_InverseInertieTensor.MultiplicationVectorielle(this->torqueAccum);
 
 	// update velocite
 	Vector3D AccelerationTemp = this->m_Acceleration;
@@ -55,5 +62,30 @@ void RigidBody::integrate(float frameTime)
 	this->m_Velocity = velocityTemp + AccelerationTemp;
 	
 	// velocity angular
+
+	Vector3D AccelerationAngTemp = this->m_AngularAcceleration;
+	AccelerationAngTemp.mulScalaire(frameTime);
+    Vector3D velocityAngTemp = this->m_AngularVelocity.mulScalaireResult(pow(this->m_AngularDamping, frameTime));
+	this->m_AngularVelocity = velocityAngTemp + AccelerationAngTemp;
+
+	//add drag
+
+	//update position
+	Vector3D Temp = this->m_Velocity;
+	Temp.mulScalaire(frameTime);
+	this->m_Position = this->m_Position + Temp;
+
+	//update orientation
+	Temp = this->m_AngularVelocity;
+	Temp.mulScalaire(frameTime);
+	this->m_Rotation = this->m_Rotation + Temp;
+    this->m_Orientation.RotateByVector(this->m_Rotation);
+
+	//calcul derived data
+    DerivedData();
+
+	//clear accums
+    clearAccum();
+
 	
 }

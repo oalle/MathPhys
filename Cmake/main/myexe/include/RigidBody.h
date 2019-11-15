@@ -13,7 +13,8 @@ private:
     Vector3D m_Position; // position du centre de masse du rigidbody
     Vector3D m_Velocity;
 	Vector3D m_Acceleration;
-    Vector3D m_AccelerationAngulaire;
+    Vector3D m_AngularAcceleration;
+	Vector3D m_AngularVelocity;
     Quaternion m_Orientation;
     Vector3D m_Rotation;
     Matrix4 m_TransformMatrix;
@@ -28,6 +29,8 @@ public:
 	void AddForceAtPoint(Vector3D p_Force, Vector3D p_Point);
 	void AddForceAtBodyPoint(Vector3D p_Force, Vector3D p_Point);
     void integrate(float frametime);
+	//Fonction pour nettoyer la resultante courante
+	void clearAccum();
 
 	
 };

@@ -3,6 +3,10 @@
 
 void RigidBody::DerivedData() 
 {
+	// update transform matrix
+	m_TransformMatrix.setOrientation(m_Orientation);
+
+	// update inertie tensor
     float l_Ix = 1 / m_InverseMass * (float) pow(m_Position.getx(), 2);
     float l_Iy = 1 / m_InverseMass * (float) pow(m_Position.gety(), 2);
 	float l_Iz = 1 / m_InverseMass * (float) pow(m_Position.getz(), 2);

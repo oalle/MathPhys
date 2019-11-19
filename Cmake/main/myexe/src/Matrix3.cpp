@@ -107,11 +107,17 @@ void Matrix3::setOrientation(Quaternion q)
     tab[8] = 1 - (2 * (q.getI() * q.getI()) + 2 * (q.getJ() * q.getJ()));
 }
 
+//Methode pour passer du repere de l'objet vers le repere du monde
+//Paraam : p_Vector : le vecteur dont on doit changer les coordonnees
+//Return : le vecteur avec les nouvelles coordonnees
 Vector3D Matrix3::LocalToWorld(Vector3D p_Vector)
 {
 	return this->MultiplicationVectorielle(p_Vector);
 }
 
+//Methode pour passer du repere du monde au repere de l'objet
+//Param : p_Vector : le vecteur dont on doit changer les coordonnees
+//Return : le vecteur avec les nouvelles coordonnees
 Vector3D Matrix3::WorldToLocal(Vector3D p_Vector)
 {
 	Matrix3 l_Temp = this->MatriceInverse();

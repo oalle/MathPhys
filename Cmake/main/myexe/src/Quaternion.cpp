@@ -1,6 +1,11 @@
 #include "Quaternion.h"
 #include <math.h>
 
+//Constructeurs a 4 parametres de la classe Quaternions
+//Param : p_R : le premier float du Quaternion
+//Param : p_I : le deuxieme float du Quaternion
+//Param : p_J : le troisieme float du Quaternion
+//Param : p_K : le quatrieme float du Quaternion
 Quaternion::Quaternion(float p_R, float p_I, float p_J, float p_K)
 {
     m_R = p_R;
@@ -9,6 +14,8 @@ Quaternion::Quaternion(float p_R, float p_I, float p_J, float p_K)
     m_K = p_K;
 }
 
+//Constructeur de recopie pour la classe Quaternion
+//Param : p_Other : le Quaternion a reccopier
 Quaternion::Quaternion(Quaternion& p_Other)
 {
     m_R = p_Other.m_R;
@@ -17,6 +24,7 @@ Quaternion::Quaternion(Quaternion& p_Other)
     m_K = p_Other.m_K;
 }
 
+//Methode pour normaliser un quaternion
 void Quaternion::Normalize()
 {
     float l_D = pow(m_R, 2) + pow(m_I, 2) + pow(m_J, 2) + pow(m_K, 2);
@@ -31,6 +39,7 @@ void Quaternion::Normalize()
     }
 }
 
+//Surcharge de l'operateur *=
 void Quaternion::operator*=(Quaternion p_Other)
 {
     m_R *= p_Other.m_R;
@@ -39,12 +48,16 @@ void Quaternion::operator*=(Quaternion p_Other)
     m_K *= p_Other.m_K;
 }
 
+//Methode pour faiire la rotation d'un quaternion
+//Param : p_Vector : le vecteur pour la rotation
 void Quaternion::RotateByVector(Vector3D p_Vector)
 {
     Quaternion l_Q = Quaternion(0, p_Vector.getx(), p_Vector.gety(), p_Vector.getz());
     operator*=(l_Q);
 }
 
+//Methode pour mettre a jour la velocite angulaire du quaternion
+//Param : p_Vector : le vecteur pour la velocite angulaire
 void Quaternion::UpdateAngularVelocity(Vector3D p_Vector, float p_Time)
 {
     Normalize();
@@ -67,13 +80,14 @@ void Quaternion::UpdateAngularVelocity(Vector3D p_Vector, float p_Time)
     m_K += l_Q.m_K;
 }
 
-float Quaternion::getI() 
-{ 
-	return m_I; 
-}
+//Getter pour le premier float du quaternion
+float Quaternion::GetI() { return m_I; }
 
-float Quaternion::getJ() { return m_J; }
+//Getter pour le deuxieme float du quaternion
+float Quaternion::GetJ() { return m_J; }
 
-float Quaternion::getK() { return m_K; }
+//Getter pour le troisieme float du quaternion
+float Quaternion::GetK() { return m_K; }
 
-float Quaternion::getR() { return m_R; }
+//Getter pour le quatrieme float du quaternion
+float Quaternion::GetR() { return m_R; }

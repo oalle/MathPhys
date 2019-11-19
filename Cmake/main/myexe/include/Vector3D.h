@@ -82,8 +82,6 @@ public:
 	//param : &vec : l'adresse du Vecteur3D a assigner
 	void operator=(const Vector3D& vec);
 
-	Vector3D ChangingBase(Matrix4 p_Matrix);
-
 private:
 	double x, y, z;
 

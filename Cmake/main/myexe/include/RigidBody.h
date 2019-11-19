@@ -17,7 +17,7 @@ private:
 	Vector3D m_AngularVelocity;
     Quaternion m_Orientation;
     Vector3D m_Rotation;
-    Matrix4 m_TransformMatrix;
+    Matrix3 m_TransformMatrix;
     Matrix3 m_InverseInertieTensor;
 	float m_AngularDamping;
 

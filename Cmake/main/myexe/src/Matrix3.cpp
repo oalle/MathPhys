@@ -106,3 +106,14 @@ void Matrix3::setOrientation(Quaternion q)
     tab[7] = 2 * q.getJ() * q.getK() - 2 * q.getI() * q.getR();
     tab[8] = 1 - (2 * (q.getI() * q.getI()) + 2 * (q.getJ() * q.getJ()));
 }
+
+Vector3D Matrix3::LocalToWorld(Vector3D p_Vector)
+{
+	return this->MultiplicationVectorielle(p_Vector);
+}
+
+Vector3D Matrix3::WorldToLocal(Vector3D p_Vector)
+{
+	Matrix3 l_Temp = this->MatriceInverse();
+	return l_Temp.MultiplicationVectorielle(p_Vector);
+}

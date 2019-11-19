@@ -21,4 +21,7 @@ public:
     Matrix3 operator+(Matrix3& B);
 	Matrix3 operator-(Matrix3& B);
 
+	Vector3D LocalToWorld(Vector3D p_Vector);
+	Vector3D WorldToLocal(Vector3D p_Vector);
+
 };

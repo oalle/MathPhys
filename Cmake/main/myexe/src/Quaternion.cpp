@@ -81,13 +81,13 @@ void Quaternion::UpdateAngularVelocity(Vector3D p_Vector, float p_Time)
 }
 
 //Getter pour le premier float du quaternion
-float Quaternion::GetI() { return m_I; }
+float Quaternion::getI() { return m_I; }
 
 //Getter pour le deuxieme float du quaternion
-float Quaternion::GetJ() { return m_J; }
+float Quaternion::getJ() { return m_J; }
 
 //Getter pour le troisieme float du quaternion
-float Quaternion::GetK() { return m_K; }
+float Quaternion::getK() { return m_K; }
 
 //Getter pour le quatrieme float du quaternion
-float Quaternion::GetR() { return m_R; }
+float Quaternion::getR() { return m_R; }

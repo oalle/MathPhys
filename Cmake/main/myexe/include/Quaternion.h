@@ -36,14 +36,14 @@ public:
 	void UpdateAngularVelocity(Vector3D p_Vector, float p_Time);
 
 	//Getter pour le premier float du quaternion
-    float GetR();
+    float getR();
 
 	//Getter pour le deuxieme float du quaternion
-    float GetI();
+    float getI();
 
 	//Getter pour le troisieme float du quaternion
-    float GetJ();
+    float getJ();
 
 	//Getter pour le quatrieme float du quaternion
-    float GetK();
+    float getK();
 };

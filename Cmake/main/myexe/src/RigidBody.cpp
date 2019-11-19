@@ -1,6 +1,7 @@
 #include "RigidBody.h"
 #include <math.h>
 
+//Methode pour calculer les donnees derivees du corps rigide
 void RigidBody::DerivedData() 
 {
 	// update transform matrix
@@ -18,6 +19,9 @@ void RigidBody::DerivedData()
 	m_InverseInertieTensor = Matrix3(l_Tab).MatriceInverse();
 }
 
+//Methode pour ajouter un force a un point 
+//Param : p_Force : le vecteur correspondant a la force a appliquer
+//Param : p_Point : le point sur le quel on doit ajouter la force
 void RigidBody::AddForceAtPoint(Vector3D p_Force, Vector3D p_Point)
 {
     // convertir p_Point en coord relatives au centre de masse
@@ -31,6 +35,9 @@ void RigidBody::AddForceAtPoint(Vector3D p_Force, Vector3D p_Point)
     torqueAccum += p_Force.prodVectorielle(pointRelatif);
 }
 
+//Methode pour ajouter une force a un point du corps rigide
+//Param : p_Force : le vecteur correspondant a la force a appliquer
+//Param : p_Point : le point sur le quel on doit ajouter la force
 void RigidBody::AddForceAtBodyPoint(Vector3D p_Force, Vector3D p_Point)
 {
     // convertir p_Point dans le repere du monde
@@ -47,6 +54,7 @@ void RigidBody::clearAccum()
 	this->torqueAccum = Vector3D(0, 0, 0);
 }
 
+//Methode pour l'integrateur
 void RigidBody::integrate(float frameTime) 
 {
 	// calcul acceleration lineaire

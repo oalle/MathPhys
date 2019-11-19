@@ -16,6 +16,7 @@ Matrix3::~Matrix3()
 
 //Methode pour claculer la multiplication scalaire d'une matrice
 //Param : a : le scalaire par le quel on souhaite multiplier la matrice
+//Return : la nouvelle matrice
 Matrix3 Matrix3::MultiplicationScalaire(float a)
 {
     float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -25,6 +26,7 @@ Matrix3 Matrix3::MultiplicationScalaire(float a)
 
 //Methode pour calculer la multiplication vectorielle d'une matrice
 //Param : vec : le vecteur par le quel on souhaite multiplier la matrice
+//Return : la nouvelle matrice
 Vector3D Matrix3::MultiplicationVectorielle(Vector3D v)
 {
     float tabRes[3] = {0, 0, 0};
@@ -41,6 +43,7 @@ Vector3D Matrix3::MultiplicationVectorielle(Vector3D v)
 
 //Methode pour calculer le produit matricielle d'une matrice
 //Param : B : la matrice par la quelle on veut multiplier la matrice
+//Return : la nouvelle matrice
 Matrix3 Matrix3::ProduitMatriciel(Matrix3 B)
 {
     float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -56,6 +59,7 @@ Matrix3 Matrix3::ProduitMatriciel(Matrix3 B)
 }
 
 //Methode pour calculer la matrice inverse
+//Return : la nouvelle matrice
 Matrix3 Matrix3::MatriceInverse()
 {
     float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -79,6 +83,7 @@ Matrix3 Matrix3::MatriceInverse()
 }
 
 //Methode pour calculer la transposee de la matrice
+//Return : la nouvelle matrice
 Matrix3 Matrix3::MatriceTranspose()
 {
     float tabRes[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -90,6 +95,7 @@ Matrix3 Matrix3::MatriceTranspose()
 }
 
 //Getter pour le tableau de float de la matrice
+//Return : le tableau de float de la matrice
 float* Matrix3::getTab() { return this->tab; }
 
 //Surcharge de l'operateur +
@@ -108,6 +114,8 @@ Matrix3 Matrix3::operator-(Matrix3& B)
     return Matrix3(tabRes);
 }
 
+//Methode pour transformer un quaternion en Matrix3
+//Param Quaternion q le quaternion
 void Matrix3::setOrientation(Quaternion q) 
 { 
 	tab[0] = 1 - (2 * (q.getJ() * q.getJ()) +2*(q.getK()*q.getK())); 
@@ -122,7 +130,7 @@ void Matrix3::setOrientation(Quaternion q)
 }
 
 //Methode pour passer du repere de l'objet vers le repere du monde
-//Paraam : p_Vector : le vecteur dont on doit changer les coordonnees
+//Param : p_Vector : le vecteur dont on doit changer les coordonnees
 //Return : le vecteur avec les nouvelles coordonnees
 Vector3D Matrix3::LocalToWorld(Vector3D p_Vector)
 {

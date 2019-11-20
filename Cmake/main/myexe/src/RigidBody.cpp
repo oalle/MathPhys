@@ -1,6 +1,8 @@
 #include "RigidBody.h"
 #include <math.h>
 
+//Methode pour calculer les donnees derivees du corps rigide
+void RigidBody::DerivedData() 
 RigidBody::RigidBody(float InverseMass, float LinearDamping, float AngularDamping,
                      Vector3D Position, Quaternion Orientation)
 {
@@ -45,11 +47,14 @@ void RigidBody::DerivedData()
     m_InverseInertieTensor = Matrix3(l_Tab).MatriceInverse();
 }
 
+//Methode pour ajouter un force a un point 
+//Param : p_Force : le vecteur correspondant a la force a appliquer
+//Param : p_Point : le point sur le quel on doit ajouter la force
 void RigidBody::AddForceAtPoint(Vector3D p_Force, Vector3D p_Point)
 {
     // convertir p_Point en coord relatives au centre de masse
-    Vector3D pointRelatif =
-        m_Position - p_Point.ChangingBase(m_TransformMatrix); // pas sur de la conversion
+	Vector3D pointRelatif =
+		m_Position - m_TransformMatrix.WorldToLocal(p_Point);//p_Point.ChangingBase(m_TransformMatrix); // pas sur de la conversion
     pointRelatif.normalisation();
 
     // update forceAccum
@@ -58,10 +63,13 @@ void RigidBody::AddForceAtPoint(Vector3D p_Force, Vector3D p_Point)
     torqueAccum += p_Force.prodVectorielle(pointRelatif);
 }
 
+//Methode pour ajouter une force a un point du corps rigide
+//Param : p_Force : le vecteur correspondant a la force a appliquer
+//Param : p_Point : le point sur le quel on doit ajouter la force
 void RigidBody::AddForceAtBodyPoint(Vector3D p_Force, Vector3D p_Point)
 {
     // convertir p_Point dans le repere du monde
-    Vector3D pointRelatif = p_Point.ChangingBase(m_TransformMatrix.MatriceInverse());
+	Vector3D pointRelatif = m_TransformMatrix.LocalToWorld(p_Point);//p_Point.ChangingBase(m_TransformMatrix.MatriceInverse());
     pointRelatif.normalisation();
 
     AddForceAtPoint(p_Force, pointRelatif);

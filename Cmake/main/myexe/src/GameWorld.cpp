@@ -206,8 +206,8 @@ void GameWorld::displayLoopWrapper(void)
     glVertex3f(-2, -2, -2);
     glVertex3f(-2, 2, -2);
     glVertex3f(2, 2, -2);
-    glVertex3f(2, -2, -2);*/
-   /* glEnd();*/
+    glVertex3f(2, -2, -2);
+    glEnd();*/
 
     glColor3f(0.2, 0.5, 0.7);
 
@@ -337,4 +337,58 @@ void GameWorld::reshapeLoopWrapper(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(70.0, 1.0, 1.0, 12.0);
+}
+
+void GameWorld::def_carre()
+{
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.5, -0.5, 0.0);
+	glVertex3f(-0.5, 0.5, 0.0);
+	glVertex3f(0.5, 0.5, 0.0);
+	glVertex3f(0.5, -0.5, 0.0);
+	glEnd();
+}
+
+void GameWorld::def_cube()
+{
+	glPushMatrix();
+
+	glPushMatrix();
+	glColor3f(1.0, 0.0, 0.0);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -0.5);
+	glColor3f(2.0, 0.0, 0.0);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90, 0, 1, 0);
+	glTranslatef(0.0, 0.0, -0.5);
+	glColor3f(3.0, 0.0, 0.0);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	glTranslatef(0.0, 0.0, -0.5);
+	glColor3f(4.0, 0.0, 0.0);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90, 1, 0, 0);
+	glTranslatef(0.0, 0.0, -0.5);
+	glColor3f(5.0, 0.0, 0.0);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(0.0, 0.0, -0.5);
+	glColor3f(6.0, 0.0, 0.0);
+	def_carre();
+	glPopMatrix();
 }

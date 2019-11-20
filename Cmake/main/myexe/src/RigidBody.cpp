@@ -105,34 +105,35 @@ void RigidBody::integrate(float frameTime)
 {
 
     // add drag linear velocity
-    float coeffDrag1 = 1;
+    /*float coeffDrag1 = 1;
     float coeffDrag2 = 1;
     Vector3D velocitypart = this->m_Velocity;
     Vector3D force = Vector3D(velocitypart.getx(), velocitypart.gety(), velocitypart.getz());
     force.normalisation();
     force.mulScalaire((coeffDrag1 * velocitypart.norme() + coeffDrag2 * velocitypart.normecarre()) *
                       -1);
-    this->forceAccum += force;
+    this->forceAccum += force;*/
 
     // add drag angulare velocity
 
-    velocitypart = this->m_AngularVelocity;
+    /*velocitypart = this->m_AngularVelocity;
     force = Vector3D(velocitypart.getx(), velocitypart.gety(), velocitypart.getz());
     force.normalisation();
     force.mulScalaire((coeffDrag1 * velocitypart.norme() + coeffDrag2 * velocitypart.normecarre()) *
                       -1);
-    this->torqueAccum += force;
+    this->torqueAccum += force;*/
 
     // calcul acceleration lineaire
+    this->forceAccum = Vector3D(0.001,0,0);
     Vector3D AccumForcesTemp = this->forceAccum;
     AccumForcesTemp.mulScalaire(this->m_InverseMass);
     this->m_Acceleration = AccumForcesTemp;
 
     // calcul acceleration angulaire
-    Vector3D torqueAccumTemp = this->torqueAccum;
+    /*Vector3D torqueAccumTemp = this->torqueAccum;
     Matrix3 inverseInertieTensorTemp = this->m_InverseInertieTensor;
     this->m_AngularAcceleration =
-        this->m_InverseInertieTensor.MultiplicationVectorielle(this->torqueAccum);
+        this->m_InverseInertieTensor.MultiplicationVectorielle(this->torqueAccum);*/
 
     // update velocite
     Vector3D AccelerationTemp = this->m_Acceleration;
@@ -143,11 +144,11 @@ void RigidBody::integrate(float frameTime)
 
     // velocity angular
 
-    Vector3D AccelerationAngTemp = this->m_AngularAcceleration;
+    /*Vector3D AccelerationAngTemp = this->m_AngularAcceleration;
     AccelerationAngTemp.mulScalaire(frameTime);
     Vector3D velocityAngTemp =
         this->m_AngularVelocity.mulScalaireResult(pow(this->m_AngularDamping, frameTime));
-    this->m_AngularVelocity = velocityAngTemp + AccelerationAngTemp;
+    this->m_AngularVelocity = velocityAngTemp + AccelerationAngTemp;*/
 
     // update position
     Vector3D Temp = this->m_Velocity;
@@ -155,10 +156,10 @@ void RigidBody::integrate(float frameTime)
     this->m_Position = this->m_Position + Temp;
 
     // update orientation
-    Temp = this->m_AngularVelocity;
+    /*Temp = this->m_AngularVelocity;
     Temp.mulScalaire(frameTime);
     this->m_Rotation = this->m_Rotation + Temp;
-    this->m_Orientation.RotateByVector(this->m_Rotation);
+    this->m_Orientation.RotateByVector(this->m_Rotation);*/
 
     // calcul derived data
     DerivedData();

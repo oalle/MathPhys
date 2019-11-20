@@ -28,8 +28,8 @@ void GameWorld::GameSetup()
 {
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
-    m_RigidBody = RigidBody(1 / 10, 0.7, 0.7, Vector3D(0, 0, 0), Quaternion(90, 1, 1, 1));
-    m_RigidBody.AddForceAtBodyPoint(Vector3D(1,0,0), Vector3D(0, 0, 0));
+    m_RigidBody = RigidBody(0.5, 0.7, 0.7, Vector3D(0, 0, 0), Quaternion(0, 0, 0, 0));
+    //m_RigidBody.AddForceAtBodyPoint(Vector3D(1,0,0), Vector3D(0, 0, 0));
     /*Particle l_Particle1G1(10, Vector3D(2, 0, 8));
     Particle l_Particle2G1(10, Vector3D(2, 3, 8));
     Particle l_Particle3G1(10, Vector3D(4, 0, 8));
@@ -231,17 +231,18 @@ void GameWorld::displayLoopWrapper(void)
 	/*glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
                     getRigidBody().getPosition().getz());*/
 	/*initSphereObjWrapper(1);*/
+	
+	glRotatef(45*frameTime,0,1,0);
 	glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
                     getRigidBody().getPosition().getz());
-	glRotatef(45*frameTime,0,1,0);
-
         def_cube();
 	/*glTranslatef(-1 * (getRigidBody().getPosition().getx() - 2),
                      -1 * (getRigidBody().getPosition().gety()),
                      -1 * (getRigidBody().getPosition().getz()));*/
         // fonction pour appliquer une translation � un projectile
 
-        getRigidBody().integrate(frameTime);
+        m_RigidBody.integrate(frameTime);
+		
 
         glPopMatrix();
 

@@ -6,6 +6,7 @@ std::vector<Particle> GameWorld::listParticules;
 RegistreForces GameWorld::registreForces;
 ParticleContactResolver GameWorld::particleContactResolver;
 RigidBody GameWorld::m_RigidBody;
+Vector3D gravity;
 
 GameWorld::GameWorld() {}
 
@@ -27,8 +28,8 @@ void GameWorld::GameSetup()
 {
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
-    m_RigidBody = RigidBody(0.5, 0.7, 0.7, Vector3D(0, 0, 0), Quaternion(0, 0, 0, 0));
-    m_RigidBody.AddForceAtBodyPoint(Vector3D(5, 0, 0), Vector3D(1, 1, 0));
+    m_RigidBody = RigidBody(0.5, 1, 1, Vector3D(0.08, -0.08, 0), Quaternion(0, 0, 0, 0));
+    gravity = Vector3D(0, 0, 0);
     /*Particle l_Particle1G1(10, Vector3D(2, 0, 8));
     Particle l_Particle2G1(10, Vector3D(2, 3, 8));
     Particle l_Particle3G1(10, Vector3D(4, 0, 8));
@@ -74,6 +75,7 @@ void GameWorld::GameSetup()
     // AddForce(&listParticules[1], l_DragForce);
     // AddForce(&listParticules[2], l_DragForce);
     // AddForce(&listParticules[3], l_DragForce);
+	
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -170,7 +172,7 @@ void GameWorld::displayLoopWrapper(void)
 {
     // debut calcul frame time
     float oldTimeSinceStart = 0;
-
+	
     // init vue glut
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, MatSpec);
@@ -191,7 +193,6 @@ void GameWorld::displayLoopWrapper(void)
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
-
     /*glBegin(GL_QUADS);
 
     // creation d'un bloc sol
@@ -245,7 +246,7 @@ void GameWorld::displayLoopWrapper(void)
                  -1 * (getRigidBody().getPosition().gety()),
                  -1 * (getRigidBody().getPosition().getz()));*/
     // fonction pour appliquer une translation � un projectile
-
+	m_RigidBody.AddForceAtBodyPoint(gravity, Vector3D(0, 0, 0));
     m_RigidBody.integrate(frameTime);
 
     glPopMatrix();
@@ -272,7 +273,7 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     case 'q':
     {
         // application de la force ressort
-        ParticleSpring* l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 1, 0.003);
+        /*ParticleSpring* l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 1, 0.003);
         AddForce(&listParticules[0], l_ParticleSpringP12G1);
         ParticleSpring* l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 1, 0.003);
         AddForce(&listParticules[1], l_ParticleSpringP21G1);
@@ -290,7 +291,7 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
         ParticleSpring* l_ParticleSpringP24G1 = new ParticleSpring(listParticules[1], 1, 0.003);
         AddForce(&listParticules[3], l_ParticleSpringP24G1);
         ParticleSpring* l_ParticleSpringP42G1 = new ParticleSpring(listParticules[3], 1, 0.003);
-        AddForce(&listParticules[1], l_ParticleSpringP42G1);
+        AddForce(&listParticules[1], l_ParticleSpringP42G1);*/
 
         // application de la force drag
         // float l_DragCoeff1 = 0.1f;
@@ -312,7 +313,8 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     case 'd':
     {
         // accelereation vers la gauche sur particule no1
-        listParticules[0].setAcceleration(Vector3D(-0.01, 0, 0));
+        m_RigidBody.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0), Vector3D(0, 0, 0));
+        gravity = Vector3D(0, -0.00005, 0);
         break;
     }
     default:

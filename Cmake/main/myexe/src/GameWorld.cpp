@@ -239,10 +239,6 @@ void GameWorld::displayLoopWrapper(void)
     /*initSphereObjWrapper(1);*/
 
     //glRotatef(45 * frameTime, 0, 1, 0);
-
-	glRotatef(getRigidBody().getTransformMatrix().getTab()[0], 1.0, 0.0, 0.0);
-    glRotatef(getRigidBody().getTransformMatrix().getTab()[4], 0.0, 1.0, 0.0);
-    glRotatef(getRigidBody().getTransformMatrix().getTab()[8], 0.0, 0.0, 1.0);
     glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
                  getRigidBody().getPosition().getz());
     def_cube();
@@ -318,7 +314,7 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     {
         // accelereation vers la gauche sur particule no1
         m_RigidBody.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0), Vector3D(0, 0, 0));
-        gravity = Vector3D(0, -0.00005, 0);
+        gravity = Vector3D(0, -0.00007, 0);
         break;
     }
     default:

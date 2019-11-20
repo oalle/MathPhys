@@ -239,6 +239,10 @@ void GameWorld::displayLoopWrapper(void)
     /*initSphereObjWrapper(1);*/
 
     //glRotatef(45 * frameTime, 0, 1, 0);
+
+	glRotatef(getRigidBody().getTransformMatrix().getTab()[0], 1.0, 0.0, 0.0);
+    glRotatef(getRigidBody().getTransformMatrix().getTab()[4], 0.0, 1.0, 0.0);
+    glRotatef(getRigidBody().getTransformMatrix().getTab()[8], 0.0, 0.0, 1.0);
     glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
                  getRigidBody().getPosition().getz());
     def_cube();

@@ -29,7 +29,7 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
     m_RigidBody = RigidBody(1 / 10, 0.7, 0.7, Vector3D(2, 0, 8), Quaternion(90, 1, 1, 1));
-
+    m_RigidBody.AddForceAtBodyPoint(Vector3D(1,0,0), Vector3D(2, 0, 8));
     /*Particle l_Particle1G1(10, Vector3D(2, 0, 8));
     Particle l_Particle2G1(10, Vector3D(2, 3, 8));
     Particle l_Particle3G1(10, Vector3D(4, 0, 8));
@@ -139,7 +139,7 @@ void GameWorld::def_cube(void)
         glPopMatrix();
 
     glPushMatrix();
-        glRotatef(90, 1, 0, 0);  /*glColor3f(1.0,1.0,1.0);*/
+        glRotatef(90, 1, 0, 0);  glColor3f(1.0,1.0,1.0);
 
         glTranslatef(-1 * (getRigidBody().getPosition().getx() - 2),
                      -1 * (getRigidBody().getPosition().gety()),
@@ -195,7 +195,7 @@ void GameWorld::displayLoopWrapper(void)
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(1, 0, 0, 0);
+    glClearColor(0.2, 0.5, 0.9, 0);
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     /*glBegin(GL_QUADS);
@@ -209,7 +209,7 @@ void GameWorld::displayLoopWrapper(void)
     glVertex3f(2, -2, -2);*/
    /* glEnd();*/
 
-    glColor3f(1.0, 0.0, 0.0);
+    glColor3f(0.2, 0.5, 0.7);
 
     // update du registre des forces
     /*for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)
@@ -239,9 +239,10 @@ void GameWorld::displayLoopWrapper(void)
     }*/
 	// affichage du rigidBody et appel � integrate (qui clear aussi les AccumForces)
 	glPushMatrix();
-	glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
-                    getRigidBody().getPosition().getz());
-	initSphereObjWrapper(1);
+	/*glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
+                    getRigidBody().getPosition().getz());*/
+	/*initSphereObjWrapper(1);*/
+	glRotatef(45*frameTime,0,1,0);
         def_cube();
 	/*glTranslatef(-1 * (getRigidBody().getPosition().getx() - 2),
                      -1 * (getRigidBody().getPosition().gety()),

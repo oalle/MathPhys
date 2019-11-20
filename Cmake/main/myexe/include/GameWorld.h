@@ -33,5 +33,7 @@ public :
 	static void displayLoopWrapper(void);
 	static void key_pressedWrapper(unsigned char key, int x, int y);
 	static void reshapeLoopWrapper(int width, int height);
+	static void def_carre();
+	static void def_cube();
 };
 

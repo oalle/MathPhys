@@ -140,13 +140,13 @@ void GameWorld::displayLoopWrapper(void)
     glBegin(GL_QUADS);
 
     // creation d'un bloc sol
-    glColor3f(0.0, 1.0, 0.0);
+    /*glColor3f(0.0, 1.0, 0.0);
 
     glVertex3f(-2, -2, -2);
     glVertex3f(-2, 2, -2);
     glVertex3f(2, 2, -2);
     glVertex3f(2, -2, -2);
-    glEnd();
+    glEnd();*/
 
     glColor3f(1.0, 0.0, 0.0);
 
@@ -160,7 +160,7 @@ void GameWorld::displayLoopWrapper(void)
     ParticleContactResolver::resolveContact(frameTime);
 
     // affichage des particules et appel � integrate (qui clear aussi les AccumForces)
-    for (int i = 0; i < listParticules.size(); i++)
+    /*for (int i = 0; i < listParticules.size(); i++)
     {
         glPushMatrix();
 
@@ -175,7 +175,8 @@ void GameWorld::displayLoopWrapper(void)
         listParticules[i].integrate(frameTime);
 
         glPopMatrix();
-    }
+    }*/
+	def_cube();
 
     glFlush();
     /* Swap front and back buffers */
@@ -262,4 +263,52 @@ void GameWorld::reshapeLoopWrapper(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(70.0, 1.0, 1.0, 12.0);
+}
+
+void GameWorld::def_carre()
+{
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.5, -0.5, 0.0);
+	glVertex3f(-0.5, 0.5, 0.0);
+	glVertex3f(0.5, 0.5, 0.0);
+	glVertex3f(0.5, -0.5, 0.0);
+	glEnd();
+}
+
+void GameWorld::def_cube()
+{
+	glPushMatrix();
+
+	glPushMatrix();
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -0.5);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90, 0, 1, 0);
+	glTranslatef(0.0, 0.0, -0.5);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	glTranslatef(0.0, 0.0, -0.5);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90, 1, 0, 0);
+	glTranslatef(0.0, 0.0, -0.5);
+	def_carre();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(0.0, 0.0, -0.5);
+	def_carre();
+	glPopMatrix();
 }

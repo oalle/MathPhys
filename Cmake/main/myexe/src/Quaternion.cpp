@@ -72,6 +72,12 @@ float Quaternion::getI()
 	return m_I; 
 }
 
+bool Quaternion::operator==(const Quaternion& p_Quaternion)
+{
+    return this->m_I == p_Quaternion.m_I && this->m_J == p_Quaternion.m_J &&
+           this->m_K == p_Quaternion.m_K && this->m_R == p_Quaternion.m_R; 
+}
+
 float Quaternion::getJ() { return m_J; }
 
 float Quaternion::getK() { return m_K; }

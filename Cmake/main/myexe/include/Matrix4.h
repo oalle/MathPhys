@@ -13,6 +13,8 @@ private:
     float tab[TABSIZE];
 
 public:
+
+	Matrix4(){};
 	/*constructeur de Matrix4
 	param : float tab[12] le tableau de valeur pour la matrice*/
     Matrix4(float tab[TABSIZE]);
@@ -51,4 +53,6 @@ public:
 	/*transforme un quaternion en Matrix4
 	param Quaternion q le quaternion*/
 	void setOrientation(Quaternion q);
+
+	bool operator==(const Matrix4& p_Matrix4);
 };

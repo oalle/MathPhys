@@ -4,12 +4,17 @@
 #include "Matrix3.h"
 #include "Matrix4.h"
 #include <math.h>
+#include <fstream>
+#include <istream>
+#include <iostream>
+#include <string>
 class RigidBody
 {
 
 private:
     float m_InverseMass;
     float m_LinearDamping;
+	float m_AngularDamping;
     Vector3D m_Position; // position du centre de masse du rigidbody
     Vector3D m_Velocity;
 	Vector3D m_Acceleration;
@@ -19,18 +24,27 @@ private:
     Vector3D m_Rotation;
     Matrix4 m_TransformMatrix;
     Matrix3 m_InverseInertieTensor;
-	float m_AngularDamping;
+	
 
 	Vector3D forceAccum;
 	Vector3D torqueAccum;
 
 public:
+        RigidBody(){};
+	RigidBody(float InverseMass,  float LinearDamping, float AngularDamping, Vector3D Position , Quaternion Orientation);
+	//Constructeur de recopie de la classe particule
+	//param : &particule : l'adresse de la particule qu'il faut recopier
+	RigidBody(const RigidBody& p_RigidBody);
     void DerivedData();
 	void AddForceAtPoint(Vector3D p_Force, Vector3D p_Point);
 	void AddForceAtBodyPoint(Vector3D p_Force, Vector3D p_Point);
     void integrate(float frametime);
 	//Fonction pour nettoyer la resultante courante
 	void clearAccum();
-
+    Vector3D getPosition() { return m_Position; };
+	float getMasse() { return 1/m_InverseMass; };
+	//Surcharge de l'operateur de comparaison pour la classe particule
+	//param : &particule : l'adresse de la particule a comparer
+	bool operator==(RigidBody& p_RigidBody);
 	
 };

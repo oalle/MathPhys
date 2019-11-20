@@ -97,6 +97,10 @@ float* Matrix4::getTab()
 	return this->tab; 
 }
 
+bool Matrix4::operator==(const Matrix4& p_Matrix4)
+{
+	return this->tab == p_Matrix4.tab ;
+}
 /*En ajoutant x, y, z en fin dans la dernière colonne*/
 void Matrix4::setOrientation(Quaternion q) 
 {

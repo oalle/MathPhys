@@ -94,6 +94,11 @@ Matrix3 Matrix3::operator-(Matrix3& B)
     return Matrix3(tabRes);
 }
 
+bool Matrix3::operator==(const Matrix3& p_Matrix3)
+{
+	return this->tab == p_Matrix3.tab ;
+}
+
 void Matrix3::setOrientation(Quaternion q) 
 { 
 	tab[0] = 1 - (2 * (q.getJ() * q.getJ()) +2*(q.getK()*q.getK())); 

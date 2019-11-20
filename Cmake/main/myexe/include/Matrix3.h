@@ -8,7 +8,7 @@ private:
     float tab[9];
 
 public:
-
+	Matrix3(){};
 	Matrix3(float tab[9]);
 	~Matrix3();
     Matrix3 MultiplicationScalaire(float a);
@@ -20,5 +20,6 @@ public:
     void setOrientation(Quaternion q);
     Matrix3 operator+(Matrix3& B);
 	Matrix3 operator-(Matrix3& B);
+	bool operator==(const Matrix3& p_Matrix3);
 
 };

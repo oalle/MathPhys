@@ -10,6 +10,7 @@ private:
 	float m_J;
 	float m_K;
 public:
+    Quaternion(){};
 	Quaternion(float p_R, float p_I, float p_J, float p_K);
 	Quaternion(Quaternion& p_Other);
 	void Normalize();
@@ -20,4 +21,5 @@ public:
     float getI();
     float getJ();
     float getK();
+	bool operator==(const Quaternion& p_Quaternion);
 };

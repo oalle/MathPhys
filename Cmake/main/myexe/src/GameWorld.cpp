@@ -28,7 +28,7 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
     m_RigidBody = RigidBody(0.5, 0.7, 0.7, Vector3D(0, 0, 0), Quaternion(0, 0, 0, 0));
-    m_RigidBody.AddForceAtBodyPoint(Vector3D(5, 0, 0), Vector3D(1, 1, 0));
+    //m_RigidBody.AddForceAtBodyPoint(Vector3D(10, 0, 0), Vector3D(0, 0, 0));
     /*Particle l_Particle1G1(10, Vector3D(2, 0, 8));
     Particle l_Particle2G1(10, Vector3D(2, 3, 8));
     Particle l_Particle3G1(10, Vector3D(4, 0, 8));
@@ -238,6 +238,10 @@ void GameWorld::displayLoopWrapper(void)
     /*initSphereObjWrapper(1);*/
 
     //glRotatef(45 * frameTime, 0, 1, 0);
+
+	glRotatef(getRigidBody().getTransformMatrix().getTab()[0], 1.0, 0.0, 0.0);
+    glRotatef(getRigidBody().getTransformMatrix().getTab()[4], 0.0, 1.0, 0.0);
+    glRotatef(getRigidBody().getTransformMatrix().getTab()[8], 0.0, 0.0, 1.0);
     glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
                  getRigidBody().getPosition().getz());
     def_cube();

@@ -52,8 +52,9 @@ public:
     void integrate(float frametime);
 
 	//Fonction pour nettoyer la resultante courante
-	void clearAccum();
+    void clearAccum();
     Vector3D getPosition() { return m_Position; };
+    Matrix3 getTransformMatrix() { return m_TransformMatrix; };
 	float getMasse() { return 1/m_InverseMass; };
 	//Surcharge de l'operateur de comparaison pour la classe particule
 	//param : &particule : l'adresse de la particule a comparer

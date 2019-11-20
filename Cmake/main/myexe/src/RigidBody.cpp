@@ -124,7 +124,6 @@ void RigidBody::integrate(float frameTime)
     this->torqueAccum += force;*/
 
     // calcul acceleration lineaire
-    this->forceAccum = Vector3D(0.001,0,0);
     Vector3D AccumForcesTemp = this->forceAccum;
     AccumForcesTemp.mulScalaire(this->m_InverseMass);
     this->m_Acceleration = AccumForcesTemp;

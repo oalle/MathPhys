@@ -1,7 +1,6 @@
 #include "GameWorld.h"
-#include "ParticleCable.h"
 #include "DragForce.h"
-
+#include "ParticleCable.h"
 
 std::vector<Particle> GameWorld::listParticules;
 RegistreForces GameWorld::registreForces;
@@ -29,7 +28,7 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
     m_RigidBody = RigidBody(0.5, 0.7, 0.7, Vector3D(0, 0, 0), Quaternion(0, 0, 0, 0));
-    //m_RigidBody.AddForceAtBodyPoint(Vector3D(1,0,0), Vector3D(0, 0, 0));
+    m_RigidBody.AddForceAtBodyPoint(Vector3D(5, 0, 0), Vector3D(1, 1, 0));
     /*Particle l_Particle1G1(10, Vector3D(2, 0, 8));
     Particle l_Particle2G1(10, Vector3D(2, 3, 8));
     Particle l_Particle3G1(10, Vector3D(4, 0, 8));
@@ -46,35 +45,35 @@ void GameWorld::GameSetup()
     AddParticule(l_Particle2G2);
     AddParticule(l_Particle3G2);
     AddParticule(l_Particle4G2);*/
-	// application de la force ressort
-    //ParticleSpring* l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 1, 0.003);
-    //AddForce(&listParticules[0], l_ParticleSpringP12G1);
-    //ParticleSpring* l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 1, 0.003);
-    //AddForce(&listParticules[1], l_ParticleSpringP21G1);
+    // application de la force ressort
+    // ParticleSpring* l_ParticleSpringP12G1 = new ParticleSpring(listParticules[1], 1, 0.003);
+    // AddForce(&listParticules[0], l_ParticleSpringP12G1);
+    // ParticleSpring* l_ParticleSpringP21G1 = new ParticleSpring(listParticules[0], 1, 0.003);
+    // AddForce(&listParticules[1], l_ParticleSpringP21G1);
 
-    //ParticleSpring* l_ParticleSpringP31G1 = new ParticleSpring(listParticules[2], 1, 0.003);
-    //AddForce(&listParticules[0], l_ParticleSpringP31G1);
-    //ParticleSpring* l_ParticleSpringP13G1 = new ParticleSpring(listParticules[0], 1, 0.003);
-    //AddForce(&listParticules[2], l_ParticleSpringP13G1);
+    // ParticleSpring* l_ParticleSpringP31G1 = new ParticleSpring(listParticules[2], 1, 0.003);
+    // AddForce(&listParticules[0], l_ParticleSpringP31G1);
+    // ParticleSpring* l_ParticleSpringP13G1 = new ParticleSpring(listParticules[0], 1, 0.003);
+    // AddForce(&listParticules[2], l_ParticleSpringP13G1);
 
-    //ParticleSpring* l_ParticleSpringP34G1 = new ParticleSpring(listParticules[2], 1, 0.003);
-    //AddForce(&listParticules[3], l_ParticleSpringP34G1);
-    //ParticleSpring* l_ParticleSpringP43G1 = new ParticleSpring(listParticules[3], 1, 0.003);
-    //AddForce(&listParticules[2], l_ParticleSpringP43G1);
+    // ParticleSpring* l_ParticleSpringP34G1 = new ParticleSpring(listParticules[2], 1, 0.003);
+    // AddForce(&listParticules[3], l_ParticleSpringP34G1);
+    // ParticleSpring* l_ParticleSpringP43G1 = new ParticleSpring(listParticules[3], 1, 0.003);
+    // AddForce(&listParticules[2], l_ParticleSpringP43G1);
 
-    //ParticleSpring* l_ParticleSpringP24G1 = new ParticleSpring(listParticules[1], 1, 0.003);
-    //AddForce(&listParticules[3], l_ParticleSpringP24G1);
-    //ParticleSpring* l_ParticleSpringP42G1 = new ParticleSpring(listParticules[3], 1, 0.003);
-    //AddForce(&listParticules[1], l_ParticleSpringP42G1);
+    // ParticleSpring* l_ParticleSpringP24G1 = new ParticleSpring(listParticules[1], 1, 0.003);
+    // AddForce(&listParticules[3], l_ParticleSpringP24G1);
+    // ParticleSpring* l_ParticleSpringP42G1 = new ParticleSpring(listParticules[3], 1, 0.003);
+    // AddForce(&listParticules[1], l_ParticleSpringP42G1);
 
     // application de la force drag
-     //float l_DragCoeff1 = 0.1f;
-     //float l_DragCoeff2 = 10.f;
-     //DragForce* l_DragForce = new DragForce(l_DragCoeff1, l_DragCoeff2);
-     //AddForce(&listParticules[0], l_DragForce);
-     //AddForce(&listParticules[1], l_DragForce);
-     //AddForce(&listParticules[2], l_DragForce);
-     //AddForce(&listParticules[3], l_DragForce);
+    // float l_DragCoeff1 = 0.1f;
+    // float l_DragCoeff2 = 10.f;
+    // DragForce* l_DragForce = new DragForce(l_DragCoeff1, l_DragCoeff2);
+    // AddForce(&listParticules[0], l_DragForce);
+    // AddForce(&listParticules[1], l_DragForce);
+    // AddForce(&listParticules[2], l_DragForce);
+    // AddForce(&listParticules[3], l_DragForce);
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -100,41 +99,42 @@ void GameWorld::def_carre(void)
 }
 
 void GameWorld::def_cube(void)
-{ 
-    glPushMatrix(); 
+{
     glPushMatrix();
-        def_carre();
-        glPopMatrix();
+    glPushMatrix();
+    def_carre();
+    glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(0.0, 0.0, -0.5);
-        def_carre();
-        glPopMatrix();
+    glTranslatef(0.0, 0.0, -0.5);
+    def_carre();
+    glPopMatrix();
 
     glPushMatrix();
-        glRotatef(-90, 0, 1, 0);
-        glTranslatef(0.0, 0.0, -0.5);
-        def_carre();
-        glPopMatrix();
+    glRotatef(-90, 0, 1, 0);
+    glTranslatef(0.0, 0.0, -0.5);
+    def_carre();
+    glPopMatrix();
 
     glPushMatrix();
-        glRotatef(90, 0, 1, 0);
-        glTranslatef(0.0, 0.0, -0.5);
-        def_carre();
-        glPopMatrix();
+    glRotatef(90, 0, 1, 0);
+    glTranslatef(0.0, 0.0, -0.5);
+    def_carre();
+    glPopMatrix();
 
     glPushMatrix();
-        glRotatef(-90, 1, 0, 0);
-        glTranslatef(0.0, 0.0, -0.5);
-        def_carre();
-        glPopMatrix();
+    glRotatef(-90, 1, 0, 0);
+    glTranslatef(0.0, 0.0, -0.5);
+    def_carre();
+    glPopMatrix();
 
     glPushMatrix();
-        glRotatef(90, 1, 0, 0);  glColor3f(1.0,1.0,1.0);
+    glRotatef(90, 1, 0, 0);
+    glColor3f(1.0, 1.0, 1.0);
 
-       glTranslatef(0.0, 0.0, -0.5);
-        def_carre();
-        glPopMatrix();
+    glTranslatef(0.0, 0.0, -0.5);
+    def_carre();
+    glPopMatrix();
 }
 
 void GameWorld::Setup(int argc, char* argv[])
@@ -161,7 +161,6 @@ void GameWorld::DeleteParticule(Particle p_Particule)
     listParticules.erase(std::find(listParticules.begin(), listParticules.end(), p_Particule));
 }
 
-
 // fonction pour initialiser une sphere dans notre environnement
 // param float x Le rayon de notre sphere
 void GameWorld::initSphereObjWrapper(float x) { glutSolidSphere(x, 50, 50); }
@@ -187,6 +186,12 @@ void GameWorld::displayLoopWrapper(void)
     glClearColor(0.2, 0.5, 0.9, 0);
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
+
+    // Enable depth test
+    glEnable(GL_DEPTH_TEST);
+    // Accept fragment if it closer to the camera than the former one
+    glDepthFunc(GL_LESS);
+
     /*glBegin(GL_QUADS);
 
     // creation d'un bloc sol
@@ -196,7 +201,7 @@ void GameWorld::displayLoopWrapper(void)
     glVertex3f(-2, 2, -2);
     glVertex3f(2, 2, -2);
     glVertex3f(2, -2, -2);*/
-   /* glEnd();*/
+    /* glEnd();*/
 
     glColor3f(0.2, 0.5, 0.7);
 
@@ -226,25 +231,24 @@ void GameWorld::displayLoopWrapper(void)
 
         glPopMatrix();
     }*/
-	// affichage du rigidBody et appel � integrate (qui clear aussi les AccumForces)
-	glPushMatrix();
-	/*glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
-                    getRigidBody().getPosition().getz());*/
-	/*initSphereObjWrapper(1);*/
-	
-	glRotatef(45*frameTime,0,1,0);
-	glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
-                    getRigidBody().getPosition().getz());
-        def_cube();
-	/*glTranslatef(-1 * (getRigidBody().getPosition().getx() - 2),
-                     -1 * (getRigidBody().getPosition().gety()),
-                     -1 * (getRigidBody().getPosition().getz()));*/
-        // fonction pour appliquer une translation � un projectile
+    // affichage du rigidBody et appel � integrate (qui clear aussi les AccumForces)
+    glPushMatrix();
+    /*glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
+                getRigidBody().getPosition().getz());*/
+    /*initSphereObjWrapper(1);*/
 
-        m_RigidBody.integrate(frameTime);
-		
+    //glRotatef(45 * frameTime, 0, 1, 0);
+    glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
+                 getRigidBody().getPosition().getz());
+    def_cube();
+    /*glTranslatef(-1 * (getRigidBody().getPosition().getx() - 2),
+                 -1 * (getRigidBody().getPosition().gety()),
+                 -1 * (getRigidBody().getPosition().getz()));*/
+    // fonction pour appliquer une translation � un projectile
 
-        glPopMatrix();
+    m_RigidBody.integrate(frameTime);
+
+    glPopMatrix();
 
     glFlush();
     /* Swap front and back buffers */
@@ -288,14 +292,14 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
         ParticleSpring* l_ParticleSpringP42G1 = new ParticleSpring(listParticules[3], 1, 0.003);
         AddForce(&listParticules[1], l_ParticleSpringP42G1);
 
-		// application de la force drag
-        //float l_DragCoeff1 = 0.1f;
-        //float l_DragCoeff2 = 10.f;
-        //DragForce* l_DragForce = new DragForce(l_DragCoeff1, l_DragCoeff2);
-        //AddForce(&listParticules[0], l_DragForce);
-        //AddForce(&listParticules[1], l_DragForce);
-        //AddForce(&listParticules[2], l_DragForce);
-        //AddForce(&listParticules[3], l_DragForce);
+        // application de la force drag
+        // float l_DragCoeff1 = 0.1f;
+        // float l_DragCoeff2 = 10.f;
+        // DragForce* l_DragForce = new DragForce(l_DragCoeff1, l_DragCoeff2);
+        // AddForce(&listParticules[0], l_DragForce);
+        // AddForce(&listParticules[1], l_DragForce);
+        // AddForce(&listParticules[2], l_DragForce);
+        // AddForce(&listParticules[3], l_DragForce);
 
         // ParticleCable l_ParticleCableP12G1(&listParticules[0], &listParticules[1], 1, 1);
         // l_ParticleCableP12G1.addContact();

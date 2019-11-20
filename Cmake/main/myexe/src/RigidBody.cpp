@@ -2,7 +2,6 @@
 #include <math.h>
 
 //Methode pour calculer les donnees derivees du corps rigide
-void RigidBody::DerivedData() 
 RigidBody::RigidBody(float InverseMass, float LinearDamping, float AngularDamping,
                      Vector3D Position, Quaternion Orientation)
 {

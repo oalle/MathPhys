@@ -157,8 +157,8 @@ void RigidBody::integrate(float frameTime)
     // update orientation
     /*Temp = this->m_AngularVelocity;
     Temp.mulScalaire(frameTime);
-    this->m_Rotation = this->m_Rotation + Temp;
-    this->m_Orientation.RotateByVector(this->m_Rotation);*/
+    this->m_Rotation = this->m_Rotation + Temp;*/
+    this->m_Orientation.RotateByVector(Vector3D(0,1,0));
 
     // calcul derived data
     DerivedData();

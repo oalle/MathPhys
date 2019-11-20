@@ -28,7 +28,7 @@ void GameWorld::GameSetup()
 {
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
-    m_RigidBody = RigidBody(0.5, 1, 1, Vector3D(0.08, -0.08, 0), Quaternion(0, 0, 0, 0));
+    m_RigidBody = RigidBody(0.5, 1, 1, Vector3D(0.06, -0.05, 0), Quaternion(0, 0, 0, 0));
     gravity = Vector3D(0, 0, 0);
     /*Particle l_Particle1G1(10, Vector3D(2, 0, 8));
     Particle l_Particle2G1(10, Vector3D(2, 3, 8));
@@ -237,8 +237,8 @@ void GameWorld::displayLoopWrapper(void)
     /*glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
                 getRigidBody().getPosition().getz());*/
     /*initSphereObjWrapper(1);*/
-
-    //glRotatef(45 * frameTime, 0, 1, 0);
+	
+    glRotatef(getRigidBody().getTransformMatrix().getTab()[0], getRigidBody().getOrientation().getI(), getRigidBody().getOrientation().getJ(), getRigidBody().getOrientation().getK());
     glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
                  getRigidBody().getPosition().getz());
     def_cube();
@@ -313,7 +313,7 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     case 'd':
     {
         // accelereation vers la gauche sur particule no1
-        m_RigidBody.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0), Vector3D(0, 0, 0));
+        m_RigidBody.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0), Vector3D(1, 1, 0));
         gravity = Vector3D(0, -0.00007, 0);
         break;
     }

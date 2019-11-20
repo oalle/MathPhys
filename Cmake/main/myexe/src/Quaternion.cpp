@@ -53,7 +53,7 @@ void Quaternion::operator*=(Quaternion p_Other)
 void Quaternion::RotateByVector(Vector3D p_Vector)
 {
     Quaternion l_Q = Quaternion(0, p_Vector.getx(), p_Vector.gety(), p_Vector.getz());
-    operator*=(l_Q);
+    this->operator*=(l_Q);
 }
 
 //Methode pour mettre a jour la velocite angulaire du quaternion

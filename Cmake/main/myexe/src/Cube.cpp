@@ -1,12 +1,17 @@
 #include "..\include\Cube.h"
 
-Cube::Cube() : RigidBody() { m_EdgeHalfLength = 1; }
+Cube::Cube() : RigidBody()
+{
+    m_EdgeHalfLength = 1;
+    updateVertexList();
+}
 
 Cube::Cube(double p_EdgeHalfLength, float InverseMass, float LinearDamping, float AngularDamping,
            Vector3D Position, Quaternion Orientation)
     : RigidBody(InverseMass, LinearDamping, AngularDamping, Position, Orientation)
 {
     m_EdgeHalfLength = p_EdgeHalfLength;
+    updateVertexList();
 }
 
 double Cube::getEdgeHalfLength() { return m_EdgeHalfLength; }

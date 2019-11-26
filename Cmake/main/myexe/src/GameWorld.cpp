@@ -5,7 +5,7 @@
 std::vector<Particle> GameWorld::listParticules;
 RegistreForces GameWorld::registreForces;
 ParticleContactResolver GameWorld::particleContactResolver;
-RigidBody GameWorld::m_RigidBody;
+Cube GameWorld::m_Cube;
 Vector3D gravity;
 
 GameWorld::GameWorld() {}
@@ -28,9 +28,8 @@ void GameWorld::GameSetup()
 {
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
-    m_RigidBody =
-        RigidBody(0.5, 1, 1, Vector3D(0.08, -0.08, 0), Quaternion(0.01, 0.01, 0.01, 0.01));
-    gravity = Vector3D(0, 0, 0);	
+    m_Cube = Cube(0.25, 0.5, 1, 1, Vector3D(0.08, -0.08, 0), Quaternion(0.01, 0.01, 0.01, 0.01));
+    gravity = Vector3D(0, 0, 0);
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -45,53 +44,62 @@ void GameWorld::GlutSetup(int argc, char* argv[])
     glutReshapeFunc(reshapeLoopWrapper);
     glutKeyboardFunc(key_pressedWrapper);
 }
-void GameWorld::def_carre(void)
+
+void GameWorld::drawCube(void)
 {
+	// Yellow side - FRONT
     glBegin(GL_POLYGON);
-    glVertex3f(-0.5, -0.5, 0.0);
-    glVertex3f(-0.5, 0.5, 0.0);
-    glVertex3f(0.5, 0.5, 0.0);
-    glVertex3f(0.5, -0.5, 0.0);
+    glColor3f(1.0, 1.0, 0.0);
+    glVertex3f(m_Cube.m_VertexList[0].getx(), m_Cube.m_VertexList[0].gety(), m_Cube.m_VertexList[0].getz()); // P1
+    glVertex3f(m_Cube.m_VertexList[1].getx(), m_Cube.m_VertexList[1].gety(), m_Cube.m_VertexList[1].getz()); // P2
+    glVertex3f(m_Cube.m_VertexList[2].getx(), m_Cube.m_VertexList[2].gety(), m_Cube.m_VertexList[2].getz()); // P3
+    glVertex3f(m_Cube.m_VertexList[3].getx(), m_Cube.m_VertexList[3].gety(), m_Cube.m_VertexList[3].getz()); // P4
     glEnd();
-}
 
-void GameWorld::def_cube(void)
-{
-    glPushMatrix();
-    glPushMatrix();
-    def_carre();
-    glPopMatrix();
+	// Cyan side - BACK
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 1.0, 1.0);
+    glVertex3f(m_Cube.m_VertexList[4].getx(), m_Cube.m_VertexList[4].gety(), m_Cube.m_VertexList[4].getz()); // P5
+    glVertex3f(m_Cube.m_VertexList[5].getx(), m_Cube.m_VertexList[5].gety(), m_Cube.m_VertexList[5].getz()); // P6
+    glVertex3f(m_Cube.m_VertexList[6].getx(), m_Cube.m_VertexList[6].gety(), m_Cube.m_VertexList[6].getz()); // P7
+    glVertex3f(m_Cube.m_VertexList[7].getx(), m_Cube.m_VertexList[7].gety(), m_Cube.m_VertexList[7].getz()); // P8
+    glEnd();
 
-    glPushMatrix();
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+    // Purple side - RIGHT
+    glBegin(GL_POLYGON);
+    glColor3f(1.0, 0.0, 1.0);
+    glVertex3f(m_Cube.m_VertexList[3].getx(), m_Cube.m_VertexList[3].gety(), m_Cube.m_VertexList[3].getz()); // P4
+    glVertex3f(m_Cube.m_VertexList[2].getx(), m_Cube.m_VertexList[2].gety(), m_Cube.m_VertexList[2].getz()); // P3
+    glVertex3f(m_Cube.m_VertexList[5].getx(), m_Cube.m_VertexList[5].gety(), m_Cube.m_VertexList[5].getz()); // P6
+    glVertex3f(m_Cube.m_VertexList[4].getx(), m_Cube.m_VertexList[4].gety(), m_Cube.m_VertexList[4].getz()); // P5
+    glEnd();
 
-    glPushMatrix();
-    glRotatef(-90, 0, 1, 0);
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+    // Green side - LEFT
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 1.0, 0.0);
+    glVertex3f(m_Cube.m_VertexList[7].getx(), m_Cube.m_VertexList[7].gety(), m_Cube.m_VertexList[7].getz()); // P8
+    glVertex3f(m_Cube.m_VertexList[6].getx(), m_Cube.m_VertexList[6].gety(), m_Cube.m_VertexList[6].getz()); // P7
+    glVertex3f(m_Cube.m_VertexList[1].getx(), m_Cube.m_VertexList[1].gety(), m_Cube.m_VertexList[1].getz()); // P2
+    glVertex3f(m_Cube.m_VertexList[0].getx(), m_Cube.m_VertexList[0].gety(), m_Cube.m_VertexList[0].getz()); // P1
+    glEnd();
 
-    glPushMatrix();
-    glRotatef(90, 0, 1, 0);
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+    // Blue side - TOP
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 0.0, 1.0);
+    glVertex3f(m_Cube.m_VertexList[5].getx(), m_Cube.m_VertexList[5].gety(), m_Cube.m_VertexList[5].getz()); // P6
+    glVertex3f(m_Cube.m_VertexList[2].getx(), m_Cube.m_VertexList[2].gety(), m_Cube.m_VertexList[2].getz()); // P3
+    glVertex3f(m_Cube.m_VertexList[1].getx(), m_Cube.m_VertexList[1].gety(), m_Cube.m_VertexList[1].getz()); // P2
+    glVertex3f(m_Cube.m_VertexList[6].getx(), m_Cube.m_VertexList[6].gety(), m_Cube.m_VertexList[6].getz()); // P7
+    glEnd();
 
-    glPushMatrix();
-    glRotatef(-90, 1, 0, 0);
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
-
-    glPushMatrix();
-    glRotatef(90, 1, 0, 0);
-    glColor3f(1.0, 1.0, 1.0);
-
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+    // Red side - BOTTOM
+    glBegin(GL_POLYGON);
+    glColor3f(1.0, 0.0, 0.0);
+    glVertex3f(m_Cube.m_VertexList[3].getx(), m_Cube.m_VertexList[3].gety(), m_Cube.m_VertexList[3].getz()); // P4
+    glVertex3f(m_Cube.m_VertexList[4].getx(), m_Cube.m_VertexList[4].gety(), m_Cube.m_VertexList[4].getz()); // P5
+    glVertex3f(m_Cube.m_VertexList[7].getx(), m_Cube.m_VertexList[7].gety(), m_Cube.m_VertexList[7].getz()); // P8
+    glVertex3f(m_Cube.m_VertexList[0].getx(), m_Cube.m_VertexList[0].gety(), m_Cube.m_VertexList[0].getz()); // P1
+    glEnd();
 }
 
 void GameWorld::Setup(int argc, char* argv[])
@@ -127,7 +135,7 @@ void GameWorld::displayLoopWrapper(void)
 {
     // debut calcul frame time
     float oldTimeSinceStart = 0;
-	
+
     // init vue glut
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, MatSpec);
@@ -160,21 +168,11 @@ void GameWorld::displayLoopWrapper(void)
     // update du registre des contacts
     ParticleContactResolver::resolveContact(frameTime);*/
 
-    // affichage du rigidBody et appel � integrate (qui clear aussi les AccumForces)
-    glPushMatrix();
-
-    glRotatef(getRigidBody().getInverseInertieTensor().getTab()[0], 1.0, 0.0, 0.0);
-    glRotatef(getRigidBody().getInverseInertieTensor().getTab()[4], 0.0, 1.0, 0.0);
-    glRotatef(getRigidBody().getInverseInertieTensor().getTab()[8], 0.0, 0.0, 1.0);
-    glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
-                 getRigidBody().getPosition().getz());
-    def_cube();
-    // fonction pour appliquer une translation � un projectile
-	m_RigidBody.AddForceAtBodyPoint(gravity, Vector3D(0, 0, 0));
-    m_RigidBody.integrate(frameTime);
+    // affichage du cube
+    drawCube();
+    m_Cube.integrate(frameTime);
 
     glPopMatrix();
-
     glFlush();
     /* Swap front and back buffers */
     glutPostRedisplay();
@@ -197,7 +195,7 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     case 'd':
     {
         // accelereation vers la gauche sur particule no1
-        m_RigidBody.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0.1), Vector3D(5.0, 1.0, 1.0));
+        m_Cube.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0.1), Vector3D(5.0, 1.0, 1.0));
         gravity = Vector3D(0, -0.00007, 0);
         break;
     }

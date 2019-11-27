@@ -28,7 +28,7 @@ void GameWorld::GameSetup()
 {
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
-    m_Cube = Cube(0.25, 0.5, 1, 1, Vector3D(0.08, -0.08, 0), Quaternion(0.01, 0.01, 0.01, 0.01));
+    m_Cube = Cube(0.25, 0.5, 1, 1, Vector3D(2, -2, 0), Quaternion(0.01, 0.01, 0.01, 0.01));
     gravity = Vector3D(0, 0, 0);
 }
 
@@ -37,7 +37,7 @@ void GameWorld::GlutSetup(int argc, char* argv[])
     glutInit(&argc, argv);
     glutInitWindowSize(1920, 1080);
     glutInitWindowPosition(0, 00);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);	
     glutCreateWindow("Blobs");
     /* Callback for display */
     glutDisplayFunc(displayLoopWrapper);
@@ -147,9 +147,10 @@ void GameWorld::displayLoopWrapper(void)
     glLightfv(GL_LIGHT0, GL_AMBIENT, Light1Amb);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+    glEnable(GL_COLOR_MATERIAL);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.2, 0.5, 0.9, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
     // Enable depth test

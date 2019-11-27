@@ -29,7 +29,9 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
     m_Cube = Cube(0.25, 0.5, 1, 1, Vector3D(2, -2, 0), Quaternion(0.01, 0.01, 0.01, 0.01));
-    gravity = Vector3D(0, 0, 0);
+
+	// accelereation vers la gauche sur particule no1
+    m_Cube.AddForceAtBodyPoint(Vector3D(-11.0, 39.0, 0.0), Vector3D(5.0, 1.0, 1.0));
 }
 
 void GameWorld::GlutSetup(int argc, char* argv[])
@@ -169,8 +171,11 @@ void GameWorld::displayLoopWrapper(void)
     // update du registre des contacts
     ParticleContactResolver::resolveContact(frameTime);*/
 
+	
     // affichage du cube
     drawCube();
+	// gravity
+    m_Cube.AddForceAtBodyPoint(Vector3D(0.0, -0.000981, 0.0), Vector3D(0.0, 0.0, 0.0));
     m_Cube.integrate(frameTime);
 
     glPopMatrix();
@@ -196,8 +201,8 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     case 'd':
     {
         // accelereation vers la gauche sur particule no1
-        m_Cube.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0.1), Vector3D(5.0, 1.0, 1.0));
-        gravity = Vector3D(0, -0.00007, 0);
+        m_Cube.AddForceAtBodyPoint(Vector3D(-0.1, 0.1, 0.1), Vector3D(5.0, 1.0, 1.0));
+        gravity = Vector3D(0, -0.07, 0);
         break;
     }
     default:

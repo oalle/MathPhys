@@ -21,5 +21,6 @@ public:
 	void setEdgeHalfLength(double p_EdgeHalfLength);
 
 	void updateVertexList();
+	void integrate(float frametime);
 
 };

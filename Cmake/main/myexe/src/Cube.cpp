@@ -30,3 +30,9 @@ void Cube::updateVertexList()
     m_VertexList[6] = getPosition() + Vector3D(-m_EdgeHalfLength, m_EdgeHalfLength, m_EdgeHalfLength);		// P7
     m_VertexList[7] = getPosition() + Vector3D(-m_EdgeHalfLength, -m_EdgeHalfLength, m_EdgeHalfLength);		// P8
 }
+
+void Cube::integrate(float frametime)
+{ 
+	RigidBody::integrate(frametime);
+	updateVertexList();
+}

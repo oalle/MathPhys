@@ -10,6 +10,19 @@ RigidBody::RigidBody(float InverseMass, float LinearDamping, float AngularDampin
     m_AngularDamping = AngularDamping;
     m_Position = Position; // position du centre de masse du rigidbody
     m_Orientation = Orientation;
+
+	m_Rotation = Vector3D(0.0, 0.0, 0.0);
+    m_Velocity = Vector3D(0.0, 0.0, 0.0);
+	m_Acceleration = Vector3D(0.0, 0.0, 0.0);
+    m_AngularVelocity = Vector3D(0.0, 0.0, 0.0);
+    m_AngularAcceleration = Vector3D(0.0, 0.0, 0.0);
+    m_Rotation = Vector3D(0.0, 0.0, 0.0);
+
+	forceAccum = Vector3D(0.0, 0.0, 0.0);
+    torqueAccum = Vector3D(0.0, 0.0, 0.0);
+
+	// calcul derived data
+    DerivedData();
 }
 RigidBody::RigidBody(const RigidBody& p_RigidBody) {
 	m_InverseMass = p_RigidBody.m_InverseMass;

@@ -16,7 +16,6 @@ RigidBody::RigidBody(float InverseMass, float LinearDamping, float AngularDampin
 	m_Acceleration = Vector3D(0.0, 0.0, 0.0);
     m_AngularVelocity = Vector3D(0.0, 0.0, 0.0);
     m_AngularAcceleration = Vector3D(0.0, 0.0, 0.0);
-    m_Rotation = Vector3D(0.0, 0.0, 0.0);
 
 	forceAccum = Vector3D(0.0, 0.0, 0.0);
     torqueAccum = Vector3D(0.0, 0.0, 0.0);
@@ -48,12 +47,12 @@ void RigidBody::DerivedData()
     m_TransformMatrix.setOrientation(m_Orientation);
 
     // update inertie tensor
-    float l_Ix = 1 / m_InverseMass * (float) pow(m_Position.getx(), 2);
-    float l_Iy = 1 / m_InverseMass * (float) pow(m_Position.gety(), 2);
-    float l_Iz = 1 / m_InverseMass * (float) pow(m_Position.getz(), 2);
-    float l_Ixy = 1 / m_InverseMass * (float) m_Position.getx() * (float) m_Position.gety();
-    float l_Ixz = 1 / m_InverseMass * (float) m_Position.getx() * (float) m_Position.getz();
-    float l_Iyz = 1 / m_InverseMass * (float) m_Position.gety() * (float) m_Position.getz();
+    float l_Ix = (1 / m_InverseMass) * (float) pow(m_Position.getx(), 2);
+    float l_Iy = (1 / m_InverseMass) * (float) pow(m_Position.gety(), 2);
+    float l_Iz = (1 / m_InverseMass) * (float) pow(m_Position.getz(), 2);
+    float l_Ixy = (1 / m_InverseMass) * (float) m_Position.getx() * (float) m_Position.gety();
+    float l_Ixz = (1 / m_InverseMass) * (float) m_Position.getx() * (float) m_Position.getz();
+    float l_Iyz = (1 / m_InverseMass) * (float) m_Position.gety() * (float) m_Position.getz();
 
     float l_Tab[9] = {l_Ix, l_Ixy, l_Ixz, l_Ixy, l_Iy, l_Iyz, l_Ixz, l_Iyz, l_Iz};
     m_InverseInertieTensor = Matrix3(l_Tab).MatriceInverse();

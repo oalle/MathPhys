@@ -1,5 +1,4 @@
 #pragma once
-#include "Matrix4.h"
 #include "Quaternion.h"
 constexpr auto TABSIZE = 12;
 

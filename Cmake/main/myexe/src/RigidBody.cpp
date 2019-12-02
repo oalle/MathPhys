@@ -162,7 +162,7 @@ void RigidBody::integrate(float frameTime)
 
 	
 	
-    //update derived Data se fait dans l'objet car c'est lui qui possède les différents sommets pour mettre à jour la matrice tensor
+    //update derived Data se fait dans l'objet car c'est lui qui possï¿½de les diffï¿½rents sommets pour mettre ï¿½ jour la matrice tensor
     
 
     // clear accums

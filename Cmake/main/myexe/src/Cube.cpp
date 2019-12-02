@@ -25,7 +25,7 @@ void Cube::DerivedData()
     m_TransformMatrix.setOrientation(m_Orientation);
 	
     // update inertie tensor
-	//on prend comme distance entre les sommets et l'axe de rotation (sur le centre de masse) une distance de 0.5 car chaque coordonnée de sommet est de 0.5
+	//on prend comme distance entre les sommets et l'axe de rotation (sur le centre de masse) une distance de 0.5 car chaque coordonnï¿½e de sommet est de 0.5
 	//sur n'importe quel axe
     float l_Ix = 1 / m_InverseMass * (float) pow(0.5, 2)*8;
     float l_Iy = 1 / m_InverseMass * (float) pow(0.5, 2)*8;
@@ -38,13 +38,13 @@ void Cube::DerivedData()
     m_InverseInertieTensor = Matrix3(l_Tab).MatriceInverse();
 }
 
-//integreur du cube, permet de mettre à jour les sommet du cube en fonction de l'orientation
+//integreur du cube, permet de mettre ï¿½ jour les sommet du cube en fonction de l'orientation
 void Cube::IntegrateCube(float frameTime) { 
 	integrate(frameTime); 
 	// calcul derived data
     DerivedData();
 
-	//pour faire la rotation j'utilise les coordonnées d'origine des sommets
+	//pour faire la rotation j'utilise les coordonnï¿½es d'origine des sommets
     Sommet1bas = m_Orientation.RotateVectorWithQuaternion(Vector3D(0.5, -0.5, 0.5));
 	Sommet2bas = m_Orientation.RotateVectorWithQuaternion(Vector3D(0.5, -0.5, -0.5));
 	Sommet3bas = m_Orientation.RotateVectorWithQuaternion(Vector3D(-0.5, -0.5, -0.5));

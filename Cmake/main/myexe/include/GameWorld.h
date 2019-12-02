@@ -1,6 +1,11 @@
 #pragma once
+#include "../../../external/freeglut/include/GL/glut.h"
+#include "Cube.h"
+#include "GravityForce.h"
 #include "Particle.h"
-#include "../../../external/freeglut/include/GL/freeglut_std.h"
+#include "ParticleContactResolver.h"
+#include "ParticleSpring.h"
+#include "RegistreForces.h"
 #include <iostream>
 #include <vector>
 #include "RegistreForces.h"
@@ -12,7 +17,7 @@
 
 class GameWorld
 {
-private :
+private:
     static std::vector<Particle> listParticules;
     static RegistreForces registreForces;
     static ParticleContactResolver particleContactResolver;
@@ -33,10 +38,14 @@ public :
 	static void AddForce(Particle* p_Particule, ParticleForceGenerator* fg);
 	static void DeleteParticule(Particle p_Particule);
 
-	static void initSphereObjWrapper(float x);
-	static void translationWrapper(Vector3D vec1);
-	static void displayLoopWrapper(void);
-	static void key_pressedWrapper(unsigned char key, int x, int y);
-	static void reshapeLoopWrapper(int width, int height);
-};
+    static std::vector<Particle> GetListParticules() { return listParticules; }
+    static void AddParticule(Particle p_Particule) { listParticules.push_back(p_Particule); }
+    static void AddForce(Particle* p_Particule, ParticleForceGenerator* fg);
+    static void DeleteParticule(Particle p_Particule);
 
+    static void initSphereObjWrapper(float x);
+    static void translationWrapper(Vector3D vec1);
+    static void displayLoopWrapper(void);
+    static void key_pressedWrapper(unsigned char key, int x, int y);
+    static void reshapeLoopWrapper(int width, int height);
+};

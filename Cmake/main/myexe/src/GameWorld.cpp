@@ -39,7 +39,7 @@ void GameWorld::GlutSetup(int argc, char* argv[])
     glutInit(&argc, argv);
     glutInitWindowSize(1920, 1080);
     glutInitWindowPosition(0, 00);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);	
     glutCreateWindow("Blobs");
     /* Callback for display */
     glutDisplayFunc(displayLoopWrapper);
@@ -250,7 +250,7 @@ void GameWorld::displayLoopWrapper(void)
 {
     // debut calcul frame time
     float oldTimeSinceStart = 0;
-	
+
     // init vue glut
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, MatSpec);
@@ -262,9 +262,10 @@ void GameWorld::displayLoopWrapper(void)
     glLightfv(GL_LIGHT0, GL_AMBIENT, Light1Amb);
     //glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+    glEnable(GL_COLOR_MATERIAL);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.2, 0.5, 0.9, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
     // Enable depth test
@@ -291,7 +292,6 @@ void GameWorld::displayLoopWrapper(void)
     m_Cube.IntegrateCube(frameTime);
 
     glPopMatrix();
-
     glFlush();
     /* Swap front and back buffers */
     glutPostRedisplay();

@@ -9,6 +9,7 @@ include_directories(${INCLUDE_FOLDER})
 #Source files
 set(SOURCES ${SOURCE_FOLDER}/main.cpp
 		    ${SOURCE_FOLDER}/Particle.cpp
+		    ${SOURCE_FOLDER}/Cube.cpp
 		    ${SOURCE_FOLDER}/Vector3D.cpp
 		    ${SOURCE_FOLDER}/DragForce.cpp
 		    ${SOURCE_FOLDER}/GameWorld.cpp
@@ -35,6 +36,7 @@ set(SOURCES ${SOURCE_FOLDER}/main.cpp
 #Headers files (for IntelliSense)
 set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 	        ${INCLUDE_FOLDER}/Particle.h
+	        ${INCLUDE_FOLDER}/Cube.h
 	        ${INCLUDE_FOLDER}/Vector3D.h
 		    ${INCLUDE_FOLDER}/DragForce.h
 		    ${INCLUDE_FOLDER}/GameWorld.h

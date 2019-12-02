@@ -8,7 +8,7 @@ private:
     float tab[9];
 
 public:
-	Matrix3(){};
+    Matrix3();
 
 	//Coonstructeur a un parametre pour la classe Matrix3
 	//Param : tab[9] : un tableau avec les 9 float de la matrice

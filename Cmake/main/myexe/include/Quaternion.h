@@ -32,6 +32,8 @@ public:
 	//Param : p_Vector : le vecteur pour la rotation
 	void RotateByVector(Vector3D p_Vector);
 
+	Vector3D RotateVectorWithQuaternion(Vector3D p_Vector);
+
 	//Methode pour mettre a jour la velocite angulaire du quaternion
 	//Param : p_Vector : le vecteur pour la velocite angulaire
 	void UpdateAngularVelocity(Vector3D p_Vector, float p_Time);

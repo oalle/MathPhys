@@ -8,10 +8,11 @@
 #include <istream>
 #include <iostream>
 #include <string>
+
 class RigidBody
 {
 
-private:
+protected:
     float m_InverseMass;
     float m_LinearDamping;
 	float m_AngularDamping;
@@ -22,7 +23,7 @@ private:
 	Vector3D m_AngularVelocity;
     Quaternion m_Orientation;
     Vector3D m_Rotation;
-    Matrix3 m_TransformMatrix;
+    Matrix4 m_TransformMatrix;
     Matrix3 m_InverseInertieTensor;
 	
 
@@ -35,8 +36,7 @@ public:
 	//Constructeur de recopie de la classe particule
 	//param : &particule : l'adresse de la particule qu'il faut recopier
 	RigidBody(const RigidBody& p_RigidBody);
-	//Methode pour calculer les donnees derivees du corps rigide
-    void DerivedData();
+	
 
 	//Methode pour ajouter un force a un point 
 	//Param : p_Force : le vecteur correspondant a la force a appliquer
@@ -54,7 +54,7 @@ public:
 	//Fonction pour nettoyer la resultante courante
     void clearAccum();
     Vector3D getPosition() { return m_Position; };
-    Matrix3 getTransformMatrix() { return m_TransformMatrix; };
+    Matrix4 getTransformMatrix() { return m_TransformMatrix; };
     Matrix3 getInverseInertieTensor() { return m_InverseInertieTensor; };
     Quaternion getOrientation() { return m_Orientation; };
 	float getMasse() { return 1/m_InverseMass; };

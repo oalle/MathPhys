@@ -14,7 +14,7 @@ private:
 
 public:
 
-	Matrix4(){};
+	Matrix4();
 	/*constructeur de Matrix4
 	param : float tab[12] le tableau de valeur pour la matrice*/
     Matrix4(float tab[TABSIZE]);

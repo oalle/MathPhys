@@ -8,6 +8,7 @@
 #include "GravityForce.h"
 #include "ParticleContactResolver.h"
 #include "RigidBody.h"
+#include "Cube.h"
 
 class GameWorld
 {
@@ -15,7 +16,7 @@ private :
     static std::vector<Particle> listParticules;
     static RegistreForces registreForces;
     static ParticleContactResolver particleContactResolver;
-	static RigidBody m_RigidBody;
+	static Cube m_Cube;
 
 public :
 	GameWorld(std::vector<Particle> p_listParticules) { listParticules = p_listParticules; }
@@ -24,9 +25,6 @@ public :
 	void GameSetup();
 	void GlutSetup(int argc, char* argv[]);
 	void Setup(int argc, char* argv[]);
-    static RigidBody getRigidBody() { return m_RigidBody; };
-	static void setRigidBody(RigidBody p_RigidBody) { m_RigidBody = p_RigidBody; };
-    static void def_carre(void);
 	static void def_cube(void);
         
 	

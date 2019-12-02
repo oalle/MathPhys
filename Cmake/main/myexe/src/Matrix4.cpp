@@ -1,5 +1,11 @@
 #include "Matrix4.h"
 
+//Coonstructeur par defaut pour la classe Matrix4
+Matrix4::Matrix4()
+{
+    for (int i = 0; i < 12; i++) { this->tab[i] = 0; }
+}
+
 /*constructeur de Matrix4
 param : float tab[12] le tableau de valeur pour la matrice*/
 Matrix4::Matrix4(float tab[TABSIZE])
@@ -31,7 +37,8 @@ Vector3D Matrix4::transformationVecteurPos(Vector3D vec)
         tabRes[i] = this->tab[i * 4] * vec.getx() + this->tab[i * 4 + 1] * vec.gety() +
                     this->tab[i * 4 + 2] * vec.getz() + this->tab[i * 4 + 3];
     }
-    return Vector3D(tabRes[0], tabRes[1], tabRes[2]);
+    Vector3D vect = Vector3D(tabRes[0], tabRes[1], tabRes[2]);
+    return vect;
 }
 
 /*Multiplie la Matrice4 par une autre Matrix4

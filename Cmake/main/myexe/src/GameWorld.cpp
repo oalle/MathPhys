@@ -2,11 +2,13 @@
 #include "DragForce.h"
 #include "ParticleCable.h"
 
+
 std::vector<Particle> GameWorld::listParticules;
 RegistreForces GameWorld::registreForces;
 ParticleContactResolver GameWorld::particleContactResolver;
-RigidBody GameWorld::m_RigidBody;
+Cube GameWorld::m_Cube;
 Vector3D gravity;
+int angleDemo = 45;
 
 GameWorld::GameWorld() {}
 
@@ -28,7 +30,7 @@ void GameWorld::GameSetup()
 {
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
-    m_RigidBody = RigidBody(0.5, 1, 1, Vector3D(0.06, -0.05, 0), Quaternion(0, 0, 0, 0));
+    m_Cube = Cube(0.5, 0.995, 0.98, Vector3D(1.0, -0.5, 0.5), Quaternion(1.0, 0.0, 0.0, 0.0));
     gravity = Vector3D(0, 0, 0);
 }
 
@@ -44,53 +46,175 @@ void GameWorld::GlutSetup(int argc, char* argv[])
     glutReshapeFunc(reshapeLoopWrapper);
     glutKeyboardFunc(key_pressedWrapper);
 }
-void GameWorld::def_carre(void)
-{
-    glBegin(GL_POLYGON);
-    glVertex3f(-0.5, -0.5, 0.0);
-    glVertex3f(-0.5, 0.5, 0.0);
-    glVertex3f(0.5, 0.5, 0.0);
-    glVertex3f(0.5, -0.5, 0.0);
-    glEnd();
-}
 
 void GameWorld::def_cube(void)
 {
-    glPushMatrix();
-    glPushMatrix();
-    def_carre();
-    glPopMatrix();
+    //face gauche
+	glPushMatrix();
+	//coordonnée du centre du rigidBody(particule)
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.3f, 0.3f, 0.3f);    
+	//coordonnée sommet1 par rapport au rigidBody
+	glVertex3f( m_Cube.getSommet1().getx(), m_Cube.getSommet1().gety(), m_Cube.getSommet1().getz());
+	//sommet5
+    glVertex3f(m_Cube.getSommet5().getx(), m_Cube.getSommet5().gety(), m_Cube.getSommet5().getz());
+	//sommet6
+    glVertex3f(m_Cube.getSommet6().getx(), m_Cube.getSommet6().gety(), m_Cube.getSommet6().getz());
+	//sommet2
+    glVertex3f(m_Cube.getSommet2().getx(), m_Cube.getSommet2().gety(), m_Cube.getSommet2().getz());
+    glEnd();
+	glPopMatrix();
+	//face en face
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.3f, 0.3f, 0.3f);     
+	//sommet 2
+	glVertex3f( m_Cube.getSommet2().getx(), m_Cube.getSommet2().gety(), m_Cube.getSommet2().getz());
+	//sommet 6
+    glVertex3f(m_Cube.getSommet6().getx(), m_Cube.getSommet6().gety(), m_Cube.getSommet6().getz());
+	//sommet 7
+    glVertex3f(m_Cube.getSommet7().getx(), m_Cube.getSommet7().gety(), m_Cube.getSommet7().getz());
+	//sommet 3
+    glVertex3f( m_Cube.getSommet3().getx(), m_Cube.getSommet3().gety(), m_Cube.getSommet3().getz());
+    glEnd();
+	glPopMatrix();
 
-    glPushMatrix();
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+	//face gauche
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.3f, 0.3f, 0.3f);     
+	//sommet 3
+	glVertex3f( m_Cube.getSommet3().getx(), m_Cube.getSommet3().gety(), m_Cube.getSommet3().getz());
+	//sommet 7
+    glVertex3f( m_Cube.getSommet7().getx(), m_Cube.getSommet7().gety(), m_Cube.getSommet7().getz());
+	//sommet 8
+    glVertex3f( m_Cube.getSommet8().getx(), m_Cube.getSommet8().gety(), m_Cube.getSommet8().getz());
+	//sommet 4
+    glVertex3f( m_Cube.getSommet4().getx(), m_Cube.getSommet4().gety(), m_Cube.getSommet4().getz());
+    glEnd();
+	glPopMatrix();
 
-    glPushMatrix();
-    glRotatef(-90, 0, 1, 0);
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+	//face arrière
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.3f, 0.3f, 0.3f);     
+	//sommet 4
+	glVertex3f( m_Cube.getSommet4().getx(), m_Cube.getSommet4().gety(), m_Cube.getSommet4().getz());
+	//sommet 8
+    glVertex3f( m_Cube.getSommet8().getx(), m_Cube.getSommet8().gety(), m_Cube.getSommet8().getz());
+	//sommet 5
+    glVertex3f( m_Cube.getSommet5().getx(), m_Cube.getSommet5().gety(), m_Cube.getSommet5().getz());
+	//sommet 1
+    glVertex3f( m_Cube.getSommet1().getx(), m_Cube.getSommet1().gety(), m_Cube.getSommet1().getz());
+    glEnd();
+	glPopMatrix();
 
-    glPushMatrix();
-    glRotatef(90, 0, 1, 0);
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+	//face haute
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.3f, 0.3f, 0.3f);     
+	//sommet 6
+	glVertex3f( m_Cube.getSommet6().getx(), m_Cube.getSommet6().gety(), m_Cube.getSommet6().getz());
+	//sommet 5
+    glVertex3f( m_Cube.getSommet5().getx(), m_Cube.getSommet5().gety(), m_Cube.getSommet5().getz());
+	//sommet 8
+    glVertex3f( m_Cube.getSommet8().getx(), m_Cube.getSommet8().gety(), m_Cube.getSommet8().getz());
+	//sommet 7
+    glVertex3f( m_Cube.getSommet7().getx(), m_Cube.getSommet7().gety(), m_Cube.getSommet7().getz());
+    glEnd();
+	glPopMatrix();
 
-    glPushMatrix();
-    glRotatef(-90, 1, 0, 0);
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+	//face basse
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.3f, 0.3f, 0.3f);    
+	//sommet 1
+	glVertex3f( m_Cube.getSommet1().getx(), m_Cube.getSommet1().gety(), m_Cube.getSommet1().getz());
+	//sommet 2
+    glVertex3f( m_Cube.getSommet2().getx(), m_Cube.getSommet2().gety(), m_Cube.getSommet2().getz());
+	//sommet 3
+    glVertex3f( m_Cube.getSommet3().getx(), m_Cube.getSommet3().gety(), m_Cube.getSommet3().getz());
+	//sommet 4
+    glVertex3f( m_Cube.getSommet4().getx(), m_Cube.getSommet4().gety(), m_Cube.getSommet4().getz());
+    glEnd();
+	glPopMatrix();
+    
 
+	//sommet 1 bas
     glPushMatrix();
-    glRotatef(90, 1, 0, 0);
-    glColor3f(1.0, 1.0, 1.0);
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+    glTranslatef(m_Cube.getSommet1().getx(), m_Cube.getSommet1().gety(), m_Cube.getSommet1().getz());
+	glColor3f(0.0f, 1.0f, 0.0f);
+	initSphereObjWrapper(0.1);
+	
+	
+	glPopMatrix();
 
-    glTranslatef(0.0, 0.0, -0.5);
-    def_carre();
-    glPopMatrix();
+
+	//sommet 2 bas
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glTranslatef(m_Cube.getSommet2().getx(), m_Cube.getSommet2().gety(), m_Cube.getSommet2().getz());
+	glColor3f(1.0f, 0.0f, 0.0f);
+	initSphereObjWrapper(0.1);
+	
+	glPopMatrix();
+
+	//sommet 3 bas
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glTranslatef(m_Cube.getSommet3().getx(), m_Cube.getSommet3().gety(), m_Cube.getSommet3().getz());
+	glColor3f(0.0f, 1.0f, 0.0f);
+	initSphereObjWrapper(0.1);
+	
+	glPopMatrix();
+
+	//sommet 4 bas
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glTranslatef(m_Cube.getSommet4().getx(), m_Cube.getSommet4().gety(), m_Cube.getSommet4().getz());
+	initSphereObjWrapper(0.1);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glPopMatrix();
+
+	//sommet 5 haut
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glTranslatef(m_Cube.getSommet5().getx(), m_Cube.getSommet5().gety(), m_Cube.getSommet5().getz());
+	initSphereObjWrapper(0.1);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glPopMatrix();
+
+	//sommet 6 haut
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glTranslatef(m_Cube.getSommet6().getx(), m_Cube.getSommet6().gety(), m_Cube.getSommet6().getz());
+	initSphereObjWrapper(0.1);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glPopMatrix();
+
+	//sommet 7 haut
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glTranslatef(m_Cube.getSommet7().getx(), m_Cube.getSommet7().gety(), m_Cube.getSommet7().getz());
+	initSphereObjWrapper(0.1);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glPopMatrix();
+
+	//sommet 8 haut
+	glPushMatrix();
+	glTranslatef(m_Cube.getPosition().getx(), m_Cube.getPosition().gety(), m_Cube.getPosition().getz());
+	glTranslatef(m_Cube.getSommet8().getx(), m_Cube.getSommet8().gety(), m_Cube.getSommet8().getz());
+	initSphereObjWrapper(0.1);
+    glColor3f(0.0f, 1.0f, 0.0f);
+	glPopMatrix();	
+	glPushMatrix();
 }
 
 void GameWorld::Setup(int argc, char* argv[])
@@ -136,7 +260,7 @@ void GameWorld::displayLoopWrapper(void)
     glLightfv(GL_LIGHT0, GL_DIFFUSE, Light1Dif);
     glLightfv(GL_LIGHT0, GL_SPECULAR, Light1Spec);
     glLightfv(GL_LIGHT0, GL_AMBIENT, Light1Amb);
-    glEnable(GL_LIGHTING);
+    //glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.2, 0.5, 0.9, 0);
@@ -148,8 +272,6 @@ void GameWorld::displayLoopWrapper(void)
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
 
-    glColor3f(0.2, 0.5, 0.7);
-
     // update du registre des forces
     /*for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)
     {
@@ -159,19 +281,14 @@ void GameWorld::displayLoopWrapper(void)
     // update du registre des contacts
     ParticleContactResolver::resolveContact(frameTime);*/
 
-    // affichage du rigidBody et appel � integrate (qui clear aussi les AccumForces)
-    glPushMatrix();
-    glRotatef(getRigidBody().getTransformMatrix().getTab()[0], getRigidBody().getOrientation().getI(), getRigidBody().getOrientation().getJ(), getRigidBody().getOrientation().getK());
-
-    glRotatef(getRigidBody().getInverseInertieTensor().getTab()[0], 1.0, 0.0, 0.0);
-    glRotatef(getRigidBody().getInverseInertieTensor().getTab()[4], 0.0, 1.0, 0.0);
-    glRotatef(getRigidBody().getInverseInertieTensor().getTab()[8], 0.0, 0.0, 1.0);
-    glTranslatef(getRigidBody().getPosition().getx(), getRigidBody().getPosition().gety(),
-                 getRigidBody().getPosition().getz());
+	
+	
     def_cube();
-    // fonction pour appliquer une translation � un projectile
-	m_RigidBody.AddForceAtBodyPoint(gravity, Vector3D(0, 0, 0));
-    m_RigidBody.integrate(frameTime);
+
+    // On ajoute la force de gravité
+	m_Cube.AddForceAtBodyPoint(gravity, Vector3D(0, 0, 0));
+	//on integrate
+    m_Cube.IntegrateCube(frameTime);
 
     glPopMatrix();
 
@@ -196,8 +313,16 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     {
     case 'd':
     {
-        // accelereation vers la gauche sur particule no1
-        m_RigidBody.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0), Vector3D(1, 1, 0));
+		//force sur arete en x et y
+        //m_Cube.AddForceAtBodyPoint(Vector3D(-0.015, 0.020, 0.0), Vector3D(0.5, 0.5, 0.0));
+		//force sur le point d'origine donc sans rotation
+		//m_Cube.AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0.0), Vector3D(0.0, 0.0, 0.0));
+		//force sur une arete en y et z
+		//m_Cube.AddForceAtBodyPoint(Vector3D(0.0, 0.020, 0.03), Vector3D(0.0, 0.5, -0.5));
+		//force sur sommet rouge en x et y et z
+        //m_Cube.AddForceAtBodyPoint(Vector3D(-0.015, 0.015555, 0.015), Vector3D(0.5, -0.5, -0.5));
+		//force sur sommet arete au dessus et a droite du sommet rouge en x et z
+        m_Cube.AddForceAtBodyPoint(Vector3D(-0.015, 0.000, 0.015), Vector3D(-0.5, 0.0, -0.5));
         gravity = Vector3D(0, -0.00007, 0);
         break;
     }

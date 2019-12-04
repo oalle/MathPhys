@@ -260,7 +260,7 @@ void GameWorld::displayLoopWrapper(void)
     glLightfv(GL_LIGHT0, GL_DIFFUSE, Light1Dif);
     glLightfv(GL_LIGHT0, GL_SPECULAR, Light1Spec);
     glLightfv(GL_LIGHT0, GL_AMBIENT, Light1Amb);
-    //glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
     glEnable(GL_COLOR_MATERIAL);
@@ -272,6 +272,8 @@ void GameWorld::displayLoopWrapper(void)
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
+
+    glColor3f(0.2, 0.5, 0.7);
 
     // update du registre des forces
     /*for (int i = 0; i < registreForces.GetListEnregistrementForce().size(); i++)

@@ -14,8 +14,11 @@ private :
 	Vector3D Sommet7haut;
 	Vector3D Sommet8haut;
 
+	
 
 public:
+	
+    
 	Cube(float InverseMass, float LinearDamping, float AngularDamping,
                      Vector3D Position, Quaternion Orientation);
 	Cube();

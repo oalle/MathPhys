@@ -31,6 +31,10 @@ set(SOURCES ${SOURCE_FOLDER}/main.cpp
 			${SOURCE_FOLDER}/Matrix4.cpp
 			${SOURCE_FOLDER}/RigidBody.cpp
 			${SOURCE_FOLDER}/Cube.cpp
+			${SOURCE_FOLDER}/BVH.cpp
+			${SOURCE_FOLDER}/Contact.cpp
+			${SOURCE_FOLDER}/Primitive.cpp
+			${SOURCE_FOLDER}/Plane.cpp
 )
 
 #Headers files (for IntelliSense)
@@ -59,6 +63,10 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 			${INCLUDE_FOLDER}/Matrix4.h
 			${INCLUDE_FOLDER}/RigidBody.h
 			${INCLUDE_FOLDER}/Cube.h
+			${INCLUDE_FOLDER}/BVH.h
+			${INCLUDE_FOLDER}/Contact.h
+			${INCLUDE_FOLDER}/Primitive.h
+			${INCLUDE_FOLDER}/Plane.h
 )
 
 #Main exec

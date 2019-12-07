@@ -13,6 +13,9 @@ Cube::Cube(float InverseMass, float LinearDamping, float AngularDamping, Vector3
     Sommet6haut = Vector3D(0.5, 0.5, -0.5);
     Sommet7haut = Vector3D(-0.5, 0.5, -0.5);
     Sommet8haut = Vector3D(-0.5, 0.5, 0.5);
+    boundingsphere.center = Vector3D(Position.getx(), Position.gety(), Position.getz());
+    boundingsphere.rayon = Sommet1bas.norme();
+
 }
 Cube::Cube() {}
 

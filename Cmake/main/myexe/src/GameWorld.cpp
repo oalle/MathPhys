@@ -7,6 +7,10 @@ std::vector<Particle> GameWorld::listParticules;
 RegistreForces GameWorld::registreForces;
 ParticleContactResolver GameWorld::particleContactResolver;
 Cube GameWorld::m_Cube;
+Plane GameWorld::m_mur1;
+Plane GameWorld::m_mur2;
+Plane GameWorld::m_mur3;
+BVH GameWorld::m_tree;
 Vector3D gravity;
 int angleDemo = 45;
 
@@ -31,6 +35,13 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     listParticules = std::vector<Particle>();
     m_Cube = Cube(0.5, 0.995, 0.98, Vector3D(1.0, -0.5, 0.5), Quaternion(1.0, 0.0, 0.0, 0.0));
+    m_mur1 = Plane(Vector3D(-1.0, -1.5, 3.0), Vector3D(0.0, 0.0, -1.0), 1.0);
+	m_mur2 = Plane(Vector3D(-1.0, -1.5, 3.0), Vector3D(1.0, 0.0, 0.0), 1.0);
+	m_mur3 = Plane(Vector3D(-1.0, -1.5, 3.0), Vector3D(0.0, 1.0, 0.0), 1.0);
+    m_tree = BVH(&(RigidBody)m_Cube);
+    m_tree.Insertion(m_mur1.getRigidBody(), &m_tree);
+	m_tree.Insertion(m_mur2.getRigidBody(), &m_tree);
+	m_tree.Insertion(m_mur3.getRigidBody(), &m_tree);
     gravity = Vector3D(0, 0, 0);
 }
 
@@ -45,6 +56,62 @@ void GameWorld::GlutSetup(int argc, char* argv[])
     glutDisplayFunc(displayLoopWrapper);
     glutReshapeFunc(reshapeLoopWrapper);
     glutKeyboardFunc(key_pressedWrapper);
+}
+void GameWorld::def_room(void) 
+{
+	//mur1
+	glPushMatrix();
+	glTranslatef(m_mur1.getPosition().getx(), m_mur1.getPosition().gety(), m_mur1.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.8f, 0.8f, 0.8f);    
+	//coordonnée sommet1 par rapport au rigidBody
+	glVertex3f( 0.0, 0.0, 0.0);
+	//sommet5
+    glVertex3f(0.0, 3.0, 0.0);
+	//sommet6
+    glVertex3f(0.0, 3.0, -3.0);
+	//sommet2
+    glVertex3f(0.0, 0.0, -3.0);
+	glEnd();
+	glPopMatrix();
+
+	//mur2
+	glPushMatrix();
+	glTranslatef(m_mur2.getPosition().getx(), m_mur2.getPosition().gety(), m_mur2.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.8f, 0.8f, 0.8f);    
+	//coordonnée sommet1 par rapport au rigidBody
+	glVertex3f( 0.0, 0.0, 0.0);
+	//sommet5
+    glVertex3f(3.0, 0.0, 0.0);
+	//sommet6
+    glVertex3f(3.0, 3.0, 0.0);
+	//sommet2
+    glVertex3f(0.0, 3.0, 0.0);
+	glEnd();
+	glPopMatrix();
+
+	//mur3
+	glPushMatrix();
+	glTranslatef(m_mur3.getPosition().getx(), m_mur3.getPosition().gety(), m_mur3.getPosition().getz());
+	glBegin(GL_POLYGON);
+	glColor3f(0.8f, 0.8f, 0.8f);    
+	//coordonnée sommet1 par rapport au rigidBody
+	glVertex3f( 0.0, 0.0, 0.0);
+	//sommet5
+    glVertex3f(0.0, 0.0, -3.0);
+	//sommet6
+    glVertex3f(3.0, 0.0, -3.0);
+	//sommet2
+    glVertex3f(3.0, 0.0, 0.0);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(m_mur2.getPosition().getx(), m_mur2.getPosition().gety(), m_mur2.getPosition().getz());
+	glColor3f(0.0f, 1.0f, 0.0f);
+	initSphereObjWrapper(0.1);
+	glPopMatrix();
 }
 
 void GameWorld::def_cube(void)
@@ -284,7 +351,10 @@ void GameWorld::displayLoopWrapper(void)
     // update du registre des contacts
     ParticleContactResolver::resolveContact(frameTime);*/
 
-	
+	//broad phase
+	//on test quel objet peuvent être en collision avec bvh
+
+	def_room();
 	
     def_cube();
 
@@ -324,7 +394,7 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
 		//force sur sommet rouge en x et y et z
         //m_Cube.AddForceAtBodyPoint(Vector3D(-0.015, 0.015555, 0.015), Vector3D(0.5, -0.5, -0.5));
 		//force sur sommet arete au dessus et a droite du sommet rouge en x et z
-        m_Cube.AddForceAtBodyPoint(Vector3D(-0.015, 0.000, 0.015), Vector3D(-0.5, 0.0, -0.5));
+        m_Cube.AddForceAtBodyPoint(Vector3D(-0.030, 0.000, 0.030), Vector3D(-0.5, 0.0, -0.5));
         gravity = Vector3D(0, -0.00007, 0);
         break;
     }

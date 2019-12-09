@@ -121,10 +121,8 @@ void GameWorld::generateCollisions(BVH tree)
             }
         }
         // les deux fils ne sont pas des feuilles
-        //à modifier afin que puisse rentré en collision avec plus d'un mur
         else
         {
-            // on se concentre sur le fils gauche
             // on teste entre les deux fils du fils de gauche entre eux
             generateCollisions(*tree.getLeftSon());
             // on teste entre les deux fils du fils de droite entre eux

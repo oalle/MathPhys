@@ -445,7 +445,7 @@ void GameWorld::def_cube(void)
                  m_Cube.getRigidBody()->getPosition().gety(),
                  m_Cube.getRigidBody()->getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.f, 0.f, 1.f);
+    glColor3f(0.f, 1.f, 0.f);
     // coordonnée sommet1 par rapport au rigidBody
     glVertex3f(m_Cube.getSommet1().getx(), m_Cube.getSommet1().gety(), m_Cube.getSommet1().getz());
     // sommet5
@@ -762,23 +762,38 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
 {
     switch (key)
     {
-    case 'd':
+    case 'a':
     {
         // force sur arete en x et y
-        // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.020, 0.0), Vector3D(0.5,
-        // 0.5, 0.0));
+        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-150, 200, 0.0),
+                                                   Vector3D(0.5, 0.5, 0.0));
+        break;
+    }
+    case 'z':
+    {
         // force sur le point d'origine donc sans rotation
-        // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0.0), Vector3D(0.0,
-        // 0.0, 0.0));
+        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-150, 280, 0.0),
+                                                   Vector3D(0.0, 0.0, 0.0));
+        break;
+    }
+    case 'e':
+    {
         // force sur une arete en y et z
-        // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(0.0, 0.020, 0.03), Vector3D(0.0, 0.5,
-        // -0.5));
+        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(0.0, 250, 350),
+                                                   Vector3D(0.0, 0.5, -0.5));
+        break;
+    }
+    case 'r':
+    {
         // force sur sommet rouge en x et y et z
-        // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.015555, 0.015),
-        // Vector3D(0.5, -0.5, -0.5));
+        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-150, 150, 15550),
+                                                   Vector3D(0.5, -0.5, -0.5));
+        break;
+    }
+    case 't':
+    {
         // force sur sommet arete au dessus et a droite du sommet rouge en x et z
-        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-100, 250, 0), Vector3D(1.0, 0.0, 0.0));
-        gravity = Vector3D(0, -3, 0);
+        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-100, 250, 100), Vector3D(1.0, 0.0, 0.0));
         break;
     }
     default:
@@ -786,6 +801,7 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
         break;
     }
     }
+    gravity = Vector3D(0, -3, 0);
 }
 
 // fonction pour positionner la vue / la camera

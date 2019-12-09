@@ -61,9 +61,9 @@ public:
 	//Surcharge de l'operateur de comparaison pour la classe particule
 	//param : &particule : l'adresse de la particule a comparer
 	bool operator==(RigidBody& p_RigidBody);
-        void SetMatriceTensor(Matrix3 matriceTensor) { m_InverseInertieTensor = matriceTensor; };
+    void SetMatriceTensor(Matrix3 matriceTensor) { m_InverseInertieTensor = matriceTensor; };
 
-		void setVelocity(Vector3D velocity) { m_Velocity = velocity; };
-		void setAngularVelocity(Vector3D angvelocity) { m_AngularVelocity = angvelocity; };
+	void setVelocity(Vector3D velocity) { m_Velocity = velocity; };
+	void setAngularVelocity(Vector3D angvelocity) { m_AngularVelocity = angvelocity; };
 	
 };

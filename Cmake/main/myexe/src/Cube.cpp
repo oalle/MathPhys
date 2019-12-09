@@ -1,6 +1,14 @@
 #include "Cube.h"
 #include <math.h>
 
+// Constructeur a 7 parametres de la classe Cube
+// param : InverseMass : l'inverse de la masse du cube
+// param : LinearDamping : le damping lineaire du cube
+// param : AngularDamping : le damping angulaire du cube
+// param : Positionrigid : la position du rigidBody du cube
+// param : Orientation : le quaternion d'orientationd du cube
+// param : Position : la position du cube
+// param : HalfSize : la demi longueur de l'arrete du cube
 Cube::Cube(float InverseMass, float LinearDamping, float AngularDamping, Vector3D Positionrigid,
            Quaternion Orientation, Vector3D Position, Vector3D Halfsize)
     : Primitive(InverseMass, LinearDamping, AngularDamping, Positionrigid, Orientation, Position)
@@ -22,6 +30,7 @@ Cube::Cube() {}
 
 Cube::~Cube() {}
 
+// Methode pour calculer les donnees derivees du corps rigide
 void Cube::DerivedData()
 {
     // update transform matrix
@@ -42,7 +51,8 @@ void Cube::DerivedData()
     body->SetMatriceTensor(Matrix3(l_Tab).MatriceInverse());
 }
 
-// integreur du cube, permet de mettre � jour les sommet du cube en fonction de l'orientation
+// Methode pour l'integrateur du cube
+// param : frameTime : le temps de la frame avec le quel on doit faire les calcul
 void Cube::IntegrateCube(float frameTime)
 {
     body->integrate(frameTime);

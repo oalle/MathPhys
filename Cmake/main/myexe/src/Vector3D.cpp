@@ -32,10 +32,7 @@ double Vector3D::normecarre() { return prodScalaire(*this); }
 // normalise le vecteur
 void Vector3D::normalisation()
 {
-	if (x != 0 && y != 0 && x != 0) {
-		mulScalaire(1 / norme());
-	}
-    
+    if (x != 0 && y != 0 && x != 0) { mulScalaire(1 / norme()); }
 }
 
 // multiplie le vecteur par un scalaire

@@ -25,13 +25,13 @@ public:
     // param : object : la primitive de l'objet
     BVH(Primitive* object);
 
-    //
+    // Methode qui ajoute une primitive dans un bvh
     // param : object : La primitive de l'objet
-    // param : tree :
+    // param : tree : le bvh
     void Insertion(Primitive* object, BVH* tree);
 
-    //
-    // param : tree :
+    // Methode pour la suppression d'un noeud du BVH
+    // param : tree : le BVH
     void Suppression(BVH* tree);
 
     // Gettter pour  l'attribut tleft de la class BVH
@@ -50,6 +50,7 @@ public:
     // return : la valeur de object
     Primitive* getobject() { return object; };
 
+    // Methode pour savoir si le noeud est une feuille
     int isLeaf();
 
     // Setter pour l'attribut tright de la classe BVH

@@ -1,14 +1,19 @@
 #include "..\include\BVH.h"
 
+// Constructeur a un parametre de la classe BVH
+// param : object : la primitive de l'objet
 BVH::BVH(Primitive* object)
 {
     this->object = object;
-    
+
     parent = NULL;
     tleft = NULL;
     tright = NULL;
 }
 
+// Methode qui ajoute une primitive dans un bvh
+// param : object : La primitive de l'objet
+// param : tree : le bvh
 void BVH::Insertion(Primitive* pobject, BVH* tree)
 {
     BVH Newnode = BVH(pobject);
@@ -48,7 +53,8 @@ void BVH::Insertion(Primitive* pobject, BVH* tree)
             {
                 Vector3D vectorBetween =
                     (tree->tleft->object->getCenterVolumeEng() - pobject->getCenterVolumeEng());
-				//std::cout <<"1"<< vectorBetween.getx() << vectorBetween.gety() << vectorBetween.getz() << std::endl;
+                // std::cout <<"1"<< vectorBetween.getx() << vectorBetween.gety() <<
+                // vectorBetween.getz() << std::endl;
                 volumeenglobantleft = vectorBetween.norme();
             }
         }
@@ -58,7 +64,8 @@ void BVH::Insertion(Primitive* pobject, BVH* tree)
             {
                 Vector3D vectorBetween =
                     (tree->tright->object->getCenterVolumeEng() - pobject->getCenterVolumeEng());
-				//std::cout <<"2"<< vectorBetween.getx() << vectorBetween.gety() << vectorBetween.getz() << std::endl;
+                // std::cout <<"2"<< vectorBetween.getx() << vectorBetween.gety() <<
+                // vectorBetween.getz() << std::endl;
                 volumeenglobantright = vectorBetween.norme();
             }
         }
@@ -70,6 +77,8 @@ void BVH::Insertion(Primitive* pobject, BVH* tree)
     }
 }
 
+// Methode pour la suppression d'un noeud du BVH
+// param : tree : le BVH
 void BVH::Suppression(BVH* tree)
 {
     BVH* Temptree;
@@ -88,11 +97,12 @@ void BVH::Suppression(BVH* tree)
     }
 }
 
+// Methode pour savoir si le noeud est une feuille
 int BVH::isLeaf()
 {
     if (tleft == NULL && tright == NULL) { return 1; }
     else
     {
         return 0;
-	}
+    }
 }

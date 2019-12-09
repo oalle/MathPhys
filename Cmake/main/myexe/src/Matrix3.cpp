@@ -87,9 +87,9 @@ Matrix3 Matrix3::MatriceInverse()
     }
     else
     {
-		relut = Matrix3(tab);
+        relut = Matrix3(tab);
     }
-    
+
     return relut;
 }
 

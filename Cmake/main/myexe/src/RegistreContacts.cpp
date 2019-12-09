@@ -6,4 +6,3 @@ void RegistreContacts::DeleteEnregistrementContact(int p_Index)
 {
     registreContacts.erase(registreContacts.begin() + p_Index);
 }
-

@@ -67,18 +67,19 @@ void Quaternion::RotateByVector(Vector3D p_Vector)
     this->operator*=(l_Q);
 }
 
-//Méthode qui calcul directement le vecteur  après rotation 
-Vector3D Quaternion::RotateVectorWithQuaternion(Vector3D p_Vector) {  
-	Quaternion l_Q = Quaternion(0, p_Vector.getx(), p_Vector.gety(), p_Vector.getz());
-	//quaternion
-	Quaternion Temp = Quaternion(m_R, m_I, m_J, m_K);
-	//conjugué du quaternion
-	Quaternion invTemp = Quaternion(m_R, -m_I, -m_J, -m_K);
-        Temp.Normalize();
-        Temp *= (l_Q);
-        invTemp.Normalize();
-        Temp *= (invTemp);
-        return Vector3D(Temp.getI(), Temp.getJ(), Temp.getK());
+// Méthode qui calcul directement le vecteur  après rotation
+Vector3D Quaternion::RotateVectorWithQuaternion(Vector3D p_Vector)
+{
+    Quaternion l_Q = Quaternion(0, p_Vector.getx(), p_Vector.gety(), p_Vector.getz());
+    // quaternion
+    Quaternion Temp = Quaternion(m_R, m_I, m_J, m_K);
+    // conjugué du quaternion
+    Quaternion invTemp = Quaternion(m_R, -m_I, -m_J, -m_K);
+    Temp.Normalize();
+    Temp *= (l_Q);
+    invTemp.Normalize();
+    Temp *= (invTemp);
+    return Vector3D(Temp.getI(), Temp.getJ(), Temp.getK());
 }
 
 // Methode pour mettre a jour la velocite angulaire du quaternion
@@ -99,13 +100,11 @@ void Quaternion::UpdateAngularVelocity(Vector3D p_Vector, float p_Time)
     l_Q.m_K *= (p_Time / 2);
 
     l_Q.Normalize();
-    
+
     m_R += l_Q.m_R;
     m_I += l_Q.m_I;
     m_J += l_Q.m_J;
     m_K += l_Q.m_K;
-
-    
 }
 
 // Getter pour le premier float du quaternion

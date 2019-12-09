@@ -35,6 +35,7 @@ set(SOURCES ${SOURCE_FOLDER}/main.cpp
 			${SOURCE_FOLDER}/Contact.cpp
 			${SOURCE_FOLDER}/Primitive.cpp
 			${SOURCE_FOLDER}/Plane.cpp
+			${SOURCE_FOLDER}/CollisionData.cpp
 )
 
 #Headers files (for IntelliSense)
@@ -67,6 +68,7 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 			${INCLUDE_FOLDER}/Contact.h
 			${INCLUDE_FOLDER}/Primitive.h
 			${INCLUDE_FOLDER}/Plane.h
+			${INCLUDE_FOLDER}/CollisionData.h
 )
 
 #Main exec

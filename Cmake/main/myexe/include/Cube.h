@@ -1,8 +1,9 @@
 #pragma once
 #include "RigidBody.h"
 #include "Vector3D.h"
+#include "Primitive.h"
 
-class Cube : public RigidBody
+class Cube : public Primitive
 {
 private :
     Vector3D Sommet1bas;
@@ -13,14 +14,14 @@ private :
 	Vector3D Sommet6haut;
 	Vector3D Sommet7haut;
 	Vector3D Sommet8haut;
-
+    Vector3D Halfsize;
 	
 
 public:
 	
     
 	Cube(float InverseMass, float LinearDamping, float AngularDamping,
-                     Vector3D Position, Quaternion Orientation);
+                     Vector3D Positionrigid, Quaternion Orientation, Vector3D Position, Vector3D Halfsize);
 	Cube();
 	~Cube();
 

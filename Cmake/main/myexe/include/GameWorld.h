@@ -31,6 +31,7 @@ private:
 	static Plane m_mur2;
 	static Plane m_mur3;
     static BVH m_tree;
+    static CollisionData m_collisiondata;
 
 public :
 	GameWorld(std::vector<Particle> p_listParticules) { listParticules = p_listParticules; }
@@ -47,7 +48,11 @@ public :
 	static void AddForce(Particle* p_Particule, ParticleForceGenerator* fg);
 	static void DeleteParticule(Particle p_Particule);
 	//a faire
-	static void generateContacts(Cube cube, Primitive prim, CollisionData * data);
+	static void generateContacts(Primitive* prim1, Primitive* prim2, CollisionData * data);
+	//a faire
+	static int isInCollisions(BVH * tree1, BVH * tree2);
+	//generate collision ne sera pas très éfficace sachant que les murs sont cencés être des plan leur volume englobant sour forme de sphere est infini également
+    static void generateCollisions(BVH tree);
     static void initSphereObjWrapper(float x);
     static void translationWrapper(Vector3D vec1);
     static void displayLoopWrapper(void);

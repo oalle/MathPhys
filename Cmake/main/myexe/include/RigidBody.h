@@ -30,16 +30,8 @@ protected:
 	Vector3D forceAccum;
 	Vector3D torqueAccum;
 
-	struct BoundingSphere
-    {
-        Vector3D center;
-        float rayon;
-    };
-
-	BoundingSphere boundingsphere;
-
 public:
-        RigidBody() { boundingsphere = {Vector3D(), 0.0}; };
+        RigidBody() { };
 	RigidBody(float InverseMass,  float LinearDamping, float AngularDamping, Vector3D Position , Quaternion Orientation);
 	//Constructeur de recopie de la classe particule
 	//param : &particule : l'adresse de la particule qu'il faut recopier
@@ -69,10 +61,9 @@ public:
 	//Surcharge de l'operateur de comparaison pour la classe particule
 	//param : &particule : l'adresse de la particule a comparer
 	bool operator==(RigidBody& p_RigidBody);
+        void SetMatriceTensor(Matrix3 matriceTensor) { m_InverseInertieTensor = matriceTensor; };
 
-	float getRayonVolemeEng() { return boundingsphere.rayon; };	
-	Vector3D getCenterVolumeEng() { return boundingsphere.center; };
-    void setRayonVolemeEng(float rayon) { boundingsphere.rayon = rayon; };
-	void setCenterVolumeEng(Vector3D vector) { boundingsphere.center = vector; };
+		void setVelocity(Vector3D velocity) { m_Velocity = velocity; };
+		void setAngularVelocity(Vector3D angvelocity) { m_AngularVelocity = angvelocity; };
 	
 };

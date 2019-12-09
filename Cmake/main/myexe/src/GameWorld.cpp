@@ -193,7 +193,6 @@ void GameWorld::generateContacts(Primitive* prim1, Primitive* prim2, CollisionDa
         float distanceSommet6 = m_Cube.getSommet6().prodScalaire(prim2->getnormal());
         float distanceSommet7 = m_Cube.getSommet7().prodScalaire(prim2->getnormal());
         float distanceSommet8 = m_Cube.getSommet8().prodScalaire(prim2->getnormal());
-
         Vector3D positionSommet1 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet1();
         Vector3D positionSommet2 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet2();
         Vector3D positionSommet3 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet3();
@@ -700,23 +699,6 @@ void GameWorld::displayLoopWrapper(void)
 
     // broad phase
     // on test quel objet peuvent être en collision avec bvh
-    /*
-        std::cout
-    <<"tree"<<m_tree.getobject()->getCenterVolumeEng().getx()<<m_tree.getobject()->getCenterVolumeEng().gety()<<m_tree.getobject()->getCenterVolumeEng().getz()
-    << std::endl; std::cout <<"left
-    son"<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getz()
-    << std::endl; std::cout <<"right
-    son"<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getz()
-    << std::endl; std::cout <<"lef left
-    son"<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz()
-    << std::endl; std::cout <<"lef right
-    son"<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getz()
-    << std::endl; std::cout <<"right right
-    son"<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getz()
-    << std::endl; std::cout <<"lef left
-    son"<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz()
-    << std::endl;
-        */
     BVH* Leftson = new BVH();
     BVH* Rightson = new BVH();
     m_tree.setLeftSon(Leftson);
@@ -729,22 +711,6 @@ void GameWorld::displayLoopWrapper(void)
     m_tree.getLeftSon()->setRightSon(Cube1);
     m_tree.getRightSon()->setRightSon(Mur2);
     m_tree.getRightSon()->setLeftSon(Mur1);
-    /*std::cout
-<<"tree"<<m_tree.getobject()->getCenterVolumeEng().getx()<<m_tree.getobject()->getCenterVolumeEng().gety()<<m_tree.getobject()->getCenterVolumeEng().getz()
-<< std::endl; std::cout <<"left
-son"<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getz()
-<< std::endl; std::cout <<"right
-son"<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getz()
-<< std::endl; std::cout <<"lef left
-son"<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz()
-<< std::endl; std::cout <<"lef right
-son"<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getz()
-<< std::endl; std::cout <<"right right
-son"<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getz()
-<< std::endl; std::cout <<"lef left
-son"<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz()
-<< std::endl;
-*/
     generateCollisions(m_tree);
     if (m_collisiondata.getContactRestant() > 0)
     {
@@ -764,9 +730,8 @@ son"<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx
         std::cout << " Penetration"
                      " : ("
                   << m_collisiondata.getContacts().at(0).getPenetration() << ")" << std::endl;
+        return;
     }
-
-	//std::cout << frameTime << std::endl;
 
     def_room();
 
@@ -812,8 +777,8 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
         // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.015555, 0.015),
         // Vector3D(0.5, -0.5, -0.5));
         // force sur sommet arete au dessus et a droite du sommet rouge en x et z
-        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-100, 250, 0),Vector3D(1.0, 0.0, 0.0));
-        gravity = Vector3D(0, -2, 0);
+        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-100, 250, 0), Vector3D(1.0, 0.0, 0.0));
+        gravity = Vector3D(0, -3, 0);
         break;
     }
     default:

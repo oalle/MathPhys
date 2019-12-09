@@ -35,7 +35,7 @@ void GameWorld::GameSetup()
     registreForces = RegistreForces();
     m_collisiondata = CollisionData();
     listParticules = std::vector<Particle>();
-    m_Cube = Cube(0.5f, 0.995f, 0.98f, Vector3D(1.0, -0.5, 0.5), Quaternion(1.0, 0.0, 0.0, 0.0),
+    m_Cube = Cube(1.f, 0.995f, 0.98f, Vector3D(1.0, -0.5, 0.5), Quaternion(1.0, 0.0, 0.0, 0.0),
                   Vector3D(1.0, -0.5, 0.5), Vector3D(0.5, 0.5, 0.5));
     // l'offset des murs est déterminé par la distance par rapprot au centre du cube(facilite les
     // calculs avec les sommets dans le repère de l'objet)
@@ -383,7 +383,7 @@ void GameWorld::def_room(void)
     glTranslatef(m_mur1.getPosition().getx(), m_mur1.getPosition().gety(),
                  m_mur1.getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.8f, 0.8f, 0.8f);
+    glColor3f(0.5f, 0.5f, 0.5f);
     // coordonnée sommet1 par rapport au rigidBody
     glVertex3f(0.0, 0.0, 0.0);
     // sommet5
@@ -417,7 +417,7 @@ void GameWorld::def_room(void)
     glTranslatef(m_mur3.getPosition().getx(), m_mur3.getPosition().gety(),
                  m_mur3.getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.8f, 0.8f, 0.8f);
+    glColor3f(0.2f, 0.2f, 0.2f);
     // coordonnée sommet1 par rapport au rigidBody
     glVertex3f(0.0, 0.0, 0.0);
     // sommet5
@@ -446,7 +446,7 @@ void GameWorld::def_cube(void)
                  m_Cube.getRigidBody()->getPosition().gety(),
                  m_Cube.getRigidBody()->getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.3f, 0.3f, 0.3f);
+    glColor3f(0.f, 0.f, 1.f);
     // coordonnée sommet1 par rapport au rigidBody
     glVertex3f(m_Cube.getSommet1().getx(), m_Cube.getSommet1().gety(), m_Cube.getSommet1().getz());
     // sommet5
@@ -463,7 +463,7 @@ void GameWorld::def_cube(void)
                  m_Cube.getRigidBody()->getPosition().gety(),
                  m_Cube.getRigidBody()->getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.3f, 0.3f, 0.3f);
+    glColor3f(0.f, 1.f, 1.f);
     // sommet 2
     glVertex3f(m_Cube.getSommet2().getx(), m_Cube.getSommet2().gety(), m_Cube.getSommet2().getz());
     // sommet 6
@@ -481,7 +481,7 @@ void GameWorld::def_cube(void)
                  m_Cube.getRigidBody()->getPosition().gety(),
                  m_Cube.getRigidBody()->getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.3f, 0.3f, 0.3f);
+    glColor3f(1.f, 0.f, 1.f);
     // sommet 3
     glVertex3f(m_Cube.getSommet3().getx(), m_Cube.getSommet3().gety(), m_Cube.getSommet3().getz());
     // sommet 7
@@ -499,7 +499,7 @@ void GameWorld::def_cube(void)
                  m_Cube.getRigidBody()->getPosition().gety(),
                  m_Cube.getRigidBody()->getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.3f, 0.3f, 0.3f);
+    glColor3f(1.f, 1.f, 0.f);
     // sommet 4
     glVertex3f(m_Cube.getSommet4().getx(), m_Cube.getSommet4().gety(), m_Cube.getSommet4().getz());
     // sommet 8
@@ -517,7 +517,7 @@ void GameWorld::def_cube(void)
                  m_Cube.getRigidBody()->getPosition().gety(),
                  m_Cube.getRigidBody()->getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.3f, 0.3f, 0.3f);
+    glColor3f(0.f, 0.f, 1.f);
     // sommet 6
     glVertex3f(m_Cube.getSommet6().getx(), m_Cube.getSommet6().gety(), m_Cube.getSommet6().getz());
     // sommet 5
@@ -535,7 +535,7 @@ void GameWorld::def_cube(void)
                  m_Cube.getRigidBody()->getPosition().gety(),
                  m_Cube.getRigidBody()->getPosition().getz());
     glBegin(GL_POLYGON);
-    glColor3f(0.3f, 0.3f, 0.3f);
+    glColor3f(1.f, 0.f, 0.f);
     // sommet 1
     glVertex3f(m_Cube.getSommet1().getx(), m_Cube.getSommet1().gety(), m_Cube.getSommet1().getz());
     // sommet 2
@@ -672,7 +672,7 @@ void GameWorld::initSphereObjWrapper(float x) { glutSolidSphere(x, 50, 50); }
 void GameWorld::displayLoopWrapper(void)
 {
     // debut calcul frame time
-    float oldTimeSinceStart = 0;
+    float oldTimeSinceStart = glutGet(GLUT_ELAPSED_TIME);
 
     // init vue glut
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Lnoire);
@@ -766,6 +766,8 @@ son"<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx
                   << m_collisiondata.getContacts().at(0).getPenetration() << ")" << std::endl;
     }
 
+	//std::cout << frameTime << std::endl;
+
     def_room();
 
     def_cube();
@@ -810,9 +812,8 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
         // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.015555, 0.015),
         // Vector3D(0.5, -0.5, -0.5));
         // force sur sommet arete au dessus et a droite du sommet rouge en x et z
-        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.090, 0.000, 0.010),
-                                                   Vector3D(-0.5, 0.0, -0.5));
-        gravity = Vector3D(0, -0.00007, 0);
+        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-100, 250, 0),Vector3D(1.0, 0.0, 0.0));
+        gravity = Vector3D(0, -2, 0);
         break;
     }
     default:

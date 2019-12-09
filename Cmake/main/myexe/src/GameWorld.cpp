@@ -43,7 +43,7 @@ void GameWorld::GameSetup()
     m_mur2 = Plane(Vector3D(-1.5, -1.5, 3.0), Vector3D(1.0, 0.0, 0.0), 3.35);
     m_mur3 = Plane(Vector3D(-1.5, -1.5, 3.0), Vector3D(0.0, 1.0, 0.0), 3.35);
     m_tree = BVH();
-   
+
     /*m_tree = BVH(&m_Cube);
     m_tree.Insertion(&m_mur1, &m_tree);
     m_tree.Insertion(&m_mur2, &m_tree);
@@ -68,7 +68,7 @@ int GameWorld::isInCollisions(BVH* tree1, BVH* tree2)
 {
     Vector3D vectorBetween =
         (tree1->getobject()->getCenterVolumeEng() - tree2->getobject()->getCenterVolumeEng());
-   
+
     if (vectorBetween.norme() <= (double) tree1->getobject()->getRayonVolemeEng() +
                                      (double) tree2->getobject()->getRayonVolemeEng())
     { return 1; }
@@ -121,35 +121,35 @@ void GameWorld::generateCollisions(BVH tree)
             }
         }
         // les deux fils ne sont pas des feuilles
-		//à modifier afin que puisse rentré en collision avec plus d'un mur
+        //à modifier afin que puisse rentré en collision avec plus d'un mur
         else
         {
-			//on se concentre sur le fils gauche
-			//on teste entre les deux fils du fils de gauche entre eux
-			generateCollisions(*tree.getLeftSon());
-			//on teste entre les deux fils du fils de droite entre eux
+            // on se concentre sur le fils gauche
+            // on teste entre les deux fils du fils de gauche entre eux
+            generateCollisions(*tree.getLeftSon());
+            // on teste entre les deux fils du fils de droite entre eux
             generateCollisions(*tree.getRightSon());
-			//on teste entre eux
-			//fils gauche du parent gauche avec fils gauche du parent droit
-			if (isInCollisions(tree.getLeftSon()->getLeftSon(), tree.getRightSon()->getLeftSon()))
+            // on teste entre eux
+            // fils gauche du parent gauche avec fils gauche du parent droit
+            if (isInCollisions(tree.getLeftSon()->getLeftSon(), tree.getRightSon()->getLeftSon()))
             {
                 generateContacts(tree.getLeftSon()->getLeftSon()->getobject(),
                                  tree.getRightSon()->getLeftSon()->getobject(), &m_collisiondata);
             }
-			//fils gauche du parent gauche avec fils droit du parent droit
-			if (isInCollisions(tree.getLeftSon()->getLeftSon(), tree.getRightSon()->getRightSon()))
+            // fils gauche du parent gauche avec fils droit du parent droit
+            if (isInCollisions(tree.getLeftSon()->getLeftSon(), tree.getRightSon()->getRightSon()))
             {
                 generateContacts(tree.getLeftSon()->getLeftSon()->getobject(),
                                  tree.getRightSon()->getRightSon()->getobject(), &m_collisiondata);
             }
-			//fils droit du parent gauche avec fils gauche du parent droit
-			if (isInCollisions(tree.getLeftSon()->getRightSon(), tree.getRightSon()->getLeftSon()))
+            // fils droit du parent gauche avec fils gauche du parent droit
+            if (isInCollisions(tree.getLeftSon()->getRightSon(), tree.getRightSon()->getLeftSon()))
             {
                 generateContacts(tree.getLeftSon()->getRightSon()->getobject(),
                                  tree.getRightSon()->getLeftSon()->getobject(), &m_collisiondata);
             }
-			//fils droit du parent gauche avec fils droit du parent droit
-			if (isInCollisions(tree.getLeftSon()->getRightSon(), tree.getRightSon()->getRightSon()))
+            // fils droit du parent gauche avec fils droit du parent droit
+            if (isInCollisions(tree.getLeftSon()->getRightSon(), tree.getRightSon()->getRightSon()))
             {
                 generateContacts(tree.getLeftSon()->getRightSon()->getobject(),
                                  tree.getRightSon()->getRightSon()->getobject(), &m_collisiondata);
@@ -183,8 +183,7 @@ void GameWorld::generateContacts(Primitive* prim1, Primitive* prim2, CollisionDa
     // si prim1 est le cube et prim2 un mur
     else if (prim1->getRigidBody() != NULL && prim2->getRigidBody() == NULL)
     {
-		float distancemurorigine =
-                    prim2->getPosition().prodScalaire(prim2->getnormal());
+        float distancemurorigine = prim2->getPosition().prodScalaire(prim2->getnormal());
         // calcul de la distance des sommets par rapport au mur
         float distanceSommet1 = m_Cube.getSommet1().prodScalaire(prim2->getnormal());
         float distanceSommet2 = m_Cube.getSommet2().prodScalaire(prim2->getnormal());
@@ -194,24 +193,25 @@ void GameWorld::generateContacts(Primitive* prim1, Primitive* prim2, CollisionDa
         float distanceSommet6 = m_Cube.getSommet6().prodScalaire(prim2->getnormal());
         float distanceSommet7 = m_Cube.getSommet7().prodScalaire(prim2->getnormal());
         float distanceSommet8 = m_Cube.getSommet8().prodScalaire(prim2->getnormal());
-		Vector3D positionSommet1 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet1();
-				Vector3D positionSommet2 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet2();
-				Vector3D positionSommet3 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet3();
-				Vector3D positionSommet4 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet4();
-				Vector3D positionSommet5 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet5();
-				Vector3D positionSommet6 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet6();
-				Vector3D positionSommet7 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet7();
-				Vector3D positionSommet8 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet8();
-               
-                distanceSommet1 = positionSommet1.prodScalaire(prim2->getnormal());
-				distanceSommet2 = positionSommet2.prodScalaire(prim2->getnormal());
-				distanceSommet3 = positionSommet3.prodScalaire(prim2->getnormal());
-				distanceSommet4 = positionSommet4.prodScalaire(prim2->getnormal());
-				distanceSommet5 = positionSommet5.prodScalaire(prim2->getnormal());
-				distanceSommet6 = positionSommet6.prodScalaire(prim2->getnormal());
-				distanceSommet7 = positionSommet7.prodScalaire(prim2->getnormal());
-				distanceSommet8 = positionSommet8.prodScalaire(prim2->getnormal());
-		
+
+        Vector3D positionSommet1 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet1();
+        Vector3D positionSommet2 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet2();
+        Vector3D positionSommet3 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet3();
+        Vector3D positionSommet4 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet4();
+        Vector3D positionSommet5 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet5();
+        Vector3D positionSommet6 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet6();
+        Vector3D positionSommet7 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet7();
+        Vector3D positionSommet8 = prim1->getRigidBody()->getPosition() + m_Cube.getSommet8();
+
+        distanceSommet1 = positionSommet1.prodScalaire(prim2->getnormal());
+        distanceSommet2 = positionSommet2.prodScalaire(prim2->getnormal());
+        distanceSommet3 = positionSommet3.prodScalaire(prim2->getnormal());
+        distanceSommet4 = positionSommet4.prodScalaire(prim2->getnormal());
+        distanceSommet5 = positionSommet5.prodScalaire(prim2->getnormal());
+        distanceSommet6 = positionSommet6.prodScalaire(prim2->getnormal());
+        distanceSommet7 = positionSommet7.prodScalaire(prim2->getnormal());
+        distanceSommet8 = positionSommet8.prodScalaire(prim2->getnormal());
+
         if (distanceSommet1 <= distancemurorigine)
         {
             Vector3D contactPoint = m_Cube.getSommet1() - prim2->getCenterVolumeEng();
@@ -219,7 +219,6 @@ void GameWorld::generateContacts(Primitive* prim1, Primitive* prim2, CollisionDa
             Contact contact1 =
                 Contact(contactPoint, prim2->getnormal(), distanceSommet1 - distancemurorigine);
             m_collisiondata.addContact(contact1);
-
         }
         else if (distanceSommet2 <= distancemurorigine)
         {
@@ -281,8 +280,7 @@ void GameWorld::generateContacts(Primitive* prim1, Primitive* prim2, CollisionDa
     // si prim2 est le cube et prim1 un mur
     else if (prim1->getRigidBody() == NULL && prim2->getRigidBody() != NULL)
     {
-		 float distancemurorigine =
-                    prim1->getPosition().prodScalaire(prim1->getnormal());
+        float distancemurorigine = prim1->getPosition().prodScalaire(prim1->getnormal());
         // calcul de la distance des sommets par rapport au mur
         float distanceSommet1 = m_Cube.getSommet1().prodScalaire(prim1->getnormal());
         float distanceSommet2 = m_Cube.getSommet2().prodScalaire(prim1->getnormal());
@@ -292,25 +290,25 @@ void GameWorld::generateContacts(Primitive* prim1, Primitive* prim2, CollisionDa
         float distanceSommet6 = m_Cube.getSommet6().prodScalaire(prim1->getnormal());
         float distanceSommet7 = m_Cube.getSommet7().prodScalaire(prim1->getnormal());
         float distanceSommet8 = m_Cube.getSommet8().prodScalaire(prim1->getnormal());
-		
-		//vecteurposition du sommet dans le monde
-                Vector3D positionSommet1 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet1();
-				Vector3D positionSommet2 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet2();
-				Vector3D positionSommet3 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet3();
-				Vector3D positionSommet4 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet4();
-				Vector3D positionSommet5 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet5();
-				Vector3D positionSommet6 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet6();
-				Vector3D positionSommet7 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet7();
-				Vector3D positionSommet8 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet8();
-               
-                distanceSommet1 = positionSommet1.prodScalaire(prim1->getnormal());
-				distanceSommet2 = positionSommet2.prodScalaire(prim1->getnormal());
-				distanceSommet3 = positionSommet3.prodScalaire(prim1->getnormal());
-				distanceSommet4 = positionSommet4.prodScalaire(prim1->getnormal());
-				distanceSommet5 = positionSommet5.prodScalaire(prim1->getnormal());
-				distanceSommet6 = positionSommet6.prodScalaire(prim1->getnormal());
-				distanceSommet7 = positionSommet7.prodScalaire(prim1->getnormal());
-				distanceSommet8 = positionSommet8.prodScalaire(prim1->getnormal());
+
+        // vecteurposition du sommet dans le monde
+        Vector3D positionSommet1 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet1();
+        Vector3D positionSommet2 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet2();
+        Vector3D positionSommet3 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet3();
+        Vector3D positionSommet4 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet4();
+        Vector3D positionSommet5 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet5();
+        Vector3D positionSommet6 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet6();
+        Vector3D positionSommet7 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet7();
+        Vector3D positionSommet8 = prim2->getRigidBody()->getPosition() + m_Cube.getSommet8();
+
+        distanceSommet1 = positionSommet1.prodScalaire(prim1->getnormal());
+        distanceSommet2 = positionSommet2.prodScalaire(prim1->getnormal());
+        distanceSommet3 = positionSommet3.prodScalaire(prim1->getnormal());
+        distanceSommet4 = positionSommet4.prodScalaire(prim1->getnormal());
+        distanceSommet5 = positionSommet5.prodScalaire(prim1->getnormal());
+        distanceSommet6 = positionSommet6.prodScalaire(prim1->getnormal());
+        distanceSommet7 = positionSommet7.prodScalaire(prim1->getnormal());
+        distanceSommet8 = positionSommet8.prodScalaire(prim1->getnormal());
         if (distanceSommet1 <= distancemurorigine)
         {
             Vector3D contactPoint = m_Cube.getSommet1() - prim1->getCenterVolumeEng();
@@ -703,53 +701,70 @@ void GameWorld::displayLoopWrapper(void)
     // broad phase
     // on test quel objet peuvent être en collision avec bvh
     /*
-	std::cout <<"tree"<<m_tree.getobject()->getCenterVolumeEng().getx()<<m_tree.getobject()->getCenterVolumeEng().gety()<<m_tree.getobject()->getCenterVolumeEng().getz() << std::endl;
-	std::cout <<"left son"<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-	std::cout <<"right son"<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-	std::cout <<"lef left son"<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-    std::cout <<"lef right son"<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-    std::cout <<"right right son"<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-	std::cout <<"lef left son"<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-	*/
-	 BVH* Leftson = new BVH();
-	 BVH* Rightson =new BVH();
-	m_tree.setLeftSon(Leftson);
-	m_tree.setRightSon(Rightson);
-	BVH* Cube1 = new BVH(&m_Cube);
-    BVH *Mur1 = new BVH(&m_mur1);
+        std::cout
+    <<"tree"<<m_tree.getobject()->getCenterVolumeEng().getx()<<m_tree.getobject()->getCenterVolumeEng().gety()<<m_tree.getobject()->getCenterVolumeEng().getz()
+    << std::endl; std::cout <<"left
+    son"<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getz()
+    << std::endl; std::cout <<"right
+    son"<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getz()
+    << std::endl; std::cout <<"lef left
+    son"<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz()
+    << std::endl; std::cout <<"lef right
+    son"<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getz()
+    << std::endl; std::cout <<"right right
+    son"<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getz()
+    << std::endl; std::cout <<"lef left
+    son"<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz()
+    << std::endl;
+        */
+    BVH* Leftson = new BVH();
+    BVH* Rightson = new BVH();
+    m_tree.setLeftSon(Leftson);
+    m_tree.setRightSon(Rightson);
+    BVH* Cube1 = new BVH(&m_Cube);
+    BVH* Mur1 = new BVH(&m_mur1);
     BVH* Mur2 = new BVH(&m_mur2);
-	BVH* Mur3 = new BVH(&m_mur3);
-	m_tree.getLeftSon()->setLeftSon(Mur3);
-	m_tree.getLeftSon()->setRightSon(Cube1);
-        m_tree.getRightSon()->setRightSon(Mur2);
-        m_tree.getRightSon()->setLeftSon(Mur1);
-		/*std::cout <<"tree"<<m_tree.getobject()->getCenterVolumeEng().getx()<<m_tree.getobject()->getCenterVolumeEng().gety()<<m_tree.getobject()->getCenterVolumeEng().getz() << std::endl;
-	std::cout <<"left son"<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-	std::cout <<"right son"<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-	std::cout <<"lef left son"<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-    std::cout <<"lef right son"<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-    std::cout <<"right right son"<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-	std::cout <<"lef left son"<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz() << std::endl;
-	*/
-	generateCollisions(m_tree);
-    if (m_collisiondata.getContactRestant() > 0) {
+    BVH* Mur3 = new BVH(&m_mur3);
+    m_tree.getLeftSon()->setLeftSon(Mur3);
+    m_tree.getLeftSon()->setRightSon(Cube1);
+    m_tree.getRightSon()->setRightSon(Mur2);
+    m_tree.getRightSon()->setLeftSon(Mur1);
+    /*std::cout
+<<"tree"<<m_tree.getobject()->getCenterVolumeEng().getx()<<m_tree.getobject()->getCenterVolumeEng().gety()<<m_tree.getobject()->getCenterVolumeEng().getz()
+<< std::endl; std::cout <<"left
+son"<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getobject()->getCenterVolumeEng().getz()
+<< std::endl; std::cout <<"right
+son"<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getobject()->getCenterVolumeEng().getz()
+<< std::endl; std::cout <<"lef left
+son"<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz()
+<< std::endl; std::cout <<"lef right
+son"<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getLeftSon()->getRightSon()->getobject()->getCenterVolumeEng().getz()
+<< std::endl; std::cout <<"right right
+son"<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getRightSon()->getobject()->getCenterVolumeEng().getz()
+<< std::endl; std::cout <<"lef left
+son"<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getx()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().gety()<<m_tree.getRightSon()->getLeftSon()->getobject()->getCenterVolumeEng().getz()
+<< std::endl;
+*/
+    generateCollisions(m_tree);
+    if (m_collisiondata.getContactRestant() > 0)
+    {
         m_Cube.getRigidBody()->setVelocity(Vector3D(0.0, 0.0, 0.0));
-		m_Cube.getRigidBody()->setAngularVelocity(Vector3D(0.0, 0.0, 0.0));
-		gravity = Vector3D(0, 0, 0);
-                std::cout << "Point d'impact : ("
-                          << m_collisiondata.getContacts().at(0).getContactPoint().getx() << ","
-                          << m_collisiondata.getContacts().at(0).getContactPoint().gety() << ","
-                          << m_collisiondata.getContacts().at(0).getContactPoint().getz() << ")"
-                          << std::endl;
-				std::cout << "Normale Point d'impact : ("
-                          << m_collisiondata.getContacts().at(0).getContactNormal().getx() << ","
-                          << m_collisiondata.getContacts().at(0).getContactNormal().gety() << ","
-                          << m_collisiondata.getContacts().at(0).getContactNormal().getz() << ")"
-                          << std::endl;
-				std::cout <<" Penetration"" : ("
-                          << m_collisiondata.getContacts().at(0).getPenetration() << ")"
-                          << std::endl;
-	}
+        m_Cube.getRigidBody()->setAngularVelocity(Vector3D(0.0, 0.0, 0.0));
+        gravity = Vector3D(0, 0, 0);
+        std::cout << "Point d'impact : ("
+                  << m_collisiondata.getContacts().at(0).getContactPoint().getx() << ","
+                  << m_collisiondata.getContacts().at(0).getContactPoint().gety() << ","
+                  << m_collisiondata.getContacts().at(0).getContactPoint().getz() << ")"
+                  << std::endl;
+        std::cout << "Normale Point d'impact : ("
+                  << m_collisiondata.getContacts().at(0).getContactNormal().getx() << ","
+                  << m_collisiondata.getContacts().at(0).getContactNormal().gety() << ","
+                  << m_collisiondata.getContacts().at(0).getContactNormal().getz() << ")"
+                  << std::endl;
+        std::cout << " Penetration"
+                     " : ("
+                  << m_collisiondata.getContacts().at(0).getPenetration() << ")" << std::endl;
+    }
 
     def_room();
 
@@ -783,15 +798,20 @@ void GameWorld::key_pressedWrapper(unsigned char key, int x, int y)
     case 'd':
     {
         // force sur arete en x et y
-        //m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.020, 0.0), Vector3D(0.5, 0.5, 0.0));
+        // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.020, 0.0), Vector3D(0.5,
+        // 0.5, 0.0));
         // force sur le point d'origine donc sans rotation
-        //m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0.0), Vector3D(0.0, 0.0, 0.0));
+        // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.028, 0.0), Vector3D(0.0,
+        // 0.0, 0.0));
         // force sur une arete en y et z
-         //m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(0.0, 0.020, 0.03), Vector3D(0.0, 0.5, -0.5));
+        // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(0.0, 0.020, 0.03), Vector3D(0.0, 0.5,
+        // -0.5));
         // force sur sommet rouge en x et y et z
-         //m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.015555, 0.015), Vector3D(0.5, -0.5, -0.5));
+        // m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.015, 0.015555, 0.015),
+        // Vector3D(0.5, -0.5, -0.5));
         // force sur sommet arete au dessus et a droite du sommet rouge en x et z
-        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.090, 0.000, 0.010),Vector3D(-0.5, 0.0, -0.5));
+        m_Cube.getRigidBody()->AddForceAtBodyPoint(Vector3D(-0.090, 0.000, 0.010),
+                                                   Vector3D(-0.5, 0.0, -0.5));
         gravity = Vector3D(0, -0.00007, 0);
         break;
     }

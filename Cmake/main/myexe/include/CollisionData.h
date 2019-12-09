@@ -1,25 +1,33 @@
 #pragma once
+#include "Contact.h"
 #include "RigidBody.h"
 #include "Vector3D.h"
-#include "Contact.h"
 #include <vector>
 
 using namespace std;
 class CollisionData
 {
 private:
-    
-        vector<Contact> contacts;
-		int contactrestant;
-    
+    vector<Contact> contacts;
+    int contactrestant;
 
 public:
-                CollisionData()
-                {
-                    contacts = vector<Contact>();
-                    contactrestant = 0;
-                };
-                void addContact(Contact contact);
-                vector<Contact> getContacts() { return contacts; };
-                int getContactRestant() { return contactrestant; };
+    // Constructeur par defaut de la classe CollisionData
+    CollisionData()
+    {
+        contacts = vector<Contact>();
+        contactrestant = 0;
+    };
+
+    // Fonction pour ajouter un contact au vecteur de contacts
+    // param : contact : le contact que l'on souhaite ajouter
+    void addContact(Contact contact);
+
+    // Getter pour l'attribut contacts de la classe CollisionData
+    // return : la valeur de l'attribut contacts
+    vector<Contact> getContacts() { return contacts; };
+
+    // Getter pour l'attribut contactrestant de la classe CollisionData
+    // return : le nombre de contacts restants
+    int getContactRestant() { return contactrestant; };
 };
